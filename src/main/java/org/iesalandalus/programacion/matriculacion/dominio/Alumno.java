@@ -1,6 +1,8 @@
 package org.iesalandalus.programacion.matriculacion.dominio;
 
+import java.time.DateTimeException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 import java.util.regex.Pattern;
 
@@ -164,6 +166,9 @@ public class Alumno {
     }
 
     private void setFechaNacimiento(LocalDate fechaNacimiento) {
+        if (fechaNacimiento == null){
+            throw new IllegalArgumentException("ERROR: La fecha de nacimiento de un alumno no puede ser nula.");
+        }
 
         LocalDate fechaAhora = LocalDate.now();
 
