@@ -30,12 +30,16 @@ public class Alumno {
     }
 
     public Alumno(Alumno alumno) {
-        this.nombre = alumno.nombre;
-        this.dni = alumno.dni;
-        this.correo = alumno.correo;
-        this.telefono = alumno.telefono;
-        this.fechaNacimiento = alumno.fechaNacimiento;
-        this.nia = alumno.nia;
+        if (alumno == null){
+            throw new IllegalArgumentException("ERROR: No es posible copiar un alumno nulo.");
+        } else {
+            this.nombre = alumno.nombre;
+            this.dni = alumno.dni;
+            this.correo = alumno.correo;
+            this.telefono = alumno.telefono;
+            this.fechaNacimiento = alumno.fechaNacimiento;
+            this.nia = alumno.nia;
+        }
     }
 
     public String getNombre() {
@@ -194,12 +198,11 @@ public class Alumno {
 
     @Override
     public int hashCode() {
-        return dni.hashCode();
+        return Objects.hashCode(dni);
     }
 
     @Override
     public String toString() {
-        return "Número de Identificación del Alumnado (NIA)=%s " +
-                "nombre=%s (%s), DNI=%s, correo=%s, teléfono=%s, fecha nacimiento=%s";
+        return String.format("Número de Identificación del Alumnado (NIA)=%s + nombre=%s (%s), DNI=%s, correo=%s, teléfono=%s, fecha nacimiento=%s", nia, nombre, dni, correo, telefono, fechaNacimiento);
     }
 }
