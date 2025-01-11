@@ -19,7 +19,25 @@ public class Matricula {
     private Alumno alumno;
     private Asignatura[] coleccionAsignaturas;
 
+    public Matricula(int idMatricula, String cursoAcademico, LocalDate fechaMatriculacion, Alumno alumno, Asignatura[] coleccionAsignaturas){
+        setIdMatricula(idMatricula);
+        setCursoAcademico(cursoAcademico);
+        setFechaMatriculacion(fechaMatriculacion);
+        setAlumno(alumno);
+        setColeccionAsignaturas(coleccionAsignaturas);
+    }
 
+    public Matricula(Matricula matricula){
+        if (matricula==null){
+            throw new IllegalArgumentException("ERROR: No es posible copiar una matrícula nula.");
+        } else {
+            this.idMatricula = matricula.idMatricula;
+            this.cursoAcademico = matricula.cursoAcademico;
+            this.fechaMatriculacion = matricula.fechaMatriculacion;
+            this.alumno = matricula.alumno;
+            this.coleccionAsignaturas = matricula.coleccionAsignaturas;
+        }
+    }
 
     public int getIdMatricula() {
         return idMatricula;
