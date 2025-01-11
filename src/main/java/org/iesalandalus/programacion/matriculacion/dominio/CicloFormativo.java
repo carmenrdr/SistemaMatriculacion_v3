@@ -84,7 +84,7 @@ public class CicloFormativo {
     }
 
     public void setHoras(int horas) {
-        if (horas < 0 || horas > MAXIMO_NUMERO_HORAS) {
+        if (horas <= 0 || horas > MAXIMO_NUMERO_HORAS) {
             throw new IllegalArgumentException("ERROR: El número de horas de un ciclo formativo no puede ser menor o igual a 0 ni mayor a " + CicloFormativo.MAXIMO_NUMERO_HORAS + ".");
         } else {
             this.horas = horas;

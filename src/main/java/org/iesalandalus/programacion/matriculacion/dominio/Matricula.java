@@ -16,13 +16,10 @@ public class Matricula {
     private LocalDate fechaMatriculacion;
     private LocalDate fechaAnulacion;
 
-    /*public Matricula(int idMatricula, String cursoAcademico, LocalDate fechaMatriculacion, Alumno alumno, Asignatura[] coleccionAsignaturas){
-        setIdMatricula(idMatricula);
-        setCursoAcademico(cursoAcademico);
-        setFechaMatriculacion(fechaMatriculacion);
-        setAlumno(alumno);
-        setColeccionAsignaturas(coleccionAsignaturas);
-    }*/
+    /*private Alumno alumno;
+    private Asignatura[] coleccionAsignaturas;*/
+
+
 
     public int getIdMatricula() {
         return idMatricula;
@@ -43,7 +40,7 @@ public class Matricula {
     public void setCursoAcademico(String cursoAcademico) {
         if (cursoAcademico == null) {
             throw new IllegalArgumentException("ERROR: El curso académico de una matrícula no puede ser nulo.");
-        } else if (cursoAcademico.matches(ER_CURSO_ACADEMICO)) {
+        } else if (!cursoAcademico.matches(ER_CURSO_ACADEMICO)) {
             throw new IllegalArgumentException("ERROR: El formato del curso académico no es correcto.");
         } else {
             this.cursoAcademico = cursoAcademico;
@@ -84,7 +81,7 @@ public class Matricula {
 
         LocalDate limiteAnulacionMatricula = this.fechaMatriculacion.plusMonths(MAXIMO_MESES_ANTERIOR_ANULACION);
         if (fechaAnulacion.isAfter(limiteAnulacionMatricula)){
-            throw new IllegalArgumentException("ERROR: La fecha de anulación no puede ser anterior a " + Matricula.MAXIMO_MESES_ANTERIOR_ANULACION + " meses.");
+            throw new IllegalArgumentException("ERROR: La fecha de anulación no puede ser posterior a " + Matricula.MAXIMO_MESES_ANTERIOR_ANULACION + " meses.");
         }
 
         this.fechaAnulacion = fechaAnulacion;

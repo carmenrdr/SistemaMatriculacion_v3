@@ -58,7 +58,7 @@ public class Asignatura {
     private void setCodigo(String codigo) {
         if (codigo == null) {
             throw new IllegalArgumentException("ERROR: El código de una asignatura no puede ser nulo.");
-        } else if (codigo.matches(ER_CODIGO)) {
+        } else if (!codigo.matches(ER_CODIGO)) {
             throw new IllegalArgumentException("ERROR: El código de la asignatura no tiene un formato válido.");
         } else {
             this.codigo = codigo;
