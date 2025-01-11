@@ -16,8 +16,8 @@ public class Matricula {
     private LocalDate fechaMatriculacion;
     private LocalDate fechaAnulacion;
 
-    /*private Alumno alumno;
-    private Asignatura[] coleccionAsignaturas;*/
+    private Alumno alumno;
+    private Asignatura[] coleccionAsignaturas;
 
 
 
