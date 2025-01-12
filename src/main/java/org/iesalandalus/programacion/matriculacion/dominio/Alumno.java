@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
 
 public class Alumno {
 
-    public static final String FORMATO_FECHA = "dd/MM/yyyy";
+    public static final String FORMATO_FECHA = "(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[0-2])/(\\d{4})";
     private static final String ER_TELEFONO = "[6-9][0-9]{8}";
     private static final String ER_CORREO = "[a-zA-Z0-9_+&*-]+@([a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}";
     private static final String ER_DNI = "[0-9]{8}[a-zA-Z]";
@@ -170,13 +170,19 @@ public class Alumno {
             throw new IllegalArgumentException("ERROR: La fecha de nacimiento de un alumno no puede ser nula.");
         }
 
+        String fechaEnString = fechaNacimiento.toString();
+        if (!fechaEnString.matches(FORMATO_FECHA)){
+            throw new IllegalArgumentException("ERROR: El formato de la fecha introducida no es correcto.");
+        }
+
         LocalDate fechaAhora = LocalDate.now();
 
         if (fechaAhora.minusYears(MIN_EDAD_ALUMNADO).isBefore(fechaNacimiento)) {
             throw new IllegalArgumentException("ERROR: La edad del alumno debe ser mayor o igual a 16 años.");
-        } else {
-            this.fechaNacimiento = fechaNacimiento;
         }
+
+        this.fechaNacimiento = fechaNacimiento;
+
     }
 
     private String getIniciales() {
