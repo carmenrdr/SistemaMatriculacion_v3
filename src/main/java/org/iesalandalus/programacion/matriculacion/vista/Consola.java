@@ -4,8 +4,10 @@ import org.iesalandalus.programacion.matriculacion.dominio.*;
 import org.iesalandalus.programacion.matriculacion.negocio.Alumnos;
 import org.iesalandalus.programacion.matriculacion.negocio.Asignaturas;
 import org.iesalandalus.programacion.matriculacion.negocio.CiclosFormativos;
+import org.iesalandalus.programacion.matriculacion.negocio.Matriculas;
 import org.iesalandalus.programacion.utilidades.Entrada;
 
+import javax.sound.midi.MidiMessage;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.regex.Matcher;
@@ -245,8 +247,28 @@ public class Consola {
             return asignaturaInventada;
 
         } catch (IllegalArgumentException e){
-            throw new IllegalArgumentException("ERROR: "+e.getMessage());
+            System.out.println("ERROR: "+e.getMessage());
         }
+    }
+
+    public Matricula getMatriculaPorIdentificador(){
+        try {
+            System.out.println("Introduzca el ID de la Matrícula: ");
+            int id = Entrada.entero();
+
+            Alumno alumnoInventado = new Alumno("Filemón", "12345678A", "test@test.com", "000000000", LocalDate.of(1996, 1, 1));
+            CicloFormativo cicloInventado = new CicloFormativo(1234, "Programación", Grado.GDCFGB, "DAM", 10);
+            Asignatura asignaturaInventada = new Asignatura("1234", "Programación", 10, Curso.PRIMERO, 10, EspecialidadProfesorado.INFORMATICA, cicloInventado);
+            Asignatura[] coleccionInventada = new Asignatura[1];
+            coleccionInventada[0] = asignaturaInventada;
+
+            Matricula matriculaInventada = new Matricula(id, Curso.PRIMERO.toString(), LocalDate.now(), alumnoInventado, coleccionInventada);
+
+            return matriculaInventada;
+        } catch (Exception e){
+            System.out.println("ERROR: "+ e.getMessage());
+        }
+        return null;
     }
 
     private void mostrarAsignaturas(Asignaturas asignaturas){
@@ -276,16 +298,66 @@ public class Consola {
         return false;
     }
 
-    public Matricula leerMatricula(Alumnos alumnos, Asignaturas asignaturas){
+    public Matricula leerMatricula(Alumnos alumnos, Asignaturas asignaturas) {
         System.out.println("Introduce el ID de la mátricula: ");
         int id = Entrada.entero();
 
         Curso curso = leerCurso();
+        String cursoAcademico = curso.toString();
 
         System.out.println("Introduzca la fecha matriculación: ");
         LocalDate fechaMatricula = LocalDate.parse(Entrada.cadena());
 
-        Alumno alumno
-    }
+        Alumno alumnoPorDni = getAlumnoPorDni();
+        Alumno alumnoEncontrado = null;
+        for (int i = 0; i < alumnos.getTamano(); i++) {
+            if (alumnos.get()[i].getDni().equals(alumnoPorDni.getDni())) {
+                alumnoEncontrado = alumnos.get()[i];
+                break;
+            }
+        }
 
+        //Array para almacenar las asignaturas que se elijan.
+        Asignatura[] asignaturasMatricula = new Asignatura[Matricula.MAXIMO_NUMERO_ASIGNATURAS_POR_MATRICULA;]
+
+        int contadorAsignaturas = 0;
+        boolean continuar = true;
+
+        while (continuar) {
+
+            Asignatura asignaturaPorCodigo = getAsignaturaPorCodigo();
+
+            //Buscar la asingatura verdadera en el array de asignaturas.
+            Asignatura asignaturaEncontrada = null;
+            for (int i = 0; i < asignaturas.getTamano(); i++) {
+                if (asignaturas.get()[i].getCodigo().equals(asignaturaPorCodigo.getCodigo())) {
+                    asignaturaEncontrada = asignaturas.get()[i];
+                    break;
+                }
+            }
+
+            //Comprobar que la asignatura encontrada no esté ya en la matrícula.
+            boolean asignaturaYaEnMatricula = false;
+            for (int i = 0; i < contadorAsignaturas; i++) {
+                if (asignaturasMatricula[i].getCodigo().equals(asignaturaEncontrada.getCodigo())) {
+                    asignaturaYaEnMatricula = true;
+                    break;
+                }
+            }
+            if (asignaturaYaEnMatricula) {
+                throw new IllegalArgumentException("ERROR: La asignatura ya se encuentra en esta matrícula.");
+            }
+
+            //Añadir la asignatura encontrada y correcta al array de asignaturas para esta matrícula.
+            asignaturasMatricula[contadorAsignaturas] = asignaturaEncontrada;
+            contadorAsignaturas++;
+
+            if (contadorAsignaturas >= Matricula.MAXIMO_NUMERO_ASIGNATURAS_POR_MATRICULA) {
+                throw new IllegalArgumentException("ERROR: No se pueden añadir más asignaturas a esta matrícula.");
+            }
+
+        }
+
+        Matricula matricula = new Matricula(id, cursoAcademico, fechaMatricula, alumnoEncontrado, asignaturasMatricula);
+    }
 }
