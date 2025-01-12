@@ -249,6 +249,7 @@ public class Consola {
         } catch (IllegalArgumentException e){
             System.out.println("ERROR: "+e.getMessage());
         }
+        return null;
     }
 
     public Matricula getMatriculaPorIdentificador(){
@@ -318,7 +319,7 @@ public class Consola {
         }
 
         //Array para almacenar las asignaturas que se elijan.
-        Asignatura[] asignaturasMatricula = new Asignatura[Matricula.MAXIMO_NUMERO_ASIGNATURAS_POR_MATRICULA;]
+        Asignatura[] asignaturasMatricula = new Asignatura[Matricula.MAXIMO_NUMERO_ASIGNATURAS_POR_MATRICULA];
 
         int contadorAsignaturas = 0;
         boolean continuar = true;
@@ -359,5 +360,6 @@ public class Consola {
         }
 
         Matricula matricula = new Matricula(id, cursoAcademico, fechaMatricula, alumnoEncontrado, asignaturasMatricula);
+        return matricula;
     }
 }
