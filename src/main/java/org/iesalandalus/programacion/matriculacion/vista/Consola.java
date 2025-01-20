@@ -252,26 +252,6 @@ public class Consola {
         return null;
     }
 
-    public Matricula getMatriculaPorIdentificador(){
-        try {
-            System.out.println("Introduzca el ID de la Matrícula: ");
-            int id = Entrada.entero();
-
-            Alumno alumnoInventado = new Alumno("Filemón", "12345678A", "test@test.com", "000000000", LocalDate.of(1996, 1, 1));
-            CicloFormativo cicloInventado = new CicloFormativo(1234, "Programación", Grado.GDCFGB, "DAM", 10);
-            Asignatura asignaturaInventada = new Asignatura("1234", "Programación", 10, Curso.PRIMERO, 10, EspecialidadProfesorado.INFORMATICA, cicloInventado);
-            Asignatura[] coleccionInventada = new Asignatura[1];
-            coleccionInventada[0] = asignaturaInventada;
-
-            Matricula matriculaInventada = new Matricula(id, Curso.PRIMERO.toString(), LocalDate.now(), alumnoInventado, coleccionInventada);
-
-            return matriculaInventada;
-        } catch (Exception e){
-            System.out.println("ERROR: "+ e.getMessage());
-        }
-        return null;
-    }
-
     private void mostrarAsignaturas(Asignaturas asignaturas){
         if (asignaturas == null || asignaturas.getTamano()==0){
             System.out.println("No hay asignaturas registradas.");
@@ -359,7 +339,27 @@ public class Consola {
 
         }
 
-        Matricula matricula = new Matricula(id, cursoAcademico, fechaMatricula, alumnoEncontrado, asignaturasMatricula);
-        return matricula;
+        return new Matricula(id, cursoAcademico, fechaMatricula, alumnoEncontrado, asignaturasMatricula);
     }
+
+    public Matricula getMatriculaPorIdentificador(){
+        try {
+            System.out.println("Introduzca el ID de la Matrícula: ");
+            int id = Entrada.entero();
+
+            Alumno alumnoInventado = new Alumno("Filemón", "12345678A", "test@test.com", "000000000", LocalDate.of(1996, 1, 1));
+            CicloFormativo cicloInventado = new CicloFormativo(1234, "Programación", Grado.GDCFGB, "DAM", 10);
+            Asignatura asignaturaInventada = new Asignatura("1234", "Programación", 10, Curso.PRIMERO, 10, EspecialidadProfesorado.INFORMATICA, cicloInventado);
+            Asignatura[] coleccionInventada = new Asignatura[1];
+            coleccionInventada[0] = asignaturaInventada;
+
+            Matricula matriculaInventada = new Matricula(id, Curso.PRIMERO.toString(), LocalDate.now(), alumnoInventado, coleccionInventada);
+
+            return matriculaInventada;
+        } catch (Exception e){
+            System.out.println("ERROR: "+ e.getMessage());
+        }
+        return null;
+    }
+
 }
