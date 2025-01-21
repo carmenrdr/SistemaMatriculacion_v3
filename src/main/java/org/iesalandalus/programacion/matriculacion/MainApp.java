@@ -1,6 +1,7 @@
 package org.iesalandalus.programacion.matriculacion;
 
 
+import org.iesalandalus.programacion.matriculacion.dominio.Alumno;
 import org.iesalandalus.programacion.matriculacion.vista.Consola;
 import org.iesalandalus.programacion.matriculacion.vista.Opcion;
 
@@ -32,12 +33,13 @@ public class MainApp {
                 break;
             case BUSCAR_ALUMNO:
                 try {
+                    Alumno alumno = Consola.getAlumnoPorDni();
 
                 } catch ( ) {
 
                 }
                 break;
-            case BORRAR_ALUMNO:
+            /* case BORRAR_ALUMNO:
                 try {
 
                 } catch ( ) {
@@ -155,7 +157,7 @@ public class MainApp {
                 } catch ( ) {
 
                 }
-                break;
+                break; */
         }
     }
 

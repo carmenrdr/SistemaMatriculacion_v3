@@ -64,20 +64,30 @@ public class Consola {
         }
     }
 
-    public Alumno getAlumnoPorDni(){
+    public static Alumno getAlumnoPorDni(){
         try {
             System.out.println("Introduzca el DNI del alumno/a: ");
             String dniABuscar = Entrada.cadena();
 
             Alumno alumnoInventado = new Alumno("Filemón", dniABuscar, "busca@busca.com", "000000000", LocalDate.of(1996, 1, 1));
-            return alumnoInventado;
 
+            //Alumnos alumnoEncontrado = alumnos.buscar(alumnoInventado);
+            /*for (int i = 0; i < Alumnos.getTamano(); i++){
+                Alumno alumno = Alumnos.get()[i];
+
+                if (alumno.getDni().equals(dniABuscar)) {
+                    return alumno;
+                }
+            }
+
+            return alumnoInventado;*/
+            throw new IllegalArgumentException("No se ha encontrado ningún alumno/a con este DNI.");
         } catch (IllegalArgumentException e){
             throw new IllegalArgumentException("ERROR: "+e.getMessage());
         }
     }
 
-    public LocalDate leerFecha(String mensaje) {
+    public static LocalDate leerFecha(String mensaje) {
         String fechaIntroducida = Entrada.cadena();
 
         String FORMATO_FECHA = "(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[0-2])/(\\d{4})";
@@ -94,7 +104,7 @@ public class Consola {
         return LocalDate.parse(fechaIntroducida, formatter);
     }
 
-    public Grado leerGrado() {
+    public static Grado leerGrado() {
         System.out.println("Los Grados existentes son los siguientes: ");
         for (int i = 0; i < Grado.values().length; i++) {
             System.out.println(Grado.values()[i].imprimir());
@@ -118,7 +128,7 @@ public class Consola {
 
     }
 
-    public CicloFormativo leerCicloFormativo(){
+    public static CicloFormativo leerCicloFormativo(){
         System.out.println("Introduzca código del Ciclo Formativo: ");
         int codigo = Entrada.entero();
 
@@ -153,7 +163,7 @@ public class Consola {
         }
     }
 
-    public CicloFormativo getCicloFormativoPorCodigo(){
+    public static CicloFormativo getCicloFormativoPorCodigo(){
         try {
             System.out.println("Introduzca el código del Ciclo Formativo: ");
             int codigoBuscar = Entrada.entero();
@@ -166,7 +176,7 @@ public class Consola {
         }
     }
 
-    public Curso leerCurso(){
+    public static Curso leerCurso(){
         System.out.println("Los cursos existentes son los siguientes: ");
         for (int i = 0; i < Curso.values().length; i++) {
             System.out.println(Curso.values()[i].imprimir());
@@ -189,7 +199,7 @@ public class Consola {
         return Curso.values()[opcion];
     }
 
-    public EspecialidadProfesorado leerEspecialidadProfesorado(){
+    public static EspecialidadProfesorado leerEspecialidadProfesorado(){
         System.out.println("Las especialidades existentes son: ");
         for (int i = 0; i < EspecialidadProfesorado.values().length; i++) {
             System.out.println(EspecialidadProfesorado.values()[i].imprimir());
@@ -212,7 +222,7 @@ public class Consola {
         return EspecialidadProfesorado.values()[opcion];
     }
 
-    public Asignatura leerAsignatura(CicloFormativo cicloFormativo){
+    public static Asignatura leerAsignatura(CicloFormativo cicloFormativo){
         System.out.println("Introduzca el código de la asignatura: ");
         String codigo = Entrada.cadena();
 
@@ -236,7 +246,7 @@ public class Consola {
         }
     }
 
-    public Asignatura getAsignaturaPorCodigo(){
+    public static Asignatura getAsignaturaPorCodigo(){
         try {
             System.out.println("Introduzca el código de la asignatura: ");
             String codigoBuscar = Entrada.cadena();
@@ -279,7 +289,7 @@ public class Consola {
         return false;
     }
 
-    public Matricula leerMatricula(Alumnos alumnos, Asignaturas asignaturas) {
+    public static Matricula leerMatricula(Alumnos alumnos, Asignaturas asignaturas) {
         System.out.println("Introduce el ID de la mátricula: ");
         int id = Entrada.entero();
 
@@ -342,7 +352,7 @@ public class Consola {
         return new Matricula(id, cursoAcademico, fechaMatricula, alumnoEncontrado, asignaturasMatricula);
     }
 
-    public Matricula getMatriculaPorIdentificador(){
+    public static Matricula getMatriculaPorIdentificador(){
         try {
             System.out.println("Introduzca el ID de la Matrícula: ");
             int id = Entrada.entero();
