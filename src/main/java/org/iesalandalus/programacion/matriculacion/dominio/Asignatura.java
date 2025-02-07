@@ -4,8 +4,8 @@ import java.util.Objects;
 
 public class Asignatura {
 
-    public static int MAX_NUM_HORAS_ANUALES = 300;
-    public static int MAX_NUM_HORAS_DESDOBLES = 6;
+    public static final int MAX_NUM_HORAS_ANUALES = 300;
+    public static final int MAX_NUM_HORAS_DESDOBLES = 6;
     private static final String ER_CODIGO = "[0-9]{4}";
     private String codigo;
     private String nombre;

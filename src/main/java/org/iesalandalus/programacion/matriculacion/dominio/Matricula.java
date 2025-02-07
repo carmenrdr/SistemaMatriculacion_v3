@@ -1,15 +1,17 @@
 package org.iesalandalus.programacion.matriculacion.dominio;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Objects;
 
 public class Matricula {
 
-    public static int MAXIMO_MESES_ANTERIOR_ANULACION = 6;
-    public static int MAXIMO_DIAS_ANTERIOR_MATRICULA = 15;
-    public static int MAXIMO_NUMERO_HORAS_MATRICULA = 1000;
-    public static int MAXIMO_NUMERO_ASIGNATURAS_POR_MATRICULA = 10;
-    public static String FORMATO_FECHA = "dd-dd";
-    private static String ER_CURSO_ACADEMICO = "([0-9]{2})-([0-9]{2})";
+    public static final int MAXIMO_MESES_ANTERIOR_ANULACION = 6;
+    public static final int MAXIMO_DIAS_ANTERIOR_MATRICULA = 15;
+    public static final int MAXIMO_NUMERO_HORAS_MATRICULA = 1000;
+    public static final int MAXIMO_NUMERO_ASIGNATURAS_POR_MATRICULA = 10;
+    public static final String FORMATO_FECHA = "dd-dd";
+    private static final String ER_CURSO_ACADEMICO = "([0-9]{2})-([0-9]{2})";
 
     private int idMatricula;
     private String cursoAcademico;
@@ -17,7 +19,7 @@ public class Matricula {
     private LocalDate fechaAnulacion;
 
     private Alumno alumno;
-    private Asignatura[] coleccionAsignaturas;
+    private Asignatura[] coleccionAsignaturas; // = new Asignatura[MAXIMO_NUMERO_ASIGNATURAS_POR_MATRICULA];
 
     public Matricula(int idMatricula, String cursoAcademico, LocalDate fechaMatriculacion, Alumno alumno, Asignatura[] coleccionAsignaturas){
         setIdMatricula(idMatricula);
@@ -31,11 +33,11 @@ public class Matricula {
         if (matricula==null){
             throw new IllegalArgumentException("ERROR: No es posible copiar una matrícula nula.");
         } else {
-            this.idMatricula = matricula.idMatricula;
-            this.cursoAcademico = matricula.cursoAcademico;
-            this.fechaMatriculacion = matricula.fechaMatriculacion;
-            this.alumno = matricula.alumno;
-            this.coleccionAsignaturas = matricula.coleccionAsignaturas;
+            this.idMatricula = matricula.getIdMatricula();
+            this.cursoAcademico = matricula.getCursoAcademico();
+            this.fechaMatriculacion = matricula.getFechaMatriculacion();
+            this.alumno = matricula.getAlumno();
+            this.coleccionAsignaturas = matricula.getColeccionAsignaturas();
         }
     }
 
@@ -140,7 +142,7 @@ public class Matricula {
             totalHorasMatricula += asignaturasMatricula[i].getHorasAnuales();
         }
 
-        return totalHorasMatricula > 1000;
+        return (totalHorasMatricula > 1000);
     }
 
     private String asignaturasMatricula(){
@@ -155,6 +157,38 @@ public class Matricula {
         }
 
         return codigosMatricula.toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {return true;}
+
+        if (o == null || getClass() != o.getClass()) {return false;}
+
+        final Matricula other = (Matricula) o;
+
+        if (!Objects.equals(this.idMatricula, other.idMatricula)) {
+            return false;
+        }
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(idMatricula);
+    }
+
+    public String imprimir() {
+        return String.format("idMatricula=%d, curso académico=%s, fecha matriculación=%s, alumno={%s}", idMatricula, cursoAcademico,
+                fechaMatriculacion.format(DateTimeFormatter.ofPattern(Matricula.FORMATO_FECHA)), alumno.toString());
+    }
+
+    @Override
+    public String toString() {
+        return String.format("idMatricula=%d, curso académico=%s, fecha matriculación=%s, alumno=%s, Asignaturas={ %s}",
+                idMatricula, cursoAcademico, fechaMatriculacion.format(DateTimeFormatter.ofPattern(Matricula.FORMATO_FECHA)),
+                alumno.toString(), asignaturasMatricula());
     }
 
 }
