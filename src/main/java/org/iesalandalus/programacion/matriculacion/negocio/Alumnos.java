@@ -4,9 +4,9 @@ import org.iesalandalus.programacion.matriculacion.dominio.Alumno;
 
 public class Alumnos {
 
-    private int capacidad;
+    private final int capacidad;
     private int tamano;
-    private Alumno[] coleccionAlumnos;
+    private final Alumno[] coleccionAlumnos;
 
     public Alumnos(int capacidad){
         if (capacidad <= 0) {
@@ -18,17 +18,17 @@ public class Alumnos {
     }
 
     public Alumno[] get(){
-        return copiaProfundaAlumnos();
+        return copiaProfundaAlumnos(coleccionAlumnos);
     }
 
-    private Alumno[] copiaProfundaAlumnos(){
-        Alumno[] copia = new Alumno[tamano];
+    private static Alumno[] copiaProfundaAlumnos(Alumno[] coleccionAlumnos){
+        Alumno[] coleccionAux = new Alumno[coleccionAlumnos.length];
 
-        for (int i = 0; i<tamano; i++){
-            copia[i] = new Alumno(coleccionAlumnos[i]);
+        for (int i = 0; i < coleccionAlumnos.length; i++) {
+            coleccionAux[i] = new Alumno(coleccionAlumnos[i]);
         }
 
-        return copia;
+        return coleccionAux;
     }
 
     public int getTamano(){
@@ -53,7 +53,7 @@ public class Alumnos {
     }
 
     private int buscarIndice(Alumno alumno){
-        for (int i = 0; i<tamano; i++){
+        for (int i = 0; i<coleccionAlumnos.length; i++){
             if (coleccionAlumnos[i].equals(alumno)){
                 return i;
             }
@@ -70,16 +70,16 @@ public class Alumnos {
     }
 
     public Alumno buscar(Alumno alumno){
-        if (alumno == null){
-            return null;
-        }
+        int indice = -1;
+        boolean encontrado = false;
 
-        int indice = buscarIndice(alumno);
-        if (indice == -1){
-            return null;
-        } else {
-            return coleccionAlumnos[indice];
+        for (int i=0; i < coleccionAlumnos.length && !encontrado; i++) {
+            if (coleccionAlumnos[i] != null && coleccionAlumnos[i].equals(alumno)) {
+                indice = i;
+                encontrado = true;
+            }
         }
+        return coleccionAlumnos[indice];
     }
 
     public void borrar(Alumno alumno){
@@ -88,18 +88,27 @@ public class Alumnos {
         }
 
         int indice = buscarIndice(alumno);
+
         if (indice == -1){
             throw new IllegalArgumentException("ERROR: No existe ningún alumno como el indicado.");
+        } else {
+            desplazarUnaPosicionHaciaIzquierda(indice);
+            tamano--;
         }
-
-        desplazarUnaPosicionHaciaIzquierda(indice);
-        coleccionAlumnos[tamano -1] = null; //eliminar el último alumno (duplicado al final)
-        tamano--;
     }
 
-    private void desplazarUnaPosicionHaciaIzquierda(int indice){
-        for (int i = indice; i < tamano -1 && coleccionAlumnos[i] != null; i++){
-            coleccionAlumnos[i] = coleccionAlumnos[i+1];
+    private void desplazarUnaPosicionHaciaIzquierda(int indice) {
+
+        if (indice == coleccionAlumnos.length-1) {
+            coleccionAlumnos[indice] = null;
+        } else {
+            int i;
+
+            for (i = indice; i < coleccionAlumnos.length-1 && coleccionAlumnos[i] != null; i++) {
+                coleccionAlumnos[i] = new Alumno(coleccionAlumnos[i+1]);
+            }
+
+            coleccionAlumnos[i+1] = null;
         }
     }
 }
