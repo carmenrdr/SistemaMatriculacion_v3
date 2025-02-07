@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public class CicloFormativo {
 
-    public static int MAXIMO_NUMERO_HORAS = 2000;
+    public static final int MAXIMO_NUMERO_HORAS = 2000;
     private int codigo;
     private String familiaProfesional;
     private Grado grado;
@@ -23,11 +23,11 @@ public class CicloFormativo {
         if (cicloFormativo == null){
             throw new IllegalArgumentException("ERROR: No es posible copiar un ciclo formativo nulo.");
         } else {
-            this.codigo = cicloFormativo.codigo;
-            this.familiaProfesional = cicloFormativo.familiaProfesional;
-            this.grado  = cicloFormativo.grado;
-            this.nombre = cicloFormativo.nombre;
-            this.horas = cicloFormativo.horas;
+            this.codigo = cicloFormativo.getCodigo();
+            this.familiaProfesional = cicloFormativo.getFamiliaProfesional();
+            this.grado  = cicloFormativo.getGrado();
+            this.nombre = cicloFormativo.getNombre();
+            this.horas = cicloFormativo.getHoras();
         }
     }
 
