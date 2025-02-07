@@ -15,7 +15,7 @@ public class CiclosFormativos {
         }
         this.capacidad = capacidad;
         this.tamano = 0;
-        this.coleccionCiclosFormativos = new CicloFormativo[capacidad];
+        this.coleccionCiclosFormativos = new CicloFormativo[getCapacidad()];
     }
 
     public CicloFormativo[] get() {

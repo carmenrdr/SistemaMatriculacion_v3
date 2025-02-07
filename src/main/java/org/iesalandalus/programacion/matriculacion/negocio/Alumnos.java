@@ -13,8 +13,8 @@ public class Alumnos {
             throw new IllegalArgumentException("ERROR: La capacidad debe ser mayor que cero.");
         }
         this.capacidad = capacidad;
-        this.coleccionAlumnos = new Alumno[capacidad];
         this.tamano = 0;
+        this.coleccionAlumnos = new Alumno[getCapacidad()];
     }
 
     public Alumno[] get(){
@@ -44,7 +44,7 @@ public class Alumnos {
             throw new IllegalArgumentException("ERROR: No se puede insertar un alumno nulo.");
         } else if (buscar(alumno) != null) {
             throw new IllegalArgumentException("ERROR: Ya existe un alumno con ese dni.");
-        } else if (tamano >= capacidad){
+        } else if (tamanoSuperado(tamano) || capacidadSuperada(capacidad)){
             throw new IllegalArgumentException("ERROR: No se aceptan más alumnos.");
         } else {
             coleccionAlumnos[tamano] = alumno;
@@ -98,7 +98,6 @@ public class Alumnos {
     }
 
     private void desplazarUnaPosicionHaciaIzquierda(int indice) {
-
         if (indice == coleccionAlumnos.length-1) {
             coleccionAlumnos[indice] = null;
         } else {
