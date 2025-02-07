@@ -196,15 +196,20 @@ public class Alumno {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Alumno alumno = (Alumno) o;
-        return dni.equals(alumno.dni);
+        if (this == o) {return true;}
+
+        if (o == null || getClass() != o.getClass()) {return false;}
+
+        final Alumno other = (Alumno) o;
+
+        if (!Objects.equals(this.dni, other.dni)) {return false;}
+
+        return true;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(dni);
+        return Objects.hashCode(this.dni);
     }
 
     @Override

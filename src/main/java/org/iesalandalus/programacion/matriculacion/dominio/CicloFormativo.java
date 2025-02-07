@@ -93,10 +93,15 @@ public class CicloFormativo {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        CicloFormativo that = (CicloFormativo) o;
-        return codigo == that.codigo;
+        if (this == o) {return true;}
+
+        if (o == null || getClass() != o.getClass()) {return false;}
+
+        CicloFormativo other = (CicloFormativo) o;
+
+        if (!Objects.equals(this.codigo, other.codigo)) {return false;}
+
+        return true;
     }
 
     @Override

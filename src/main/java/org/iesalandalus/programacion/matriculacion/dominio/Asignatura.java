@@ -6,7 +6,7 @@ public class Asignatura {
 
     public static int MAX_NUM_HORAS_ANUALES = 300;
     public static int MAX_NUM_HORAS_DESDOBLES = 6;
-    private static String ER_CODIGO = "[0-9]{4}";
+    private static final String ER_CODIGO = "[0-9]{4}";
     private String codigo;
     private String nombre;
     private int horasAnuales;
@@ -29,13 +29,13 @@ public class Asignatura {
         if (asignatura == null){
             throw new IllegalArgumentException("ERROR: No es posible copiar una asignatura nula.");
         } else {
-            this.codigo = asignatura.codigo;
-            this.nombre = asignatura.nombre;
-            this.horasAnuales = asignatura.horasAnuales;
-            this.curso = asignatura.curso;
-            this.horasDesdoble = asignatura.horasDesdoble;
-            this.especialidadProfesorado = asignatura.especialidadProfesorado;
-            this.cicloFormativo = asignatura.cicloFormativo;
+            this.codigo = asignatura.getCodigo();
+            this.nombre = asignatura.getNombre();
+            this.horasAnuales = asignatura.getHorasAnuales();
+            this.curso = asignatura.getCurso();
+            this.horasDesdoble = asignatura.getHorasDesdoble();
+            this.especialidadProfesorado = asignatura.getEspecialidadProfesorado();
+            this.cicloFormativo = asignatura.getCicloFormativo();
         }
     }
 
@@ -127,10 +127,15 @@ public class Asignatura {
 
    @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Asignatura that = (Asignatura) o;
-        return Objects.equals(codigo, that.codigo);
+        if (this == o) {return true;}
+
+        if (o == null || getClass() != o.getClass()) {return false;}
+
+        Asignatura other = (Asignatura) o;
+
+        if (!Objects.equals(this.codigo, other.codigo)) {return false;}
+
+        return true;
     }
 
     @Override
