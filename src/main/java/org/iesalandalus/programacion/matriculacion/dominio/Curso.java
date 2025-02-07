@@ -3,7 +3,7 @@ package org.iesalandalus.programacion.matriculacion.dominio;
 public enum Curso {
 
     PRIMERO("Primero"), SEGUNDO("Segundo");
-    private String cadenaAMostrar;
+    private final String cadenaAMostrar;
 
     private Curso (String cadenaAMostrar) {
         this.cadenaAMostrar = cadenaAMostrar;
@@ -15,7 +15,7 @@ public enum Curso {
         } else if (this == SEGUNDO) {
             return "1.-"+this.cadenaAMostrar;
         } else {
-            throw new IllegalArgumentException("El nombre del curso no es válido.");
+            throw new IllegalArgumentException("ERROR: El nombre del curso no es válido.");
         }
     }
 
