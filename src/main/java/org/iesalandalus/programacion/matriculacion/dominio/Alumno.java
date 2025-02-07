@@ -32,12 +32,12 @@ public class Alumno {
         if (alumno == null){
             throw new IllegalArgumentException("ERROR: No es posible copiar un alumno nulo.");
         } else {
-            this.nombre = alumno.nombre;
-            this.dni = alumno.dni;
-            this.correo = alumno.correo;
-            this.telefono = alumno.telefono;
-            this.fechaNacimiento = alumno.fechaNacimiento;
-            this.nia = alumno.nia;
+            this.nombre = alumno.getNombre();
+            this.dni = alumno.getDni();
+            this.correo = alumno.getCorreo();
+            this.telefono = alumno.getTelefono();
+            this.fechaNacimiento = alumno.getFechaNacimiento();
+            this.nia = alumno.getNia();
         }
     }
 
@@ -60,7 +60,7 @@ public class Alumno {
 
     public void setNia() {
         //creamos el nia con los cuatro primeros caracteres del nombre en minúscula y las 3 últimas cifras del DNI.
-        this.nia = nombre.substring(0,4).toLowerCase() + dni.substring(5,8);
+        this.nia = getIniciales() + dni.substring(5,8);
     }
 
     private void setNia(String nia) {
@@ -72,11 +72,9 @@ public class Alumno {
     }
 
     private String formateaNombre(String nombre) {
-        //Primero eliminar los espacios en blanco.
-        nombre = nombre.trim().replaceAll(" +", " ");
 
-        //Dividir el nombre por palabras usando los espacios.
-        String[] palabras = nombre.split(" ");
+        String[] palabras = nombre.split("\\s");
+
         StringBuilder nombreFormateado = new StringBuilder();
 
         //Ir recorriendo para poner la primera letra en mayúscula y las demás en minúsculas.
@@ -135,7 +133,7 @@ public class Alumno {
     }
 
     private boolean comprobarLetraDni(String dni) {
-        //Primero comprobamos si cumple el patrón establecido directamente es incorrecto.
+        //Primero comprobamos si cumple el patrón establecido, sino directamente es incorrecto.
         if (!dni.matches(ER_DNI)) {
             return false;
         }
