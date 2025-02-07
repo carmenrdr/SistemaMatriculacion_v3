@@ -23,7 +23,7 @@ public enum Opcion {
     MOSTRAR_MATRICULAS_CURSO_ACADEMICO("Mostrar matrículas por curso académico."),
     SALIR("Salir.");
 
-    private String cadenaAMostrar;
+    private final String cadenaAMostrar;
 
     private Opcion(String cadenaAMostrar) {
         this.cadenaAMostrar = cadenaAMostrar;
