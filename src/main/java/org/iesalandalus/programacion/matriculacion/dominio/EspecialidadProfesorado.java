@@ -5,7 +5,7 @@ public enum EspecialidadProfesorado {
     INFORMATICA("Informática"),
     SISTEMAS("Sistemas y Aplicaciones informáticas"),
     FOL("Formación y Orientación Laboral");
-    private String cadenaAMostrar;
+    private final String cadenaAMostrar;
 
     private EspecialidadProfesorado(String cadenaAMostrar){
         this.cadenaAMostrar = cadenaAMostrar;
@@ -19,7 +19,7 @@ public enum EspecialidadProfesorado {
         } else if (this == FOL) {
             return "2.-"+this.cadenaAMostrar;
         } else {
-            throw new IllegalArgumentException("La especialidad del profesorado no es válida.");
+            throw new IllegalArgumentException("ERROR: La especialidad del profesorado no es válida.");
         }
     }
 
