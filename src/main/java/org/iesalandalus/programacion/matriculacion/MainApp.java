@@ -21,7 +21,7 @@ public class MainApp {
         System.out.println("Hasta luego!!!!");
     }
 
-    private static void ejecutarOpcion(Opcion opcion) {
+    private static void ejecutarOpcion(Opcion opcion) throws Exception {
 
         switch (opcion) {
             case INSERTAR_ALUMNO:

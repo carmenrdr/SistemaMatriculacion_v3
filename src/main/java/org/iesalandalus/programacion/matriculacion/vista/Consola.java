@@ -4,10 +4,8 @@ import org.iesalandalus.programacion.matriculacion.dominio.*;
 import org.iesalandalus.programacion.matriculacion.negocio.Alumnos;
 import org.iesalandalus.programacion.matriculacion.negocio.Asignaturas;
 import org.iesalandalus.programacion.matriculacion.negocio.CiclosFormativos;
-import org.iesalandalus.programacion.matriculacion.negocio.Matriculas;
 import org.iesalandalus.programacion.utilidades.Entrada;
 
-import javax.sound.midi.MidiMessage;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.regex.Matcher;
@@ -19,8 +17,12 @@ public class Consola {
     }
 
     public static void mostrarMenu() {
-        Opcion[] opcionesMenu = Opcion.values();
 
+        System.out.println("Le damos la bienvenida al sistema de matriculación del instituto IES Al-Ándalus.");
+        System.out.println("--------------------------------------------------------------------------------");
+        System.out.println("Menú:");
+
+        Opcion[] opcionesMenu = Opcion.values();
         for (int i = 0; i < opcionesMenu.length; i++) {
             System.out.println(opcionesMenu[i]);
         }
@@ -41,7 +43,7 @@ public class Consola {
         return Opcion.values()[opcion];
     }
 
-    public static Alumno leerAlumno() {
+    public static Alumno leerAlumno() throws Exception {
         System.out.println("Introduzca el nombre del nuevo alumno o alumna: ");
         String nombre = Entrada.cadena();
 
@@ -57,22 +59,33 @@ public class Consola {
         System.out.println("Introduzca la fecha de nacimiento en formato dd/mm/yyyy: ");
         LocalDate fechaNacimiento = LocalDate.parse(Entrada.cadena());
 
+        Alumno alumnoNuevo;
+
         try {
-            return new Alumno(nombre, dni, correo, telefono, fechaNacimiento);
+            alumnoNuevo = new Alumno(nombre, dni, correo, telefono, fechaNacimiento);
         } catch (IllegalArgumentException e) {
             throw new IllegalArgumentException("El alumno introducido no es correcto.\n" + e.getMessage());
         }
+
+        return alumnoNuevo;
     }
 
     public static Alumno getAlumnoPorDni(){
-        try {
             System.out.println("Introduzca el DNI del alumno/a: ");
             String dniABuscar = Entrada.cadena();
 
-            Alumno alumnoInventado = new Alumno("Filemón", dniABuscar, "busca@busca.com", "000000000", LocalDate.of(1996, 1, 1));
+            try {
+                Alumno alumnoInventado = new Alumno("Filemón", dniABuscar, "busca@busca.com", "000000000", LocalDate.of(1996, 1, 1));
+                return alumnoInventado;
+            } catch (IllegalArgumentException e) {
+                throw new IllegalArgumentException("ERROR: "+ e.getMessage());
+            }
 
-            //Alumnos alumnoEncontrado = alumnos.buscar(alumnoInventado);
-            /*for (int i = 0; i < Alumnos.getTamano(); i++){
+
+            /*Alumno[] alumnosActuales = new alumnos.get();
+            Alumno alumnoEncontrado = alumnos.buscar(alumnoInventado);
+            Alumnos alumnoEncontrado = alumnos.buscar(alumnoInventado);
+            for (int i = 0; i < Alumnos.getTamano(); i++){
                 Alumno alumno = Alumnos.get()[i];
 
                 if (alumno.getDni().equals(dniABuscar)) {
@@ -81,10 +94,10 @@ public class Consola {
             }
 
             return alumnoInventado;*/
-            throw new IllegalArgumentException("No se ha encontrado ningún alumno/a con este DNI.");
+          /*  throw new IllegalArgumentException("No se ha encontrado ningún alumno/a con este DNI.");
         } catch (IllegalArgumentException e){
             throw new IllegalArgumentException("ERROR: "+e.getMessage());
-        }
+        }*/
     }
 
     public static LocalDate leerFecha(String mensaje) {
@@ -104,7 +117,7 @@ public class Consola {
         return LocalDate.parse(fechaIntroducida, formatter);
     }
 
-    public static Grado leerGrado() {
+    public static Grado leerGrado() throws Exception {
         System.out.println("Los Grados existentes son los siguientes: ");
         for (int i = 0; i < Grado.values().length; i++) {
             System.out.println(Grado.values()[i].imprimir());
@@ -128,7 +141,7 @@ public class Consola {
 
     }
 
-    public static CicloFormativo leerCicloFormativo(){
+    public static CicloFormativo leerCicloFormativo() throws Exception {
         System.out.println("Introduzca código del Ciclo Formativo: ");
         int codigo = Entrada.entero();
 
@@ -163,20 +176,19 @@ public class Consola {
         }
     }
 
-    public static CicloFormativo getCicloFormativoPorCodigo(){
-        try {
-            System.out.println("Introduzca el código del Ciclo Formativo: ");
-            int codigoBuscar = Entrada.entero();
+    public static CicloFormativo getCicloFormativoPorCodigo() {
+        System.out.println("Introduzca el código del Ciclo Formativo a buscar: ");
+        int codigoBuscar = Entrada.entero();
 
+        try {
             CicloFormativo cicloInventado = new CicloFormativo(codigoBuscar, "Programacion", Grado.GDCFGB, "DAM", 100);
             return cicloInventado;
-
-        } catch (IllegalArgumentException e){
-            throw new IllegalArgumentException("ERROR: "+e.getMessage());
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException("ERROR: " + e.getMessage());
         }
     }
 
-    public static Curso leerCurso(){
+    public static Curso leerCurso() throws Exception {
         System.out.println("Los cursos existentes son los siguientes: ");
         for (int i = 0; i < Curso.values().length; i++) {
             System.out.println(Curso.values()[i].imprimir());
@@ -199,7 +211,7 @@ public class Consola {
         return Curso.values()[opcion];
     }
 
-    public static EspecialidadProfesorado leerEspecialidadProfesorado(){
+    public static EspecialidadProfesorado leerEspecialidadProfesorado() throws Exception {
         System.out.println("Las especialidades existentes son: ");
         for (int i = 0; i < EspecialidadProfesorado.values().length; i++) {
             System.out.println(EspecialidadProfesorado.values()[i].imprimir());
@@ -222,7 +234,7 @@ public class Consola {
         return EspecialidadProfesorado.values()[opcion];
     }
 
-    public static Asignatura leerAsignatura(CicloFormativo cicloFormativo){
+    public static Asignatura leerAsignatura(CicloFormativo cicloFormativo) throws Exception {
         System.out.println("Introduzca el código de la asignatura: ");
         String codigo = Entrada.cadena();
 
@@ -246,23 +258,21 @@ public class Consola {
         }
     }
 
-    public static Asignatura getAsignaturaPorCodigo(){
-        try {
-            System.out.println("Introduzca el código de la asignatura: ");
-            String codigoBuscar = Entrada.cadena();
+    public static Asignatura getAsignaturaPorCodigo() throws Exception {
+        System.out.println("Introduzca el código de la asignatura: ");
+        String codigoBuscar = Entrada.cadena();
 
+        try {
             CicloFormativo cicloInventado = new CicloFormativo(3333, "Programacion", Grado.GDCFGB, "DAM", 100);
 
-            Asignatura asignaturaInventada = new Asignatura(codigoBuscar, "Programación", 10, Curso.PRIMERO, 10, EspecialidadProfesorado.FOL,cicloInventado);
+            Asignatura asignaturaInventada = new Asignatura(codigoBuscar, "Programación", 10, Curso.PRIMERO, 10, EspecialidadProfesorado.FOL, cicloInventado);
             return asignaturaInventada;
-
-        } catch (IllegalArgumentException e){
-            System.out.println("ERROR: "+e.getMessage());
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException("ERROR: " + e.getMessage());
         }
-        return null;
     }
 
-    private void mostrarAsignaturas(Asignaturas asignaturas){
+    private static void mostrarAsignaturas(Asignaturas asignaturas){
         if (asignaturas == null || asignaturas.getTamano()==0){
             System.out.println("No hay asignaturas registradas.");
         } else {
@@ -270,12 +280,12 @@ public class Consola {
 
             for (int i = 0; i < asignaturas.getTamano(); i++) {
                 Asignatura asignatura = asignaturas.get()[i];
-                System.out.println(asignatura);
+                System.out.println(asignatura.imprimir());
             }
         }
     }
 
-    private boolean asignaturaYaMatriculada(Asignatura[] asignaturasMatricula, Asignatura asignatura){
+    private static boolean asignaturaYaMatriculada(Asignatura[] asignaturasMatricula, Asignatura asignatura){
         if (asignaturasMatricula == null || asignatura == null){
             return false;
         }
@@ -289,7 +299,7 @@ public class Consola {
         return false;
     }
 
-    public static Matricula leerMatricula(Alumnos alumnos, Asignaturas asignaturas) {
+    public static Matricula leerMatricula(Alumnos alumnos, Asignaturas asignaturas) throws Exception {
         System.out.println("Introduce el ID de la mátricula: ");
         int id = Entrada.entero();
 
@@ -302,46 +312,39 @@ public class Consola {
         Alumno alumnoPorDni = getAlumnoPorDni();
         Alumno alumnoEncontrado = null;
         for (int i = 0; i < alumnos.getTamano(); i++) {
-            if (alumnos.get()[i].getDni().equals(alumnoPorDni.getDni())) {
+            if (alumnos.get()[i].equals(alumnoPorDni)) {
                 alumnoEncontrado = alumnos.get()[i];
                 break;
             }
         }
 
+        //Muestro las asignaturas que hay.
+        mostrarAsignaturas(asignaturas);
         //Array para almacenar las asignaturas que se elijan.
         Asignatura[] asignaturasMatricula = new Asignatura[Matricula.MAXIMO_NUMERO_ASIGNATURAS_POR_MATRICULA];
 
         int contadorAsignaturas = 0;
-        boolean continuar = true;
 
-        while (continuar) {
+        while (!(contadorAsignaturas >= Matricula.MAXIMO_NUMERO_ASIGNATURAS_POR_MATRICULA)) {
 
             Asignatura asignaturaPorCodigo = getAsignaturaPorCodigo();
 
             //Buscar la asingatura verdadera en el array de asignaturas.
             Asignatura asignaturaEncontrada = null;
             for (int i = 0; i < asignaturas.getTamano(); i++) {
-                if (asignaturas.get()[i].getCodigo().equals(asignaturaPorCodigo.getCodigo())) {
+                if (asignaturas.get()[i].equals(asignaturaPorCodigo)) {
                     asignaturaEncontrada = asignaturas.get()[i];
                     break;
                 }
             }
 
             //Comprobar que la asignatura encontrada no esté ya en la matrícula.
-            boolean asignaturaYaEnMatricula = false;
-            for (int i = 0; i < contadorAsignaturas; i++) {
-                if (asignaturasMatricula[i].getCodigo().equals(asignaturaEncontrada.getCodigo())) {
-                    asignaturaYaEnMatricula = true;
-                    break;
-                }
-            }
-            if (asignaturaYaEnMatricula) {
+            if (asignaturaYaMatriculada(asignaturasMatricula, asignaturaEncontrada)) {
                 throw new IllegalArgumentException("ERROR: La asignatura ya se encuentra en esta matrícula.");
+            } else {
+                asignaturasMatricula[contadorAsignaturas] = asignaturaEncontrada;
+                contadorAsignaturas++;
             }
-
-            //Añadir la asignatura encontrada y correcta al array de asignaturas para esta matrícula.
-            asignaturasMatricula[contadorAsignaturas] = asignaturaEncontrada;
-            contadorAsignaturas++;
 
             if (contadorAsignaturas >= Matricula.MAXIMO_NUMERO_ASIGNATURAS_POR_MATRICULA) {
                 throw new IllegalArgumentException("ERROR: No se pueden añadir más asignaturas a esta matrícula.");
@@ -352,24 +355,22 @@ public class Consola {
         return new Matricula(id, cursoAcademico, fechaMatricula, alumnoEncontrado, asignaturasMatricula);
     }
 
-    public static Matricula getMatriculaPorIdentificador(){
-        try {
-            System.out.println("Introduzca el ID de la Matrícula: ");
-            int id = Entrada.entero();
+    public static Matricula getMatriculaPorIdentificador() throws Exception {
+        System.out.println("Introduzca el ID de la Matrícula: ");
+        int idABuscar = Entrada.entero();
 
+        try {
             Alumno alumnoInventado = new Alumno("Filemón", "12345678A", "test@test.com", "000000000", LocalDate.of(1996, 1, 1));
             CicloFormativo cicloInventado = new CicloFormativo(1234, "Programación", Grado.GDCFGB, "DAM", 10);
             Asignatura asignaturaInventada = new Asignatura("1234", "Programación", 10, Curso.PRIMERO, 10, EspecialidadProfesorado.INFORMATICA, cicloInventado);
             Asignatura[] coleccionInventada = new Asignatura[1];
             coleccionInventada[0] = asignaturaInventada;
 
-            Matricula matriculaInventada = new Matricula(id, Curso.PRIMERO.toString(), LocalDate.now(), alumnoInventado, coleccionInventada);
-
+            Matricula matriculaInventada = new Matricula(idABuscar, Curso.PRIMERO.toString(), LocalDate.now(), alumnoInventado, coleccionInventada);
             return matriculaInventada;
-        } catch (Exception e){
-            System.out.println("ERROR: "+ e.getMessage());
+        } catch (Exception e) {
+            throw new IllegalArgumentException("ERROR: " + e.getMessage());
         }
-        return null;
     }
 
 }
