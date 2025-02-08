@@ -14,6 +14,7 @@ import java.time.LocalDate;
 
 public class MainApp {
     public static final int CAPACIDAD=3;
+
     private static Alumnos alumnos;
     private static Matriculas matriculas;
     private static Asignaturas asignaturas;
@@ -28,9 +29,7 @@ public class MainApp {
             ejecutarOpcion(opcion);
         } while (opcion != Opcion.SALIR);
 
-        if (opcion == Opcion.SALIR) {
-            System.out.println("¡Hasta la próxima!");
-        }
+        System.out.println("¡Hasta la próxima!");
     }
 
     private static void ejecutarOpcion(Opcion opcion) {
