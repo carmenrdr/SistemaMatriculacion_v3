@@ -177,7 +177,7 @@ public class Consola {
     }
 
     public static CicloFormativo getCicloFormativoPorCodigo() {
-        System.out.println("Introduzca el código del Ciclo Formativo a buscar: ");
+        System.out.println("Introduzca el código del Ciclo Formativo: ");
         int codigoBuscar = Entrada.entero();
 
         try {
