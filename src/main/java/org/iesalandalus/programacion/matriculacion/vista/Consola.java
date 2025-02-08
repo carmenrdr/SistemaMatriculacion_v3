@@ -163,13 +163,13 @@ public class Consola {
         }
     }
 
-    public void mostrarCiclosFormativos(CiclosFormativos ciclosFormativos){
-        if (ciclosFormativos == null || ciclosFormativos.getTamano()==0){
+    public static void mostrarCiclosFormativos(CiclosFormativos ciclosFormativos) {
+        if (ciclosFormativos == null || ciclosFormativos.getTamano() == 0) {
             System.out.println("No hay Ciclos Formativos registrados.");
         } else {
             System.out.println("Los Ciclos Formativos registrados son los siguientes: ");
 
-            for (int i=0; i< ciclosFormativos.getTamano(); i++){
+            for (int i = 0; i < ciclosFormativos.getTamano(); i++) {
                 CicloFormativo cicloFormativo = ciclosFormativos.get()[i];
                 System.out.println(cicloFormativo);
             }
@@ -234,7 +234,7 @@ public class Consola {
         return EspecialidadProfesorado.values()[opcion];
     }
 
-    public static Asignatura leerAsignatura(CicloFormativo cicloFormativo) throws Exception {
+    public static Asignatura leerAsignatura() throws Exception {
         System.out.println("Introduzca el código de la asignatura: ");
         String codigo = Entrada.cadena();
 
@@ -245,6 +245,8 @@ public class Consola {
         int horasAnuales = Entrada.entero();
 
         Curso curso = leerCurso();
+
+        CicloFormativo cicloFormativo = leerCicloFormativo();
 
         System.out.println("Introduzca las horas de desdoble: ");
         int horasDesdoble = Entrada.entero();
@@ -272,7 +274,7 @@ public class Consola {
         }
     }
 
-    private static void mostrarAsignaturas(Asignaturas asignaturas){
+    public static void mostrarAsignaturas(Asignaturas asignaturas){
         if (asignaturas == null || asignaturas.getTamano()==0){
             System.out.println("No hay asignaturas registradas.");
         } else {
