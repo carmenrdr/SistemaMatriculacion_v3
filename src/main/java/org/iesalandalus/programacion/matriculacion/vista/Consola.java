@@ -18,6 +18,7 @@ public class Consola {
 
     public static void mostrarMenu() {
 
+        System.out.println("--------------------------------------------------------------------------------");
         System.out.println("Le damos la bienvenida al sistema de matriculación del instituto IES Al-Ándalus.");
         System.out.println("--------------------------------------------------------------------------------");
         System.out.println("Menú:");
@@ -80,24 +81,6 @@ public class Consola {
             } catch (IllegalArgumentException e) {
                 throw new IllegalArgumentException("ERROR: "+ e.getMessage());
             }
-
-
-            /*Alumno[] alumnosActuales = new alumnos.get();
-            Alumno alumnoEncontrado = alumnos.buscar(alumnoInventado);
-            Alumnos alumnoEncontrado = alumnos.buscar(alumnoInventado);
-            for (int i = 0; i < Alumnos.getTamano(); i++){
-                Alumno alumno = Alumnos.get()[i];
-
-                if (alumno.getDni().equals(dniABuscar)) {
-                    return alumno;
-                }
-            }
-
-            return alumnoInventado;*/
-          /*  throw new IllegalArgumentException("No se ha encontrado ningún alumno/a con este DNI.");
-        } catch (IllegalArgumentException e){
-            throw new IllegalArgumentException("ERROR: "+e.getMessage());
-        }*/
     }
 
     public static LocalDate leerFecha(String mensaje) {
