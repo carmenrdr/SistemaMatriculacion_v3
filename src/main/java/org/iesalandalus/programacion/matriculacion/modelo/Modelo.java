@@ -5,7 +5,7 @@ public class Modelo {
     public int CAPACIDAD;
 
     public void comenzar() {
-
+        //new
     }
 
 }
