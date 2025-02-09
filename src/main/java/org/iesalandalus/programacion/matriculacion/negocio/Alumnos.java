@@ -39,7 +39,7 @@ public class Alumnos {
         return capacidad;
     }
 
-    public void insertar(Alumno alumno){
+    public void insertar(Alumno alumno) throws Exception {
         if (alumno == null){
             throw new IllegalArgumentException("ERROR: No se puede insertar un alumno nulo.");
         } else if (buscar(alumno) != null) {
@@ -82,7 +82,7 @@ public class Alumnos {
         return coleccionAlumnos[indice];
     }
 
-    public void borrar(Alumno alumno){
+    public void borrar(Alumno alumno) throws Exception {
         if (alumno == null){
             throw new IllegalArgumentException("ERROR: No se puede borrar un alumno nulo.");
         }

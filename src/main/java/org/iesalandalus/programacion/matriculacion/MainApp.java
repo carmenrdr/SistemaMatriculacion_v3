@@ -182,7 +182,7 @@ public class MainApp {
         System.out.println(alumnoEncontrado);
     }
 
-    private static void borrarAlumno() {
+    private static void borrarAlumno() throws Exception {
         Alumno alumnoABuscar = new Alumno(Consola.getAlumnoPorDni());
         Alumno alumnoEncontrado = new Alumno(alumnos.buscar(alumnoABuscar));
         alumnos.borrar(alumnoEncontrado);
@@ -232,7 +232,7 @@ public class MainApp {
         System.out.println(cicloFormativoEncontrado);
     }
 
-    private static void borrarCicloFormativo() {
+    private static void borrarCicloFormativo() throws Exception {
         CicloFormativo cicloFormativoABuscar = new CicloFormativo(Consola.getCicloFormativoPorCodigo());
         CicloFormativo cicloFormativoEncontrado = new CicloFormativo(ciclosFormativos.buscar(cicloFormativoABuscar));
         ciclosFormativos.borrar(cicloFormativoEncontrado);
@@ -281,7 +281,7 @@ public class MainApp {
         }
     }
 
-    private static void mostrarMatriculasPorAlumno() {
+    private static void mostrarMatriculasPorAlumno() throws Exception {
         Alumno alumnoABuscar = new Alumno(Consola.getAlumnoPorDni());
         Alumno alumnoEncontrado = new Alumno(alumnos.buscar(alumnoABuscar));
 

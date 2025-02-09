@@ -40,7 +40,7 @@ public class Asignaturas {
         return capacidad;
     }
 
-    public void insertar(Asignatura asignatura){
+    public void insertar(Asignatura asignatura) throws Exception {
         if (asignatura==null){
             throw new IllegalArgumentException("ERROR: No se puede insertar una asignatura nula.");
         } else if (buscar(asignatura) != null){
@@ -83,7 +83,7 @@ public class Asignaturas {
         return coleccionAsignaturas[indice];
     }
 
-    public void borrar(Asignatura asignatura){
+    public void borrar(Asignatura asignatura) throws Exception {
         if (asignatura==null){
             throw new IllegalArgumentException("ERROR: No se puede borrar una asignatura nula.");
         }

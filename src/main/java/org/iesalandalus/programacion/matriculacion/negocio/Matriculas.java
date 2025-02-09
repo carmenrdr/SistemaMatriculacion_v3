@@ -42,7 +42,7 @@ public class Matriculas {
         return capacidad;
     }
 
-    public void insertar(Matricula matricula){
+    public void insertar(Matricula matricula) throws Exception {
         if (matricula == null){
             throw new IllegalArgumentException("ERROR: No se puede insertar una matricula nula.");
         } else if (buscar(matricula) != null) {
@@ -85,7 +85,7 @@ public class Matriculas {
         return coleccionMatriculas[indice];
     }
 
-    public void borrar(Matricula matricula){
+    public void borrar(Matricula matricula) throws Exception {
         if (matricula == null){
             throw new IllegalArgumentException("ERROR: No se puede borrar una matrícula nula.");
         }
@@ -114,7 +114,7 @@ public class Matriculas {
         }
     }
 
-    public Matricula[] get(Alumno alumno){
+    public Matricula[] get(Alumno alumno) throws Exception {
         if (alumno==null){
             throw new IllegalArgumentException("ERROR: El alumno no puede ser nulo.");
         }
@@ -139,7 +139,7 @@ public class Matriculas {
         return resultado;
     }
 
-    public Matricula[] get(String cursoAcademico){
+    public Matricula[] get(String cursoAcademico) throws Exception {
         if (cursoAcademico==null){
             throw new IllegalArgumentException("ERROR: El curso académico no puede ser nulo.");
         }
@@ -164,7 +164,7 @@ public class Matriculas {
         return resultado;
     }
 
-    public Matricula[] get(CicloFormativo cicloFormativo){
+    public Matricula[] get(CicloFormativo cicloFormativo) throws Exception {
         if (cicloFormativo==null) {
             throw new IllegalArgumentException("ERROR: El ciclo formativo no puede ser nulo.");
         }

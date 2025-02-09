@@ -40,7 +40,7 @@ public class CiclosFormativos {
         return capacidad;
     }
 
-    public void insertar(CicloFormativo cicloFormativo) {
+    public void insertar(CicloFormativo cicloFormativo) throws Exception {
         if (cicloFormativo == null) {
             throw new IllegalArgumentException("ERROR: No se puede insertar un ciclo formativo nulo.");
         } else if (buscar(cicloFormativo) != null) {
@@ -83,7 +83,7 @@ public class CiclosFormativos {
         return coleccionCiclosFormativos[indice];
     }
 
-    public void borrar(CicloFormativo cicloFormativo) {
+    public void borrar(CicloFormativo cicloFormativo) throws Exception {
         if (cicloFormativo == null) {
             throw new IllegalArgumentException("ERROR: No se puede borrar un ciclo formativo nulo.");
         }
