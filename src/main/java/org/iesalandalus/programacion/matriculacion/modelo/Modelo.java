@@ -26,7 +26,7 @@ public class Modelo {
     }
 
     public void terminar() {
-        System.out.println("El modelo ha terminado.");
+        System.out.println("¡Hasta la próxima!");
     }
 
     public void insertar(Alumno alumno) throws Exception {
