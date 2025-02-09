@@ -146,14 +146,14 @@ public class Consola {
         }
     }
 
-    public static void mostrarCiclosFormativos(CiclosFormativos ciclosFormativos) {
-        if (ciclosFormativos == null || ciclosFormativos.getTamano() == 0) {
+    public static void mostrarCiclosFormativos(CicloFormativo[] ciclosFormativos) {
+        if (ciclosFormativos == null) {
             System.out.println("No hay Ciclos Formativos registrados.");
         } else {
             System.out.println("Los Ciclos Formativos registrados son los siguientes: ");
 
-            for (int i = 0; i < ciclosFormativos.getTamano(); i++) {
-                CicloFormativo cicloFormativo = ciclosFormativos.get()[i];
+            for (int i = 0; i < ciclosFormativos.length; i++) {
+                CicloFormativo cicloFormativo = ciclosFormativos[i];
                 System.out.println(cicloFormativo);
             }
         }
@@ -257,14 +257,14 @@ public class Consola {
         }
     }
 
-    public static void mostrarAsignaturas(Asignaturas asignaturas){
-        if (asignaturas == null || asignaturas.getTamano()==0){
+    public static void mostrarAsignaturas(Asignatura[] asignaturas){
+        if (asignaturas == null){
             System.out.println("No hay asignaturas registradas.");
         } else {
             System.out.println("Las asignaturas registradas son las siguientes: ");
 
-            for (int i = 0; i < asignaturas.getTamano(); i++) {
-                Asignatura asignatura = asignaturas.get()[i];
+            for (int i = 0; i < asignaturas.length; i++) {
+                Asignatura asignatura = asignaturas[i];
                 System.out.println(asignatura.imprimir());
             }
         }
@@ -284,7 +284,7 @@ public class Consola {
         return false;
     }
 
-    public static Matricula leerMatricula(Alumnos alumnos, Asignaturas asignaturas) throws Exception {
+    public static Matricula leerMatricula(Alumnos alumnos, Asignatura[] asignaturas) throws Exception {
         System.out.println("Introduce el ID de la mátricula: ");
         int id = Entrada.entero();
 
@@ -338,6 +338,13 @@ public class Consola {
         }
 
         return new Matricula(id, cursoAcademico, fechaMatricula, alumnoEncontrado, asignaturasMatricula);
+    }
+
+    public Asignatura[] elegirAsignaturasMatricula(Asignatura[] asignaturas) {
+        mostrarAsignaturas(asignaturas);
+
+        Asignatura[] asignaturasMatricula = new Asignatura[Matricula.MAXIMO_NUMERO_ASIGNATURAS_POR_MATRICULA];
+
     }
 
     public static Matricula getMatriculaPorIdentificador() throws Exception {
