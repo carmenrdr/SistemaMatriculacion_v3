@@ -27,8 +27,11 @@ public class Controlador {
     }
 
     public void comenzar() {
-        //vista.comenzar();
-        //modelo.comenzar();
+        System.out.println("--------------------------------------------------------------------------------");
+        System.out.println("Le damos la bienvenida al sistema de matriculación del instituto IES Al-Ándalus.");
+        System.out.println("--------------------------------------------------------------------------------");
+
+        vista.comenzar();
     }
 
     public void terminar() {

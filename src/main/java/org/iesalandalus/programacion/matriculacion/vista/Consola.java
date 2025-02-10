@@ -18,9 +18,6 @@ public class Consola {
 
     public static void mostrarMenu() {
 
-        System.out.println("--------------------------------------------------------------------------------");
-        System.out.println("Le damos la bienvenida al sistema de matriculación del instituto IES Al-Ándalus.");
-        System.out.println("--------------------------------------------------------------------------------");
         System.out.println("Menú:");
 
         Opcion[] opcionesMenu = Opcion.values();

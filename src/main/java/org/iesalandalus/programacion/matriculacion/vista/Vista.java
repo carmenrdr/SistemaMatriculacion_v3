@@ -14,12 +14,6 @@ public class Vista {
 
     private Controlador controlador;
 
-    /*private static Alumnos alumnos;
-    private static Matriculas matriculas;
-    private static Asignaturas asignaturas;
-    private static CiclosFormativos ciclosFormativos;
-    */
-
     public void setControlador(Controlador controlador) {
         if (controlador == null) {
             throw new IllegalArgumentException("ERROR: El controlador no puede ser nulo.");
@@ -28,6 +22,7 @@ public class Vista {
     }
 
     public void comenzar() {
+
         Opcion opcionElegida;
 
         do {
@@ -36,7 +31,7 @@ public class Vista {
             ejecutarOpcion(opcionElegida);
         } while (opcionElegida != Opcion.SALIR);
 
-        System.out.println("¡Hasta la próxima!");
+        terminar();
     }
 
     public void terminar() {
