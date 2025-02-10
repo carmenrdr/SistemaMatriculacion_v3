@@ -303,47 +303,45 @@ public class Consola {
             }
         }
 
-        //Muestro las asignaturas que hay.
-        mostrarAsignaturas(asignaturas);
-        //Array para almacenar las asignaturas que se elijan.
-        Asignatura[] asignaturasMatricula = new Asignatura[Matricula.MAXIMO_NUMERO_ASIGNATURAS_POR_MATRICULA];
-
-        int contadorAsignaturas = 0;
-
-        while (!(contadorAsignaturas >= Matricula.MAXIMO_NUMERO_ASIGNATURAS_POR_MATRICULA)) {
-
-            Asignatura asignaturaPorCodigo = getAsignaturaPorCodigo();
-
-            //Buscar la asingatura verdadera en el array de asignaturas.
-            Asignatura asignaturaEncontrada = null;
-            for (int i = 0; i < asignaturas.getTamano(); i++) {
-                if (asignaturas.get()[i].equals(asignaturaPorCodigo)) {
-                    asignaturaEncontrada = asignaturas.get()[i];
-                    break;
-                }
-            }
-
-            //Comprobar que la asignatura encontrada no esté ya en la matrícula.
-            if (asignaturaYaMatriculada(asignaturasMatricula, asignaturaEncontrada)) {
-                throw new IllegalArgumentException("ERROR: La asignatura ya se encuentra en esta matrícula.");
-            } else {
-                asignaturasMatricula[contadorAsignaturas] = asignaturaEncontrada;
-                contadorAsignaturas++;
-            }
-
-            if (contadorAsignaturas >= Matricula.MAXIMO_NUMERO_ASIGNATURAS_POR_MATRICULA) {
-                throw new IllegalArgumentException("ERROR: No se pueden añadir más asignaturas a esta matrícula.");
-            }
-
-        }
+        Asignatura[] asignaturasMatricula = elegirAsignaturasMatricula(asignaturas);
 
         return new Matricula(id, cursoAcademico, fechaMatricula, alumnoEncontrado, asignaturasMatricula);
     }
 
-    public Asignatura[] elegirAsignaturasMatricula(Asignatura[] asignaturas) {
+    public static Asignatura[] elegirAsignaturasMatricula(Asignatura[] asignaturas) {
         mostrarAsignaturas(asignaturas);
 
         Asignatura[] asignaturasMatricula = new Asignatura[Matricula.MAXIMO_NUMERO_ASIGNATURAS_POR_MATRICULA];
+        int contadorAsignaturas = 0;
+
+        while (contadorAsignaturas < Matricula.MAXIMO_NUMERO_ASIGNATURAS_POR_MATRICULA) {
+            System.out.println("Elija las asignaturas que quiere matricular (introduzca el número o -1 para terminar):");
+            int numeroAsignatura = Entrada.entero();
+
+            if (numeroAsignatura == -1) {
+                break;
+            }
+
+            if (numeroAsignatura < 0 || numeroAsignatura >= asignaturas.length) {
+                System.out.println("La opción elegida no es válida.");
+            }
+
+            Asignatura asignaturaElegida = asignaturas[numeroAsignatura];
+
+            if (asignaturaYaMatriculada(asignaturasMatricula, asignaturaElegida)) {
+                System.out.println("La asignatura elegida ya se encuentra en la matrícula.");
+            } else {
+                asignaturasMatricula[contadorAsignaturas] = asignaturaElegida;
+                contadorAsignaturas++;
+            }
+
+            if (contadorAsignaturas >= Matricula.MAXIMO_NUMERO_ASIGNATURAS_POR_MATRICULA) {
+                System.out.println("No se pueden añadir más asignaturas a esta matrícula.");
+                break;
+            }
+        }
+
+        return asignaturasMatricula;
 
     }
 
