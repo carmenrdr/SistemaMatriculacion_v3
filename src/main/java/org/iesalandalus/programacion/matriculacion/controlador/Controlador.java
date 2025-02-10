@@ -5,6 +5,7 @@ import org.iesalandalus.programacion.matriculacion.dominio.Asignatura;
 import org.iesalandalus.programacion.matriculacion.dominio.CicloFormativo;
 import org.iesalandalus.programacion.matriculacion.dominio.Matricula;
 import org.iesalandalus.programacion.matriculacion.modelo.Modelo;
+import org.iesalandalus.programacion.matriculacion.vista.Vista;
 
 public class Controlador {
 

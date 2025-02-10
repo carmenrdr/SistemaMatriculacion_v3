@@ -284,7 +284,7 @@ public class Consola {
         return false;
     }
 
-    public static Matricula leerMatricula(Alumnos alumnos, Asignatura[] asignaturas) throws Exception {
+    public static Matricula leerMatricula(Alumno alumno, Asignatura[] asignaturas) throws Exception {
         System.out.println("Introduce el ID de la mátricula: ");
         int id = Entrada.entero();
 
@@ -294,18 +294,9 @@ public class Consola {
         System.out.println("Introduzca la fecha matriculación: ");
         LocalDate fechaMatricula = LocalDate.parse(Entrada.cadena());
 
-        Alumno alumnoPorDni = getAlumnoPorDni();
-        Alumno alumnoEncontrado = null;
-        for (int i = 0; i < alumnos.getTamano(); i++) {
-            if (alumnos.get()[i].equals(alumnoPorDni)) {
-                alumnoEncontrado = alumnos.get()[i];
-                break;
-            }
-        }
-
         Asignatura[] asignaturasMatricula = elegirAsignaturasMatricula(asignaturas);
 
-        return new Matricula(id, cursoAcademico, fechaMatricula, alumnoEncontrado, asignaturasMatricula);
+        return new Matricula(id, cursoAcademico, fechaMatricula, alumno, asignaturasMatricula);
     }
 
     public static Asignatura[] elegirAsignaturasMatricula(Asignatura[] asignaturas) {
