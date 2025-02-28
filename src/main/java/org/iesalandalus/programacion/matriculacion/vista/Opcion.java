@@ -2,31 +2,140 @@ package org.iesalandalus.programacion.matriculacion.vista;
 
 public enum Opcion {
 
-    SALIR("Salir."),
-    INSERTAR_ALUMNO("Insertar alumno/a."),
-    BUSCAR_ALUMNO("Buscar alumno/a."),
-    BORRAR_ALUMNO("Borrar alumno/a."),
-    MOSTRAR_ALUMNOS("Mostrar alumno/as."),
-    INSERTAR_CICLO_FORMATIVO("Insertar Ciclo Formativo."),
-    BUSCAR_CICLO_FORMATIVO("Buscar Ciclo Formativo."),
-    BORRAR_CICLO_FORMATIVO("Borrar Ciclo Formativo."),
-    MOSTRAR_CICLOS_FORMATIVOS("Mostrar Ciclos Formativos."),
-    INSERTAR_ASIGNATURA("Insertar asignaturas."),
-    BUSCAR_ASIGNATURA("Buscar asignaturas."),
-    BORRAR_ASIGNATURA("Borrar asignaturas."),
-    MOSTRAR_ASIGNATURAS("Mostrar asignaturas."),
-    INSERTAR_MATRICULA("Insertar matrícula."),
-    BUSCAR_MATRICULA("Buscar matrícula."),
-    ANULAR_MATRICULA("Anular matrícula."),
-    MOSTRAR_MATRICULAS("Mostrar matrículas."),
-    MOSTRAR_MATRICULAS_ALUMNO("Mostrar matrículas de un/a alumno/a."),
-    MOSTRAR_MATRICULAS_CICLO_FORMATIVO("Mostrar matrículas por Ciclo Formativo."),
-    MOSTRAR_MATRICULAS_CURSO_ACADEMICO("Mostrar matrículas por curso académico.");
+    SALIR("Salir.") {
+        @Override
+        public void ejecutar() {
+
+        }
+    },
+    INSERTAR_ALUMNO("Insertar alumno/a.") {
+        @Override
+        public void ejecutar() {
+
+        }
+    },
+    BUSCAR_ALUMNO("Buscar alumno/a.") {
+        @Override
+        public void ejecutar() {
+
+        }
+    },
+    BORRAR_ALUMNO("Borrar alumno/a.") {
+        @Override
+        public void ejecutar() {
+
+        }
+    },
+    MOSTRAR_ALUMNOS("Mostrar alumno/as.") {
+        @Override
+        public void ejecutar() {
+
+        }
+    },
+    INSERTAR_CICLO_FORMATIVO("Insertar Ciclo Formativo.") {
+        @Override
+        public void ejecutar() {
+
+        }
+    },
+    BUSCAR_CICLO_FORMATIVO("Buscar Ciclo Formativo.") {
+        @Override
+        public void ejecutar() {
+
+        }
+    },
+    BORRAR_CICLO_FORMATIVO("Borrar Ciclo Formativo.") {
+        @Override
+        public void ejecutar() {
+
+        }
+    },
+    MOSTRAR_CICLOS_FORMATIVOS("Mostrar Ciclos Formativos.") {
+        @Override
+        public void ejecutar() {
+
+        }
+    },
+    INSERTAR_ASIGNATURA("Insertar asignaturas.") {
+        @Override
+        public void ejecutar() {
+
+        }
+    },
+    BUSCAR_ASIGNATURA("Buscar asignaturas.") {
+        @Override
+        public void ejecutar() {
+
+        }
+    },
+    BORRAR_ASIGNATURA("Borrar asignaturas.") {
+        @Override
+        public void ejecutar() {
+
+        }
+    },
+    MOSTRAR_ASIGNATURAS("Mostrar asignaturas.") {
+        @Override
+        public void ejecutar() {
+
+        }
+    },
+    INSERTAR_MATRICULA("Insertar matrícula.") {
+        @Override
+        public void ejecutar() {
+
+        }
+    },
+    BUSCAR_MATRICULA("Buscar matrícula.") {
+        @Override
+        public void ejecutar() {
+
+        }
+    },
+    ANULAR_MATRICULA("Anular matrícula.") {
+        @Override
+        public void ejecutar() {
+
+        }
+    },
+    MOSTRAR_MATRICULAS("Mostrar matrículas.") {
+        @Override
+        public void ejecutar() {
+
+        }
+    },
+    MOSTRAR_MATRICULAS_ALUMNO("Mostrar matrículas de un/a alumno/a.") {
+        @Override
+        public void ejecutar() {
+
+        }
+    },
+    MOSTRAR_MATRICULAS_CICLO_FORMATIVO("Mostrar matrículas por Ciclo Formativo.") {
+        @Override
+        public void ejecutar() {
+
+        }
+    },
+    MOSTRAR_MATRICULAS_CURSO_ACADEMICO("Mostrar matrículas por curso académico.") {
+        @Override
+        public void ejecutar() {
+
+        }
+    };
 
     private final String cadenaAMostrar;
+    private static Vista vista;
 
     private Opcion(String cadenaAMostrar) {
         this.cadenaAMostrar = cadenaAMostrar;
+    }
+
+    public abstract void ejecutar() {
+
+    }
+
+    public static void setVista(Vista vista) {
+
     }
 
     @Override

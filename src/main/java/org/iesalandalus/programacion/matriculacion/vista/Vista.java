@@ -12,6 +12,10 @@ import java.util.List;
 
 public class Vista {
 
+    //public void Vista() {
+
+    //}
+
     private Controlador controlador;
 
     public void setControlador(Controlador controlador) throws OperationNotSupportedException {
