@@ -1,17 +1,18 @@
 package org.iesalandalus.programacion.matriculacion.modelo;
 
-import org.iesalandalus.programacion.matriculacion.dominio.Alumno;
-import org.iesalandalus.programacion.matriculacion.dominio.Asignatura;
-import org.iesalandalus.programacion.matriculacion.dominio.CicloFormativo;
-import org.iesalandalus.programacion.matriculacion.dominio.Matricula;
-import org.iesalandalus.programacion.matriculacion.negocio.Alumnos;
-import org.iesalandalus.programacion.matriculacion.negocio.Asignaturas;
-import org.iesalandalus.programacion.matriculacion.negocio.CiclosFormativos;
-import org.iesalandalus.programacion.matriculacion.negocio.Matriculas;
+import org.iesalandalus.programacion.matriculacion.modelo.dominio.Alumno;
+import org.iesalandalus.programacion.matriculacion.modelo.dominio.Asignatura;
+import org.iesalandalus.programacion.matriculacion.modelo.dominio.CicloFormativo;
+import org.iesalandalus.programacion.matriculacion.modelo.dominio.Matricula;
+import org.iesalandalus.programacion.matriculacion.modelo.negocio.Alumnos;
+import org.iesalandalus.programacion.matriculacion.modelo.negocio.Asignaturas;
+import org.iesalandalus.programacion.matriculacion.modelo.negocio.CiclosFormativos;
+import org.iesalandalus.programacion.matriculacion.modelo.negocio.Matriculas;
+
+import javax.naming.OperationNotSupportedException;
+import java.util.List;
 
 public class Modelo {
-
-    public int CAPACIDAD;
 
     private Alumnos alumnos;
     private Matriculas matriculas;
@@ -19,37 +20,37 @@ public class Modelo {
     private CiclosFormativos ciclosFormativos;
 
     public void comenzar() {
-        alumnos = new Alumnos(CAPACIDAD);
-        matriculas = new Matriculas(CAPACIDAD);
-        asignaturas = new Asignaturas(CAPACIDAD);
-        ciclosFormativos = new CiclosFormativos(CAPACIDAD);
+        alumnos = new Alumnos();
+        matriculas = new Matriculas();
+        asignaturas = new Asignaturas();
+        ciclosFormativos = new CiclosFormativos();
     }
 
     public void terminar() {
         System.out.println("¡Hasta la próxima!");
     }
 
-    public void insertar(Alumno alumno) throws Exception {
+    public void insertar(Alumno alumno) throws OperationNotSupportedException {
         alumnos.insertar(alumno);
     }
 
-    public void insertar(Asignatura asignatura) throws Exception {
+    public void insertar(Asignatura asignatura) throws OperationNotSupportedException {
         asignaturas.insertar(asignatura);
     }
 
-    public void insertar(CicloFormativo cicloFormativo) throws Exception {
+    public void insertar(CicloFormativo cicloFormativo) throws OperationNotSupportedException {
         ciclosFormativos.insertar(cicloFormativo);
     }
 
-    public void insertar(Matricula matricula) throws Exception {
+    public void insertar(Matricula matricula) throws OperationNotSupportedException {
         matriculas.insertar(matricula);
     }
 
-    public Alumno buscar(Alumno alumno) {
+    public Alumno buscar(Alumno alumno) throws OperationNotSupportedException {
         return alumnos.buscar(alumno);
     }
 
-    public Asignatura buscar(Asignatura asignatura) {
+    public Asignatura buscar(Asignatura asignatura) throws OperationNotSupportedException {
         return asignaturas.buscar(asignatura);
     }
 
@@ -57,51 +58,51 @@ public class Modelo {
         return ciclosFormativos.buscar(cicloFormativo);
     }
 
-    public Matricula buscar(Matricula matricula) {
+    public Matricula buscar(Matricula matricula) throws OperationNotSupportedException {
         return matriculas.buscar(matricula);
     }
 
-    public void borrar(Alumno alumno) throws Exception {
+    public void borrar(Alumno alumno) throws OperationNotSupportedException {
         alumnos.borrar(alumno);
     }
 
-    public void borrar(Asignatura asignatura) throws Exception {
+    public void borrar(Asignatura asignatura) throws OperationNotSupportedException {
         asignaturas.borrar(asignatura);
     }
 
-    public void borrar(CicloFormativo cicloFormativo) throws Exception {
+    public void borrar(CicloFormativo cicloFormativo) throws OperationNotSupportedException {
         ciclosFormativos.borrar(cicloFormativo);
     }
 
-    public void borrar(Matricula matricula) throws Exception {
+    public void borrar(Matricula matricula) throws OperationNotSupportedException {
         matriculas.borrar(matricula);
     }
 
-    public Alumno[] getAlumnos() {
+    public List<Alumno> getAlumnos() throws OperationNotSupportedException {
         return alumnos.get();
     }
 
-    public Asignatura[] getAsignaturas() {
+    public List<Asignatura> getAsignaturas() throws OperationNotSupportedException {
         return asignaturas.get();
     }
 
-    public CicloFormativo[] getCiclosFormativos() {
+    public List<CicloFormativo> getCiclosFormativos() {
         return ciclosFormativos.get();
     }
 
-    public Matricula[] getMatriculas() {
+    public List<Matricula> getMatriculas() throws OperationNotSupportedException {
         return matriculas.get();
     }
 
-    public Matricula[] getMatriculas(Alumno alumno) throws Exception {
+    public List<Matricula> getMatriculas(Alumno alumno) throws OperationNotSupportedException {
         return matriculas.get(alumno);
     }
 
-    public Matricula[] getMatriculas(CicloFormativo cicloFormativo) throws Exception {
+    public List<Matricula> getMatriculas(CicloFormativo cicloFormativo) throws OperationNotSupportedException {
         return matriculas.get(cicloFormativo);
     }
 
-    public Matricula[] getMatriculas(String cursoAcademico) throws Exception {
+    public List<Matricula> getMatriculas(String cursoAcademico) throws OperationNotSupportedException {
         return matriculas.get(cursoAcademico);
     }
 

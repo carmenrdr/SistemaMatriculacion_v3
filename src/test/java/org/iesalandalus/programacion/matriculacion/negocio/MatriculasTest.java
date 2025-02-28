@@ -1,47 +1,48 @@
 package org.iesalandalus.programacion.matriculacion.negocio;
 
-/*
 import org.iesalandalus.programacion.matriculacion.MainApp;
-import org.iesalandalus.programacion.matriculacion.dominio.*;
+import org.iesalandalus.programacion.matriculacion.modelo.Modelo;
+import org.iesalandalus.programacion.matriculacion.modelo.dominio.*;
+import org.iesalandalus.programacion.matriculacion.modelo.negocio.Matriculas;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import javax.naming.OperationNotSupportedException;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
-*/
 
 public class MatriculasTest {
-/*
-    private static final String ERROR_NO_EXCEPCION = "No debería haber saltado la excepción.";
+    private static final String ERROR_NO_EXCEPCION = "No deberia haber saltado la excepcion.";
     private static final String ERROR_CAPACIDAD_NO_CORRECTA = "ERROR: La capacidad debe ser mayor que cero.";
-    private static final String ERROR_INSERTAR_MATRICULA_NULA = "ERROR: No se puede insertar una matrícula nula.";
-    private static final String ERROR_BORRAR_MATRICULA_NULA = "ERROR: No se puede borrar una matrícula nula.";
-    private static final String ERROR_NO_MAS_MATRICULAS = "ERROR: No se aceptan más matrículas.";
-    private static final String ERROR_MATRICULA_EXISTE = "ERROR: Ya existe una matrícula con ese identificador.";
-    private static final String ERROR_MATRICULA_BORRAR_NO_EXISTE = "ERROR: No existe ninguna matrícula como la indicada.";
+    private static final String ERROR_INSERTAR_MATRICULA_NULA = "ERROR: No se puede insertar una matricula nula.";
+    private static final String ERROR_BORRAR_MATRICULA_NULA = "ERROR: No se puede borrar una matricula nula.";
+    private static final String ERROR_NO_MAS_MATRICULAS = "ERROR: No se aceptan mas matriculas.";
+    private static final String ERROR_MATRICULA_EXISTE = "ERROR: Ya existe una matricula con ese identificador.";
+    private static final String ERROR_MATRICULA_BORRAR_NO_EXISTE = "ERROR: No existe ninguna matricula como la indicada.";
 
-    private static final String OPERACION_NO_PERMITIDA = "Debería haber saltado una excepción indicando que dicha operación no está permitida.";
-    private static final String MATRICULA_NULA = "Debería haber saltado una excepción indicando que no se puede operar con una matrícula nula.";
-    private static final String MENSAJE_EXCEPCION_NO_CORRECTO = "El mensaje devuelto por la excepción no es correcto.";
-    private static final String TIPO_EXCEPCION_NO_CORRECTO = "El tipo de la excepción no es correcto.";
-    private static final String EXCEPCION_NO_PROCEDE = "No debería haber saltado la excepción.";
-    private static final String OPERACION_NO_REALIZADA = "La operación no la ha realizado correctamente.";
-    private static final String MATRICULAS_NO_CREADAS = "Debería haber creado las matrículas correctamente.";
+    private static final String OPERACION_NO_PERMITIDA = "Deberia haber saltado una excepcion indicando que dicha operacion no esta permitida.";
+    private static final String MATRICULA_NULA = "Deberia haber saltado una excepcion indicando que no se puede operar con una matricula nula.";
+    private static final String MENSAJE_EXCEPCION_NO_CORRECTO = "El mensaje devuelto por la excepcion no es correcto.";
+    private static final String TIPO_EXCEPCION_NO_CORRECTO = "El tipo de la excepcion no es correcto.";
+    private static final String EXCEPCION_NO_PROCEDE = "No deberia haber saltado la excepcion.";
+    private static final String OPERACION_NO_REALIZADA = "La operacion no la ha realizado correctamente.";
+    private static final String MATRICULAS_NO_CREADAS = "Deberia haber creado las matrículas correctamente.";
     private static final String REFERENCIA_NO_ESPERADA = "La referencia devuelta es la misma que la pasada.";
     private static final String TAMANO_NO_ESPERADO = "El tamaño devuelto no es el esperado.";
     private static final String CAPACIDAD_NO_ESPERADA="La capacidad devuelta no es la esperada.";
-    private static final String MATRICULA_NO_ESPERADA = "La matrícula devuelta no es la que debería ser.";
-    private static final String OBJETO_DEBERIA_SER_NULO = "No se debería haber creado el objeto.";
+    private static final String MATRICULA_NO_ESPERADA = "La matricula devuelta no es la que deberia ser.";
+    private static final String OBJETO_DEBERIA_SER_NULO = "No se deberia haber creado el objeto.";
 
-    private static final String NOMBRE_JRJR = "José Ramón Jiménez Reyes";
+    private static final String NOMBRE_JRJR = "Jose Ramon Jimenez Reyes";
     private static final String DNI_JRJR = "11223344B";
     private static final String TELEFONO_JRJR = "950112233";
     private static final String CORREO_JRJR = "joseramon.jimenez@iesalandalus.org";
     private static final LocalDate FECHA_NACIMIENTO_JRJR=LocalDate.of(2002, 9, 15);
-    private static final String NOMBRE_ARDR = "Andrés Rubio Del Río";
+    private static final String NOMBRE_ARDR = "Andres Rubio Del Rio";
     private static final String DNI_ARDR = "22334455Y";
     private static final String TELEFONO_ARDR = "666223344";
     private static final String CORREO_ARDR = "andres.rubio@iesalandalus.org";
@@ -59,7 +60,7 @@ public class MatriculasTest {
     private static final LocalDate FECHA_MATRICULACION=LocalDate.now().minusDays(3);
 
     private static final String CODIGO_ASIGNATURA="0100";
-    private static final String NOMBRE_ASIGNATURA="Programación";
+    private static final String NOMBRE_ASIGNATURA="Programacion";
     private static final int HORAS_ASIGNATURA=256;
     private static final Curso CURSO_ASIGNATURA=Curso.PRIMERO;
     private static final int HORAS_DESDOBLE_ASIGNATURA=4;
@@ -71,7 +72,7 @@ public class MatriculasTest {
     private static final int HORAS_DESDOBLE_ASIGNATURA_2=3;
 
     private static final String CODIGO_ASIGNATURA_3="0300";
-    private static final String NOMBRE_ASIGNATURA_3="Administración de Sistemas Operativos";
+    private static final String NOMBRE_ASIGNATURA_3="Administracion de Sistemas Operativos";
     private static final int HORAS_ASIGNATURA_3=120;
     private static final Curso CURSO_ASIGNATURA_3=Curso.SEGUNDO;
     private static final int HORAS_DESDOBLE_ASIGNATURA_3=0;
@@ -80,7 +81,7 @@ public class MatriculasTest {
 
 
     private static final int CODIGO_CF_1=1225;
-    private static final String FAMILIA_PROFESIONAL_CF="Informática y Comunicaciones";
+    private static final String FAMILIA_PROFESIONAL_CF="Informatica y Comunicaciones";
     private static final String NOMBRE_CICLO_FORMATIVO="DAW";
     private static final Grado GRADO_CF=Grado.GDCFGS;
     private static final int HORAS_CICLO_FORMATIVO=1000;
@@ -96,7 +97,7 @@ public class MatriculasTest {
     private static Alumno alumno2;
     private static Alumno alumno3;
     private static Matricula matricula1, matricula2, matricula3, matriculaRepetida1;
-    private static Asignatura[] coleccionAsignaturas;
+    private static List<Asignatura> coleccionAsignaturas;
 
     @BeforeAll
     public static void asignarValoresAtributos() {
@@ -112,10 +113,10 @@ public class MatriculasTest {
         asignatura2 = new Asignatura(CODIGO_ASIGNATURA_2,NOMBRE_ASIGNATURA_2,HORAS_ASIGNATURA_2,CURSO_ASIGNATURA,HORAS_DESDOBLE_ASIGNATURA_2,ESPECIALIDAD_PROFESORADO_ASIGNATURA,cf2);
         asignatura3= new Asignatura(CODIGO_ASIGNATURA_3, NOMBRE_ASIGNATURA_3,HORAS_ASIGNATURA_3,CURSO_ASIGNATURA_3,HORAS_DESDOBLE_ASIGNATURA_3,ESPECIALIDAD_PROFESORADO_ASIGNATURA_2,cf3);
 
-        coleccionAsignaturas=new Asignatura[5];
-        coleccionAsignaturas[0]=asignatura1;
-        coleccionAsignaturas[1]=asignatura2;
-        coleccionAsignaturas[2]=asignatura3;
+        coleccionAsignaturas=new ArrayList<>();
+        coleccionAsignaturas.add(asignatura1);
+        coleccionAsignaturas.add(asignatura2);
+        coleccionAsignaturas.add(asignatura3);
 
         try
         {
@@ -133,49 +134,23 @@ public class MatriculasTest {
 
     @Test
     public void constructorCapacidadValidaCreaAsignaturasCorrectamente() {
-        Matriculas matriculas = new Matriculas(MainApp.CAPACIDAD);
+        Matriculas matriculas = new Matriculas();
         assertNotEquals(null, matriculas, MATRICULAS_NO_CREADAS);
-        assertEquals(MainApp.CAPACIDAD, matriculas.getCapacidad(), CAPACIDAD_NO_ESPERADA);
         assertEquals(0, matriculas.getTamano(), TAMANO_NO_ESPERADO);
     }
 
     @Test
-    public void constructorCapacidadNoValidaLanzaExcepcion() {
-        Matriculas matriculas = null;
-
-        try {
-            matriculas = new Matriculas(0);
-            fail(OPERACION_NO_PERMITIDA);
-        } catch (IllegalArgumentException e) {
-            assertEquals(ERROR_CAPACIDAD_NO_CORRECTA, e.getMessage(), MENSAJE_EXCEPCION_NO_CORRECTO);
-            assertNull(matriculas, OBJETO_DEBERIA_SER_NULO);
-        } catch (Exception e) {
-            fail(TIPO_EXCEPCION_NO_CORRECTO);
-        }
-
-        try {
-            matriculas = new Matriculas(-1);
-            fail(OPERACION_NO_PERMITIDA);
-        } catch (IllegalArgumentException e) {
-            assertEquals(ERROR_CAPACIDAD_NO_CORRECTA, e.getMessage(), MENSAJE_EXCEPCION_NO_CORRECTO);
-            assertNull(matriculas, OBJETO_DEBERIA_SER_NULO);
-        } catch (Exception e) {
-            fail(TIPO_EXCEPCION_NO_CORRECTO);
-        }
-    }
-
-    @Test
     public void insertarMatriculaValidaInsertaMatriculaCorrectamente() {
-        Matriculas matriculas = new Matriculas(5);
+        Matriculas matriculas = new Matriculas();
 
         try {
             matriculas.insertar(matricula1);
 
-            Matricula[] copiaMatriculas = matriculas.get();
+            List<Matricula> copiaMatriculas = matriculas.get();
             assertEquals(1, matriculas.getTamano(), TAMANO_NO_ESPERADO);
             assertEquals(matricula1, matriculas.buscar(matricula1), MATRICULA_NO_ESPERADA);
-            assertNotSame(matricula1, copiaMatriculas[0], REFERENCIA_NO_ESPERADA);
-            assertEquals(matricula1, copiaMatriculas[0], OPERACION_NO_REALIZADA);
+            assertNotSame(matricula1, copiaMatriculas.get(0), REFERENCIA_NO_ESPERADA);
+            assertEquals(matricula1, copiaMatriculas.get(0), OPERACION_NO_REALIZADA);
         } catch (OperationNotSupportedException e) {
             fail(EXCEPCION_NO_PROCEDE);
         }
@@ -183,20 +158,20 @@ public class MatriculasTest {
 
     @Test
     public void insertarDosMatriculasValidasInsertaMatriculasCorrectamente() {
-        Matriculas matriculas = new Matriculas(5);
+        Matriculas matriculas = new Matriculas();
 
         try {
             matriculas.insertar(matricula1);
             matriculas.insertar(matricula2);
 
-            Matricula[] copiaMatriculas = matriculas.get();
+            List<Matricula> copiaMatriculas = matriculas.get();
             assertEquals(2, matriculas.getTamano(), TAMANO_NO_ESPERADO);
             assertEquals(matricula1, matriculas.buscar(matricula1), MATRICULA_NO_ESPERADA);
-            assertNotSame(matricula1, copiaMatriculas[0], REFERENCIA_NO_ESPERADA);
-            assertEquals(matricula1, copiaMatriculas[0], OPERACION_NO_REALIZADA);
+            assertNotSame(matricula1, copiaMatriculas.get(0), REFERENCIA_NO_ESPERADA);
+            assertEquals(matricula1, copiaMatriculas.get(0), OPERACION_NO_REALIZADA);
             assertEquals(matricula2, matriculas.buscar(matricula2), MATRICULA_NO_ESPERADA);
-            assertNotSame(matricula2, copiaMatriculas[1], REFERENCIA_NO_ESPERADA);
-            assertEquals(matricula2, copiaMatriculas[1], OPERACION_NO_REALIZADA);
+            assertNotSame(matricula2, copiaMatriculas.get(1), REFERENCIA_NO_ESPERADA);
+            assertEquals(matricula2, copiaMatriculas.get(1), OPERACION_NO_REALIZADA);
         } catch (OperationNotSupportedException e) {
             fail(EXCEPCION_NO_PROCEDE);
         }
@@ -204,25 +179,25 @@ public class MatriculasTest {
 
     @Test
     public void insertarTresMatriculasValidasInsertaMatriculasCorrectamente() {
-        Matriculas matriculas = new Matriculas(5);
+        Matriculas matriculas = new Matriculas();
 
         try {
             matriculas.insertar(matricula1);
             matriculas.insertar(matricula2);
             matriculas.insertar(matricula3);
 
-            Matricula[] copiaMatriculas = matriculas.get();
+            List<Matricula> copiaMatriculas = matriculas.get();
 
             assertEquals(3, matriculas.getTamano(), TAMANO_NO_ESPERADO);
             assertEquals(matricula1, matriculas.buscar(matricula1), MATRICULA_NO_ESPERADA);
-            assertNotSame(matricula1, copiaMatriculas[0], REFERENCIA_NO_ESPERADA);
-            assertEquals(matricula1, copiaMatriculas[0], OPERACION_NO_REALIZADA);
+            assertNotSame(matricula1, copiaMatriculas.get(0), REFERENCIA_NO_ESPERADA);
+            assertEquals(matricula1, copiaMatriculas.get(0), OPERACION_NO_REALIZADA);
             assertEquals(matricula2, matriculas.buscar(matricula2), MATRICULA_NO_ESPERADA);
-            assertNotSame(matricula2, copiaMatriculas[1], REFERENCIA_NO_ESPERADA);
-            assertEquals(matricula2, copiaMatriculas[1], OPERACION_NO_REALIZADA);
+            assertNotSame(matricula2, copiaMatriculas.get(1), REFERENCIA_NO_ESPERADA);
+            assertEquals(matricula2, copiaMatriculas.get(1), OPERACION_NO_REALIZADA);
             assertEquals(matricula3, matriculas.buscar(matricula3), MATRICULA_NO_ESPERADA);
-            assertNotSame(matricula3, copiaMatriculas[2], REFERENCIA_NO_ESPERADA);
-            assertEquals(matricula3, copiaMatriculas[2], OPERACION_NO_REALIZADA);
+            assertNotSame(matricula3, copiaMatriculas.get(2), REFERENCIA_NO_ESPERADA);
+            assertEquals(matricula3, copiaMatriculas.get(2), OPERACION_NO_REALIZADA);
 
 
         } catch (OperationNotSupportedException e) {
@@ -232,7 +207,7 @@ public class MatriculasTest {
 
     @Test
     public void insertarMatriculaNulaLanzaExcepcion() {
-        Matriculas matriculas = new Matriculas(5);
+        Matriculas matriculas = new Matriculas();
 
         try {
             matriculas.insertar(null);
@@ -247,7 +222,7 @@ public class MatriculasTest {
 
     @Test
     public void insertarMatriculaRepetidaLanzaExcepcion() {
-        Matriculas matriculas = new Matriculas(5);
+        Matriculas matriculas = new Matriculas();
 
         try {
             matriculas.insertar(matricula1);
@@ -262,7 +237,7 @@ public class MatriculasTest {
             fail(TIPO_EXCEPCION_NO_CORRECTO);
         }
 
-        matriculas = new Matriculas(5);
+        matriculas = new Matriculas();
         try {
             matriculas.insertar(matricula2);
             matriculas.insertar(matricula1);
@@ -276,7 +251,7 @@ public class MatriculasTest {
             fail(TIPO_EXCEPCION_NO_CORRECTO);
         }
 
-        matriculas = new Matriculas(5);
+        matriculas = new Matriculas();
         try {
             matriculas.insertar(matricula2);
             matriculas.insertar(matricula3);
@@ -286,37 +261,6 @@ public class MatriculasTest {
         } catch (OperationNotSupportedException e) {
             assertEquals(ERROR_MATRICULA_EXISTE, e.getMessage(), MENSAJE_EXCEPCION_NO_CORRECTO);
             assertEquals(3, matriculas.getTamano(), TAMANO_NO_ESPERADO);
-        } catch (Exception e) {
-            fail(TIPO_EXCEPCION_NO_CORRECTO);
-        }
-    }
-
-    @Test
-    public void insertarMatriculaValidaConMatriculasLlenoLanzaExcepcion() {
-        Matriculas matriculas = new Matriculas(2);
-
-        try {
-            matriculas.insertar(matricula1);
-            matriculas.insertar(matricula2);
-            matriculas.insertar(matricula3);
-            fail(OPERACION_NO_PERMITIDA);
-        } catch (OperationNotSupportedException e) {
-            assertEquals(ERROR_NO_MAS_MATRICULAS, e.getMessage(), MENSAJE_EXCEPCION_NO_CORRECTO);
-            assertEquals(2, matriculas.getTamano(), TAMANO_NO_ESPERADO);
-            assertEquals(matricula1, matriculas.buscar(matricula1), MATRICULA_NO_ESPERADA);
-            assertNotSame(matricula1, matriculas.buscar(matricula1), REFERENCIA_NO_ESPERADA);
-            try
-            {
-                assertEquals(matricula1, matriculas.get()[0], OPERACION_NO_REALIZADA);
-
-            }
-            catch (OperationNotSupportedException e1)
-            {
-                System.out.println(e1.getMessage());
-            }
-
-            assertEquals(matricula2, matriculas.buscar(matricula2), MATRICULA_NO_ESPERADA);
-            assertNotSame(matricula2, matriculas.buscar(matricula2), REFERENCIA_NO_ESPERADA);
         } catch (Exception e) {
             fail(TIPO_EXCEPCION_NO_CORRECTO);
         }
@@ -324,7 +268,7 @@ public class MatriculasTest {
 
     @Test
     public void borrarMatriculaExistenteBorraMatriculaCorrectamente() throws OperationNotSupportedException {
-        Matriculas matriculas = new Matriculas(5);
+        Matriculas matriculas = new Matriculas();
 
         try {
             matriculas.insertar(matricula1);
@@ -335,7 +279,7 @@ public class MatriculasTest {
             fail(EXCEPCION_NO_PROCEDE);
         }
 
-        matriculas = new Matriculas(5);
+        matriculas = new Matriculas();
         try {
             matriculas.insertar(matricula1);
             matriculas.insertar(matricula2);
@@ -347,7 +291,7 @@ public class MatriculasTest {
             fail(EXCEPCION_NO_PROCEDE);
         }
 
-        matriculas = new Matriculas(5);
+        matriculas = new Matriculas();
         try {
             matriculas.insertar(matricula1);
             matriculas.insertar(matricula2);
@@ -359,7 +303,7 @@ public class MatriculasTest {
             fail(EXCEPCION_NO_PROCEDE);
         }
 
-        matriculas = new Matriculas(5);
+        matriculas = new Matriculas();
         try {
             matriculas.insertar(matricula1);
             matriculas.insertar(matricula2);
@@ -373,7 +317,7 @@ public class MatriculasTest {
             fail(EXCEPCION_NO_PROCEDE);
         }
 
-        matriculas = new Matriculas(5);
+        matriculas = new Matriculas();
         try {
             matriculas.insertar(matricula1);
             matriculas.insertar(matricula2);
@@ -387,7 +331,7 @@ public class MatriculasTest {
             fail(EXCEPCION_NO_PROCEDE);
         }
 
-        matriculas = new Matriculas(5);
+        matriculas = new Matriculas();
         try {
             matriculas.insertar(matricula1);
             matriculas.insertar(matricula2);
@@ -401,7 +345,7 @@ public class MatriculasTest {
             fail(EXCEPCION_NO_PROCEDE);
         }
 
-        matriculas = new Matriculas(3);
+        matriculas = new Matriculas();
         try {
             matriculas.insertar(matricula1);
             matriculas.insertar(matricula2);
@@ -418,7 +362,7 @@ public class MatriculasTest {
 
     @Test
     public void borrarMatriculaNoExistenteLanzaExcepcion() {
-        Matriculas matriculas = new Matriculas(5);
+        Matriculas matriculas = new Matriculas();
 
         try {
             matriculas.insertar(matricula1);
@@ -432,7 +376,7 @@ public class MatriculasTest {
         }
 
 
-        matriculas = new Matriculas(5);
+        matriculas = new Matriculas();
         try {
             matriculas.insertar(matricula1);
             matriculas.insertar(matricula2);
@@ -448,7 +392,7 @@ public class MatriculasTest {
 
     @Test
     public void borrarMatriculaNulaLanzaExcepcion() {
-        Matriculas matriculas = new Matriculas(5);
+        Matriculas matriculas = new Matriculas();
         try {
             matriculas.insertar(matricula1);
             matriculas.borrar(null);
@@ -462,5 +406,5 @@ public class MatriculasTest {
     }
 
 
-*/
+
 }

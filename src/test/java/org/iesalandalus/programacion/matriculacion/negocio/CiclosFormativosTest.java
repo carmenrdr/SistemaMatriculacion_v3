@@ -1,26 +1,27 @@
 package org.iesalandalus.programacion.matriculacion.negocio;
-/*
+
 import org.iesalandalus.programacion.matriculacion.MainApp;
-import org.iesalandalus.programacion.matriculacion.dominio.Alumno;
-import org.iesalandalus.programacion.matriculacion.dominio.CicloFormativo;
-import org.iesalandalus.programacion.matriculacion.dominio.Grado;
+import org.iesalandalus.programacion.matriculacion.modelo.Modelo;
+import org.iesalandalus.programacion.matriculacion.modelo.dominio.CicloFormativo;
+import org.iesalandalus.programacion.matriculacion.modelo.dominio.Grado;
+import org.iesalandalus.programacion.matriculacion.modelo.negocio.CiclosFormativos;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import javax.naming.OperationNotSupportedException;
-import java.time.LocalDate;
+
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
-*/
 
 public class CiclosFormativosTest {
-/*
+
     private static final String ERROR_CAPACIDAD_NO_CORRECTA = "ERROR: La capacidad debe ser mayor que cero.";
     private static final String ERROR_INSERTAR_CICLO_FORMATIVO_NULO = "ERROR: No se puede insertar un ciclo formativo nulo.";
     private static final String ERROR_BORRAR_CICLO_FORMATIVO_NULO = "ERROR: No se puede borrar un ciclo formativo nulo.";
-    private static final String ERROR_NO_MAS_CICLOS_FORMATIVOS = "ERROR: No se aceptan más ciclos formativos.";
-    private static final String ERROR_CICLO_FORMATIVO_EXISTE = "ERROR: Ya existe un ciclo formativo con ese código.";
-    private static final String ERROR_CICLO_FORMATIVO_BORRAR_NO_EXISTE = "ERROR: No existe ningún ciclo formativo como el indicado.";
+    private static final String ERROR_NO_MAS_CICLOS_FORMATIVOS = "ERROR: No se aceptan mas ciclos formativos.";
+    private static final String ERROR_CICLO_FORMATIVO_EXISTE = "ERROR: Ya existe un ciclo formativo con ese codigo.";
+    private static final String ERROR_CICLO_FORMATIVO_BORRAR_NO_EXISTE = "ERROR: No existe ningun ciclo formativo como el indicado.";
 
     private static final String OPERACION_NO_PERMITIDA = "Debería haber saltado una excepción indicando que dicha operación no está permitida.";
     private static final String CICLO_FORMATIVO_NULO = "Debería haber saltado una excepción indicando que no se puede operar con un ciclo formativo nulo.";
@@ -64,48 +65,24 @@ public class CiclosFormativosTest {
 
     @Test
     public void constructorCapacidadValidaCreaCiclosFormativosCorrectamente() {
-        CiclosFormativos ciclosFormativos = new CiclosFormativos(MainApp.CAPACIDAD);
+        CiclosFormativos ciclosFormativos = new CiclosFormativos();
         assertNotEquals(null, ciclosFormativos, CICLOS_FORMATIVOS_NO_CREADOS);
-        assertEquals(MainApp.CAPACIDAD, ciclosFormativos.getCapacidad(), CAPACIDAD_NO_ESPERADA);
         assertEquals(0, ciclosFormativos.getTamano(), TAMANO_NO_ESPERADO);
     }
 
-    @Test
-    public void constructorCapacidadNoValidaLanzaExcepcion() {
-        CiclosFormativos ciclosFormativos = null;
-
-        try {
-            ciclosFormativos = new CiclosFormativos(0);
-            fail(OPERACION_NO_PERMITIDA);
-        } catch (IllegalArgumentException e) {
-            assertEquals(ERROR_CAPACIDAD_NO_CORRECTA, e.getMessage(), MENSAJE_EXCEPCION_NO_CORRECTO);
-            assertNull(ciclosFormativos, OBJETO_DEBERIA_SER_NULO);
-        } catch (Exception e) {
-            fail(TIPO_EXCEPCION_NO_CORRECTO);
-        }
-        try {
-            ciclosFormativos = new CiclosFormativos(-1);
-            fail(OPERACION_NO_PERMITIDA);
-        } catch (IllegalArgumentException e) {
-            assertEquals(ERROR_CAPACIDAD_NO_CORRECTA, e.getMessage(), MENSAJE_EXCEPCION_NO_CORRECTO);
-            assertNull(ciclosFormativos, OBJETO_DEBERIA_SER_NULO);
-        } catch (Exception e) {
-            fail(TIPO_EXCEPCION_NO_CORRECTO);
-        }
-    }
 
     @Test
     public void insertarCicloFormativoValidoInsertaCicloFormativoCorrectamente() {
-        CiclosFormativos ciclosFormativos = new CiclosFormativos(5);
+        CiclosFormativos ciclosFormativos = new CiclosFormativos();
 
         try {
             ciclosFormativos.insertar(cf1);
 
-            CicloFormativo[] copiaCiclos = ciclosFormativos.get();
+            List<CicloFormativo> copiaCiclos = ciclosFormativos.get();
             assertEquals(1, ciclosFormativos.getTamano(), TAMANO_NO_ESPERADO);
             assertEquals(cf1, ciclosFormativos.buscar(cf1), CICLO_FORMATIVO_NO_ESPERADO);
-            assertNotSame(cf1, copiaCiclos[0], REFERENCIA_NO_ESPERADA);
-            assertEquals(cf1, copiaCiclos[0], OPERACION_NO_REALIZADA);
+            assertNotSame(cf1, copiaCiclos.get(0), REFERENCIA_NO_ESPERADA);
+            assertEquals(cf1, copiaCiclos.get(0), OPERACION_NO_REALIZADA);
         } catch (OperationNotSupportedException e) {
             fail(EXCEPCION_NO_PROCEDE);
         }
@@ -113,20 +90,20 @@ public class CiclosFormativosTest {
 
     @Test
     public void insertarDosCiclosFormativosValidosInsertaCiclosFormativosCorrectamente() {
-        CiclosFormativos ciclosFormativos = new CiclosFormativos(5);
+        CiclosFormativos ciclosFormativos = new CiclosFormativos();
 
         try {
             ciclosFormativos.insertar(cf1);
             ciclosFormativos.insertar(cf2);
 
-            CicloFormativo[] copiaCiclos = ciclosFormativos.get();
+            List<CicloFormativo> copiaCiclos = ciclosFormativos.get();
             assertEquals(2, ciclosFormativos.getTamano(), TAMANO_NO_ESPERADO);
             assertEquals(cf1, ciclosFormativos.buscar(cf1), CICLO_FORMATIVO_NO_ESPERADO);
-            assertNotSame(cf1, copiaCiclos[0], REFERENCIA_NO_ESPERADA);
-            assertEquals(cf1, copiaCiclos[0], OPERACION_NO_REALIZADA);
+            assertNotSame(cf1, copiaCiclos.get(0), REFERENCIA_NO_ESPERADA);
+            assertEquals(cf1, copiaCiclos.get(0), OPERACION_NO_REALIZADA);
             assertEquals(cf2, ciclosFormativos.buscar(cf2), CICLO_FORMATIVO_NO_ESPERADO);
-            assertNotSame(cf2, copiaCiclos[1], REFERENCIA_NO_ESPERADA);
-            assertEquals(cf2, copiaCiclos[1], OPERACION_NO_REALIZADA);
+            assertNotSame(cf2, copiaCiclos.get(1), REFERENCIA_NO_ESPERADA);
+            assertEquals(cf2, copiaCiclos.get(1), OPERACION_NO_REALIZADA);
         } catch (OperationNotSupportedException e) {
             fail(EXCEPCION_NO_PROCEDE);
         }
@@ -134,25 +111,25 @@ public class CiclosFormativosTest {
 
     @Test
     public void insertarTresCiclosFormativosValidosInsertaCiclosFormativosCorrectamente() {
-        CiclosFormativos ciclosFormativos = new CiclosFormativos(5);
+        CiclosFormativos ciclosFormativos = new CiclosFormativos();
 
         try {
             ciclosFormativos.insertar(cf1);
             ciclosFormativos.insertar(cf2);
             ciclosFormativos.insertar(cf3);
 
-            CicloFormativo[] copiaCiclos = ciclosFormativos.get();
+            List<CicloFormativo> copiaCiclos = ciclosFormativos.get();
 
             assertEquals(3, ciclosFormativos.getTamano(), TAMANO_NO_ESPERADO);
             assertEquals(cf1, ciclosFormativos.buscar(cf1), CICLO_FORMATIVO_NO_ESPERADO);
-            assertNotSame(cf1, copiaCiclos[0], REFERENCIA_NO_ESPERADA);
-            assertEquals(cf1, copiaCiclos[0], OPERACION_NO_REALIZADA);
+            assertNotSame(cf1, copiaCiclos.get(0), REFERENCIA_NO_ESPERADA);
+            assertEquals(cf1, copiaCiclos.get(0), OPERACION_NO_REALIZADA);
             assertEquals(cf2, ciclosFormativos.buscar(cf2), CICLO_FORMATIVO_NO_ESPERADO);
-            assertNotSame(cf2, copiaCiclos[1], REFERENCIA_NO_ESPERADA);
-            assertEquals(cf2, copiaCiclos[1], OPERACION_NO_REALIZADA);
+            assertNotSame(cf2, copiaCiclos.get(1), REFERENCIA_NO_ESPERADA);
+            assertEquals(cf2, copiaCiclos.get(1), OPERACION_NO_REALIZADA);
             assertEquals(cf3, ciclosFormativos.buscar(cf3), CICLO_FORMATIVO_NO_ESPERADO);
-            assertNotSame(cf3, copiaCiclos[2], REFERENCIA_NO_ESPERADA);
-            assertEquals(cf3, copiaCiclos[2], OPERACION_NO_REALIZADA);
+            assertNotSame(cf3, copiaCiclos.get(2), REFERENCIA_NO_ESPERADA);
+            assertEquals(cf3, copiaCiclos.get(2), OPERACION_NO_REALIZADA);
 
 
         } catch (OperationNotSupportedException e) {
@@ -162,7 +139,7 @@ public class CiclosFormativosTest {
 
     @Test
     public void insertarCicloFormativoNuloLanzaExcepcion() {
-        CiclosFormativos ciclosFormativos = new CiclosFormativos(5);
+        CiclosFormativos ciclosFormativos = new CiclosFormativos();
 
         try {
             ciclosFormativos.insertar(null);
@@ -177,7 +154,7 @@ public class CiclosFormativosTest {
 
     @Test
     public void insertarCicloFormativoRepetidoLanzaExcepcion() {
-        CiclosFormativos ciclosFormativos = new CiclosFormativos(5);
+        CiclosFormativos ciclosFormativos = new CiclosFormativos();
 
         try {
             ciclosFormativos.insertar(cf1);
@@ -192,7 +169,7 @@ public class CiclosFormativosTest {
             fail(TIPO_EXCEPCION_NO_CORRECTO);
         }
 
-        ciclosFormativos = new CiclosFormativos(5);
+        ciclosFormativos = new CiclosFormativos();
         try {
             ciclosFormativos.insertar(cf2);
             ciclosFormativos.insertar(cf1);
@@ -206,7 +183,7 @@ public class CiclosFormativosTest {
             fail(TIPO_EXCEPCION_NO_CORRECTO);
         }
 
-        ciclosFormativos = new CiclosFormativos(5);
+        ciclosFormativos = new CiclosFormativos();
         try {
             ciclosFormativos.insertar(cf2);
             ciclosFormativos.insertar(cf3);
@@ -221,31 +198,10 @@ public class CiclosFormativosTest {
         }
     }
 
-    @Test
-    public void insertarCicloFormativoValidoConCiclosFormativosLlenoLanzaExcepcion() {
-        CiclosFormativos ciclosFormativos = new CiclosFormativos(2);
-
-        try {
-            ciclosFormativos.insertar(cf1);
-            ciclosFormativos.insertar(cf2);
-            ciclosFormativos.insertar(cf3);
-            fail(OPERACION_NO_PERMITIDA);
-        } catch (OperationNotSupportedException e) {
-            assertEquals(ERROR_NO_MAS_CICLOS_FORMATIVOS, e.getMessage(), MENSAJE_EXCEPCION_NO_CORRECTO);
-            assertEquals(2, ciclosFormativos.getTamano(), TAMANO_NO_ESPERADO);
-            assertEquals(cf1, ciclosFormativos.buscar(cf1), CICLO_FORMATIVO_NO_ESPERADO);
-            assertNotSame(cf1, ciclosFormativos.buscar(cf1), REFERENCIA_NO_ESPERADA);
-            assertEquals(cf1, ciclosFormativos.get()[0], OPERACION_NO_REALIZADA);
-            assertEquals(cf2, ciclosFormativos.buscar(cf2), CICLO_FORMATIVO_NO_ESPERADO);
-            assertNotSame(cf2, ciclosFormativos.buscar(cf2), REFERENCIA_NO_ESPERADA);
-        } catch (Exception e) {
-            fail(TIPO_EXCEPCION_NO_CORRECTO);
-        }
-    }
 
     @Test
     public void borrarCicloFormativoExistenteBorraCicloFormativoCorrectamente() throws OperationNotSupportedException {
-        CiclosFormativos ciclosFormativos = new CiclosFormativos(5);
+        CiclosFormativos ciclosFormativos = new CiclosFormativos();
 
         try {
             ciclosFormativos.insertar(cf1);
@@ -256,7 +212,7 @@ public class CiclosFormativosTest {
             fail(EXCEPCION_NO_PROCEDE);
         }
 
-        ciclosFormativos = new CiclosFormativos(5);
+        ciclosFormativos = new CiclosFormativos();
         try {
             ciclosFormativos.insertar(cf1);
             ciclosFormativos.insertar(cf2);
@@ -268,7 +224,7 @@ public class CiclosFormativosTest {
             fail(EXCEPCION_NO_PROCEDE);
         }
 
-        ciclosFormativos = new CiclosFormativos(5);
+        ciclosFormativos = new CiclosFormativos();
         try {
             ciclosFormativos.insertar(cf1);
             ciclosFormativos.insertar(cf2);
@@ -280,7 +236,7 @@ public class CiclosFormativosTest {
             fail(EXCEPCION_NO_PROCEDE);
         }
 
-        ciclosFormativos = new CiclosFormativos(5);
+        ciclosFormativos = new CiclosFormativos();
         try {
             ciclosFormativos.insertar(cf1);
             ciclosFormativos.insertar(cf2);
@@ -294,7 +250,7 @@ public class CiclosFormativosTest {
             fail(EXCEPCION_NO_PROCEDE);
         }
 
-        ciclosFormativos = new CiclosFormativos(5);
+        ciclosFormativos = new CiclosFormativos();
         try {
             ciclosFormativos.insertar(cf1);
             ciclosFormativos.insertar(cf2);
@@ -308,7 +264,7 @@ public class CiclosFormativosTest {
             fail(EXCEPCION_NO_PROCEDE);
         }
 
-        ciclosFormativos = new CiclosFormativos(5);
+        ciclosFormativos = new CiclosFormativos();
         try {
             ciclosFormativos.insertar(cf1);
             ciclosFormativos.insertar(cf2);
@@ -322,7 +278,7 @@ public class CiclosFormativosTest {
             fail(EXCEPCION_NO_PROCEDE);
         }
 
-        ciclosFormativos = new CiclosFormativos(3);
+        ciclosFormativos = new CiclosFormativos();
         try {
             ciclosFormativos.insertar(cf1);
             ciclosFormativos.insertar(cf2);
@@ -339,7 +295,7 @@ public class CiclosFormativosTest {
 
     @Test
     public void borrarCicloFormativoNoExistenteLanzaExcepcion() {
-        CiclosFormativos ciclosFormativos = new CiclosFormativos(5);
+        CiclosFormativos ciclosFormativos = new CiclosFormativos();
 
         try {
             ciclosFormativos.insertar(cf1);
@@ -353,7 +309,7 @@ public class CiclosFormativosTest {
         }
 
 
-        ciclosFormativos = new CiclosFormativos(5);
+        ciclosFormativos = new CiclosFormativos();
         try {
             ciclosFormativos.insertar(cf1);
             ciclosFormativos.insertar(cf2);
@@ -369,7 +325,7 @@ public class CiclosFormativosTest {
 
     @Test
     public void borrarCicloFormativoNuloLanzaExcepcion() {
-        CiclosFormativos ciclosFormativos = new CiclosFormativos(5);
+        CiclosFormativos ciclosFormativos = new CiclosFormativos();
         try {
             ciclosFormativos.insertar(cf1);
             ciclosFormativos.borrar(null);
@@ -382,6 +338,6 @@ public class CiclosFormativosTest {
         }
     }
 
-*/
+
 
 }

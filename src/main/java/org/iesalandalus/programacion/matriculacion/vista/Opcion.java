@@ -2,6 +2,7 @@ package org.iesalandalus.programacion.matriculacion.vista;
 
 public enum Opcion {
 
+    SALIR("Salir."),
     INSERTAR_ALUMNO("Insertar alumno/a."),
     BUSCAR_ALUMNO("Buscar alumno/a."),
     BORRAR_ALUMNO("Borrar alumno/a."),
@@ -20,8 +21,7 @@ public enum Opcion {
     MOSTRAR_MATRICULAS("Mostrar matrículas."),
     MOSTRAR_MATRICULAS_ALUMNO("Mostrar matrículas de un/a alumno/a."),
     MOSTRAR_MATRICULAS_CICLO_FORMATIVO("Mostrar matrículas por Ciclo Formativo."),
-    MOSTRAR_MATRICULAS_CURSO_ACADEMICO("Mostrar matrículas por curso académico."),
-    SALIR("Salir.");
+    MOSTRAR_MATRICULAS_CURSO_ACADEMICO("Mostrar matrículas por curso académico.");
 
     private final String cadenaAMostrar;
 
