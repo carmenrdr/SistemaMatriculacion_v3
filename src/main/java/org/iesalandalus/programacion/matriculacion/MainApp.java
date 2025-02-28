@@ -9,7 +9,7 @@ import javax.naming.OperationNotSupportedException;
 public class MainApp {
 
     public static void main(String[] args) {
-
+        //prueba.
         try {
             Modelo modelo = new Modelo();
             Vista vista = new Vista();
