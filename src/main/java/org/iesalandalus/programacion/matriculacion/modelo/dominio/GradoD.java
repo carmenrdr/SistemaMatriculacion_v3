@@ -8,7 +8,8 @@ public class GradoD extends Grado {
 
     public GradoD(String nombre, int numAnios, Modalidad modalidad) throws OperationNotSupportedException {
         super(nombre);
-
+        this.setNumAnios(numAnios);
+        setModalidad(modalidad);
     }
 
     public Modalidad getModalidad() {
@@ -29,6 +30,8 @@ public class GradoD extends Grado {
             throw new OperationNotSupportedException("ERROR: El número de años para este grado no es válido.");
         } else if (numAnios==0) {
             throw new OperationNotSupportedException("ERROR: El número de años no puede ser nulo.");
+        } else {
+            this.numAnios = numAnios;
         }
     }
 

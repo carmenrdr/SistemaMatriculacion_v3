@@ -48,6 +48,6 @@ public abstract class Grado {
 
     @Override
     public String toString() {
-        return "(" + iniciales + ") - " + nombre;
+        return "(" + iniciales + ") - " + nombre +", "+ numAnios;
     }
 }
