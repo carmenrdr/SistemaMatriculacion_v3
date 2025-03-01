@@ -8,7 +8,7 @@ public class GradoE extends Grado {
 
     public GradoE(String nombre, int numAnios, int numEdiciones) throws OperationNotSupportedException {
         super(nombre);
-        setNumAnios(numAnios);
+        this.setNumAnios(numAnios);
         setNumEdiciones(numEdiciones);
     }
 
@@ -35,7 +35,7 @@ public class GradoE extends Grado {
 
     @Override
     public String toString() {
-        return super.toString() + ", " + numEdiciones;
+        return super.toString() + ", " + this.numAnios + ", " + numEdiciones;
     }
 
 }

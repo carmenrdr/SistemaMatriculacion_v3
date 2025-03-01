@@ -97,9 +97,50 @@ public class Consola {
         return LocalDate.parse(fechaIntroducida, formatter);
     }
 
-    public TiposGrado leerTipoGrado()  {
+    public static TiposGrado leerTipoGrado() throws OperationNotSupportedException {
         System.out.println("Los tipos de Grado que hay son los siguientes:");
-        TiposGrado.imprimir();
+        for (int i = 0; i < TiposGrado.values().length; i++) {
+            System.out.println(TiposGrado.values()[i].imprimir());
+        }
+
+        int opcion = -1;
+        do {
+            try {
+                System.out.println("Introduzca el Grado elegido (0 ó 1):");
+                opcion = Entrada.entero();
+
+                if (!(opcion==0) || !(opcion==1)) {
+                    throw new OperationNotSupportedException("ERROR: La opción introducida no es válida.");
+                }
+            } catch (OperationNotSupportedException e) {
+                System.out.println(e.getMessage());
+            }
+        } while (!(opcion==0) || !(opcion==1));
+
+        return TiposGrado.values()[opcion];
+    }
+
+    public static Modalidad leerModalidad() throws OperationNotSupportedException {
+        System.out.println("Las modalidades que hay son las siguientes:");
+        for (int i = 0; i < Modalidad.values().length; i++) {
+            System.out.println(Modalidad.values()[i].imprimir());
+        }
+
+        int opcion = -1;
+        do {
+            try {
+                System.out.println("Introduzca la modalidad elegida (0 ó 1): ");
+                opcion = Entrada.entero();
+
+                if (!(opcion==0) || !(opcion==1)) {
+                    throw new OperationNotSupportedException("ERROR: La opción introducida no es válida.");
+                }
+            } catch (OperationNotSupportedException e) {
+                System.out.println(e.getMessage());
+            }
+        } while (!(opcion==0) || !(opcion==1));
+
+        return Modalidad.values()[opcion];
     }
 
     public static CicloFormativo leerCicloFormativo() throws OperationNotSupportedException {
@@ -124,29 +165,37 @@ public class Consola {
         }
     }
 
-    /*public static Grado leerGrado() throws OperationNotSupportedException {
-       System.out.println("Los Grados existentes son los siguientes: ");
-       for (int i = 0; i < Grado.values().length; i++) {
-           System.out.println(Grado.values()[i].imprimir());
+    public static Grado leerGrado() throws OperationNotSupportedException {
+       TiposGrado gradoElegido = leerTipoGrado();
+       Grado gradoNuevo = null;
+
+       if (gradoElegido == TiposGrado.GRADOD) {
+           System.out.println("Introduzca el nombre del Grado: ");
+           String nombre = Entrada.cadena();
+
+           System.out.println("Introduzca el número de años: ");
+           int numAnios = Entrada.entero();
+
+           Modalidad modalidadElegida = leerModalidad();
+
+           gradoNuevo = new GradoD(nombre, numAnios, modalidadElegida);
        }
 
-       int opcion = -1;
-       do {
-           try {
-               System.out.println("Introduzca el Grado elegido (0, 1 ó 2): ");
-               opcion = Entrada.entero();
+       if (gradoElegido == TiposGrado.GRADOE) {
+           System.out.println("Introduzca el nombre del Grado: ");
+           String nombre = Entrada.cadena();
 
-               if (opcion < 0 || opcion >= Grado.values().length) {
-                   throw new OperationNotSupportedException("La opción introducida no es válida.");
-               }
-           } catch (OperationNotSupportedException e) {
-               System.out.println("ERROR: " + e.getMessage());
-           }
-       } while (opcion < 0 || opcion >= Grado.values().length);
+           System.out.println("Introduzca el número de años: ");
+           int numAnios = Entrada.entero();
 
-       return Grado.values()[opcion];
+           System.out.println("Introduzca el número de ediciones: ");
+           int numEdiciones = Entrada.entero();
 
-   }*/
+           gradoNuevo = new GradoE(nombre, numAnios, numEdiciones);
+       }
+
+       return gradoNuevo;
+   }
 
     public static void mostrarCiclosFormativos(List<CicloFormativo> ciclosFormativos) {
         if (ciclosFormativos.isEmpty()) {

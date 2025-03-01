@@ -10,6 +10,8 @@ public abstract class Grado {
 
     public Grado(String nombre) throws OperationNotSupportedException {
         this.setNombre(nombre);
+        this.iniciales = " ";
+        this.numAnios = 0;
     }
 
     public String getNombre() {
@@ -48,6 +50,6 @@ public abstract class Grado {
 
     @Override
     public String toString() {
-        return "(" + iniciales + ") - " + nombre +", "+ numAnios;
+        return "(" + iniciales + ") - " + nombre;
     }
 }
