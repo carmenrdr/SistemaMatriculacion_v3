@@ -13,8 +13,7 @@ import java.util.regex.Pattern;
 
 public class Consola {
 
-    private Consola() {
-    }
+    private Consola() {}
 
     public static void mostrarMenu() {
 
@@ -98,28 +97,9 @@ public class Consola {
         return LocalDate.parse(fechaIntroducida, formatter);
     }
 
-    public static Grado leerGrado() throws OperationNotSupportedException {
-        System.out.println("Los Grados existentes son los siguientes: ");
-        for (int i = 0; i < Grado.values().length; i++) {
-            System.out.println(Grado.values()[i].imprimir());
-        }
-
-        int opcion = -1;
-        do {
-            try {
-                System.out.println("Introduzca el Grado elegido (0, 1 ó 2): ");
-                opcion = Entrada.entero();
-
-                if (opcion < 0 || opcion >= Grado.values().length) {
-                    throw new OperationNotSupportedException("La opción introducida no es válida.");
-                }
-            } catch (OperationNotSupportedException e) {
-                System.out.println("ERROR: " + e.getMessage());
-            }
-        } while (opcion < 0 || opcion >= Grado.values().length);
-
-        return Grado.values()[opcion];
-
+    public TiposGrado leerTipoGrado()  {
+        System.out.println("Los tipos de Grado que hay son los siguientes:");
+        TiposGrado.imprimir();
     }
 
     public static CicloFormativo leerCicloFormativo() throws OperationNotSupportedException {
@@ -143,6 +123,30 @@ public class Consola {
             throw new OperationNotSupportedException("El Ciclo Formativo introducido no es correcto.\n" + e.getMessage());
         }
     }
+
+    /*public static Grado leerGrado() throws OperationNotSupportedException {
+       System.out.println("Los Grados existentes son los siguientes: ");
+       for (int i = 0; i < Grado.values().length; i++) {
+           System.out.println(Grado.values()[i].imprimir());
+       }
+
+       int opcion = -1;
+       do {
+           try {
+               System.out.println("Introduzca el Grado elegido (0, 1 ó 2): ");
+               opcion = Entrada.entero();
+
+               if (opcion < 0 || opcion >= Grado.values().length) {
+                   throw new OperationNotSupportedException("La opción introducida no es válida.");
+               }
+           } catch (OperationNotSupportedException e) {
+               System.out.println("ERROR: " + e.getMessage());
+           }
+       } while (opcion < 0 || opcion >= Grado.values().length);
+
+       return Grado.values()[opcion];
+
+   }*/
 
     public static void mostrarCiclosFormativos(List<CicloFormativo> ciclosFormativos) {
         if (ciclosFormativos.isEmpty()) {
@@ -254,7 +258,7 @@ public class Consola {
         }
     }
 
-    public static void mostrarAsignaturas(List<Asignatura> asignaturas){
+    /*private static void mostrarAsignaturas(List<Asignatura> asignaturas){
         if (asignaturas.isEmpty()){
             System.out.println("No hay asignaturas registradas.");
         } else {
@@ -264,9 +268,9 @@ public class Consola {
                 System.out.println(asignatura.imprimir());
             }
         }
-    }
+    }*/
 
-    private static boolean asignaturaYaMatriculada(List<Asignatura> asignaturasMatricula, Asignatura asignatura){
+    /*private static boolean asignaturaYaMatriculada(List<Asignatura> asignaturasMatricula, Asignatura asignatura){
         if (asignaturasMatricula.isEmpty() || asignatura == null){
             return false;
         }
@@ -278,7 +282,7 @@ public class Consola {
         }
 
         return false;
-    }
+    }*/
 
     public static Matricula leerMatricula(Alumno alumno, List<Asignatura> asignaturas) throws OperationNotSupportedException {
         System.out.println("Introduce el ID de la mátricula: ");

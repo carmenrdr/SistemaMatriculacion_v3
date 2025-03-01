@@ -8,16 +8,20 @@ public class GradoE extends Grado {
 
     public GradoE(String nombre, int numAnios, int numEdiciones) throws OperationNotSupportedException {
         super(nombre);
-
+        setNumAnios(numAnios);
+        setNumEdiciones(numEdiciones);
     }
 
     public int getNumEdiciones() {
         return numEdiciones;
     }
 
-    public void setNumEdiciones(int numEdiciones) {
-        //if
-        //this.numEdiciones = numEdiciones;
+    public void setNumEdiciones(int numEdiciones) throws OperationNotSupportedException {
+        if (numEdiciones <= 0) {
+            throw new OperationNotSupportedException("ERROR: El número de ediciones no puede ser menor o igual a 0.");
+        } else {
+            this.numEdiciones = numEdiciones;
+        }
     }
 
     @Override
