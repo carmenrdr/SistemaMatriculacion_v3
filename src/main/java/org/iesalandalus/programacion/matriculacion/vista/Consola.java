@@ -213,8 +213,10 @@ public class Consola {
         System.out.println("Introduzca el código del Ciclo Formativo: ");
         int codigoBuscar = Entrada.entero();
 
+        Grado gradoInventado = new GradoE("Grado", 1, 1);
+
         try {
-            CicloFormativo cicloInventado = new CicloFormativo(codigoBuscar, "Programacion", Grado.GDCFGB, "DAM", 100);
+            CicloFormativo cicloInventado = new CicloFormativo(codigoBuscar, "Programacion", gradoInventado, "DAM", 100);
             return cicloInventado;
         } catch (OperationNotSupportedException e) {
             throw new OperationNotSupportedException("ERROR: " + e.getMessage());
@@ -297,8 +299,10 @@ public class Consola {
         System.out.println("Introduzca el código de la asignatura: ");
         String codigoBuscar = Entrada.cadena();
 
+        Grado gradoInventado = new GradoE("Grado", 1, 1);
+
         try {
-            CicloFormativo cicloInventado = new CicloFormativo(3333, "Programacion", Grado.GDCFGB, "DAM", 100);
+            CicloFormativo cicloInventado = new CicloFormativo(3333, "Programacion", gradoInventado, "DAM", 100);
 
             Asignatura asignaturaInventada = new Asignatura(codigoBuscar, "Programación", 10, Curso.PRIMERO, 10, EspecialidadProfesorado.FOL, cicloInventado);
             return asignaturaInventada;
@@ -307,7 +311,7 @@ public class Consola {
         }
     }
 
-    /*private static void mostrarAsignaturas(List<Asignatura> asignaturas){
+    private static void mostrarAsignaturas(List<Asignatura> asignaturas){
         if (asignaturas.isEmpty()){
             System.out.println("No hay asignaturas registradas.");
         } else {
@@ -317,9 +321,9 @@ public class Consola {
                 System.out.println(asignatura.imprimir());
             }
         }
-    }*/
+    }
 
-    /*private static boolean asignaturaYaMatriculada(List<Asignatura> asignaturasMatricula, Asignatura asignatura){
+    private static boolean asignaturaYaMatriculada(List<Asignatura> asignaturasMatricula, Asignatura asignatura){
         if (asignaturasMatricula.isEmpty() || asignatura == null){
             return false;
         }
@@ -331,7 +335,7 @@ public class Consola {
         }
 
         return false;
-    }*/
+    }
 
     public static Matricula leerMatricula(Alumno alumno, List<Asignatura> asignaturas) throws OperationNotSupportedException {
         System.out.println("Introduce el ID de la mátricula: ");
