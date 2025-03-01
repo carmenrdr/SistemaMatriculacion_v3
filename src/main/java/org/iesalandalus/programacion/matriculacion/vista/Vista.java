@@ -14,7 +14,7 @@ public class Vista {
 
     private Controlador controlador;
 
-    private Vista() {
+    public Vista() {
         Opcion.setVista(this);
     }
 
@@ -32,7 +32,7 @@ public class Vista {
         do {
             Consola.mostrarMenu();
             opcionElegida = Consola.elegirOpcion();
-            ejecutarOpcion(opcionElegida);
+            opcionElegida.ejecutar();
         } while (opcionElegida != Opcion.SALIR);
 
         terminar();

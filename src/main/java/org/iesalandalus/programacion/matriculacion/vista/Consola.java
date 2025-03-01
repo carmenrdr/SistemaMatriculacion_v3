@@ -311,7 +311,7 @@ public class Consola {
         }
     }
 
-    private static void mostrarAsignaturas(List<Asignatura> asignaturas){
+    public static void mostrarAsignaturas(List<Asignatura> asignaturas){
         if (asignaturas.isEmpty()){
             System.out.println("No hay asignaturas registradas.");
         } else {
