@@ -12,11 +12,11 @@ import java.util.List;
 
 public class Vista {
 
-    //public void Vista() {
-
-    //}
-
     private Controlador controlador;
+
+    private Vista() {
+        Opcion.setVista(this);
+    }
 
     public void setControlador(Controlador controlador) throws OperationNotSupportedException {
         if (controlador == null) {
@@ -42,7 +42,7 @@ public class Vista {
         controlador.terminar();
     }
 
-    private void ejecutarOpcion(Opcion opcion) throws OperationNotSupportedException {
+    /*private void ejecutarOpcion(Opcion opcion) throws OperationNotSupportedException {
 
         switch (opcion) {
             case INSERTAR_ALUMNO:
@@ -179,14 +179,14 @@ public class Vista {
                 }
                 break;
         }
-    }
+    } */
 
-    private void insertarAlumno() throws OperationNotSupportedException {
+    public void insertarAlumno() throws OperationNotSupportedException {
         Alumno alumnoNuevo = new Alumno(Consola.leerAlumno());
         controlador.insertar(alumnoNuevo);
     }
 
-    private void buscarAlumno() throws OperationNotSupportedException {
+    public void buscarAlumno() throws OperationNotSupportedException {
         Alumno alumnoABuscar = new Alumno(Consola.getAlumnoPorDni());
         Alumno alumnoEncontrado = controlador.buscar(alumnoABuscar);
 
@@ -198,7 +198,7 @@ public class Vista {
 
     }
 
-    private void borrarAlumno() throws OperationNotSupportedException {
+    public void borrarAlumno() throws OperationNotSupportedException {
         Alumno alumnoABuscar = new Alumno(Consola.getAlumnoPorDni());
         Alumno alumnoEncontrado = controlador.buscar(alumnoABuscar);
 
@@ -210,7 +210,7 @@ public class Vista {
 
     }
 
-    private void mostrarAlumnos() throws OperationNotSupportedException {
+    public void mostrarAlumnos() throws OperationNotSupportedException {
         List<Alumno> alumnos = controlador.getAlumnos();
 
         Comparator<Alumno> comparadorAlumnos = Comparator.comparing(Alumno :: getNombre);
@@ -224,12 +224,12 @@ public class Vista {
         }
     }
 
-    private void insertarAsignatura() throws OperationNotSupportedException {
+    public void insertarAsignatura() throws OperationNotSupportedException {
         Asignatura asignaturaNueva = new Asignatura(Consola.leerAsignatura());
         controlador.insertar(asignaturaNueva);
     }
 
-    private void buscarAsignatura() throws OperationNotSupportedException {
+    public void buscarAsignatura() throws OperationNotSupportedException {
         Asignatura asignaturaABuscar = new Asignatura(Consola.getAsignaturaPorCodigo());
         Asignatura asignaturaEncontrada = controlador.buscar(asignaturaABuscar);
 
@@ -240,7 +240,7 @@ public class Vista {
         }
     }
 
-    private void borrarAsignatura() throws OperationNotSupportedException {
+    public void borrarAsignatura() throws OperationNotSupportedException {
         Asignatura asignaturaABuscar = new Asignatura(Consola.getAsignaturaPorCodigo());
         Asignatura asignaturaEncontrada = controlador.buscar(asignaturaABuscar);
 
@@ -251,7 +251,7 @@ public class Vista {
         }
     }
 
-    private void mostrarAsignaturas() throws OperationNotSupportedException {
+    public void mostrarAsignaturas() throws OperationNotSupportedException {
         List<Asignatura> asignaturas = controlador.getAsignaturas();
 
         Comparator<Asignatura> comparadorAsignaturas = Comparator.comparing(Asignatura :: getNombre);
@@ -264,12 +264,12 @@ public class Vista {
         }
     }
 
-    private void insertarCicloFormativo() throws OperationNotSupportedException {
+    public void insertarCicloFormativo() throws OperationNotSupportedException {
         CicloFormativo cicloFormativoNuevo = new CicloFormativo(Consola.leerCicloFormativo());
         controlador.insertar(cicloFormativoNuevo);
     }
 
-    private void buscarCicloFormativo() throws OperationNotSupportedException {
+    public void buscarCicloFormativo() throws OperationNotSupportedException {
         CicloFormativo cicloFormativoABuscar = new CicloFormativo(Consola.getCicloFormativoPorCodigo());
         CicloFormativo cicloFormativoEncontrado = controlador.buscar(cicloFormativoABuscar);
 
@@ -280,7 +280,7 @@ public class Vista {
         }
     }
 
-    private void borrarCicloFormativo() throws OperationNotSupportedException {
+    public void borrarCicloFormativo() throws OperationNotSupportedException {
         CicloFormativo cicloFormativoABuscar = new CicloFormativo(Consola.getCicloFormativoPorCodigo());
         CicloFormativo cicloFormativoEncontrado = controlador.buscar(cicloFormativoABuscar);
 
@@ -292,7 +292,7 @@ public class Vista {
 
     }
 
-    private void mostrarCiclosFormativos() {
+    public void mostrarCiclosFormativos() {
         List<CicloFormativo> ciclosFormativos = controlador.getCiclosFormativos();
 
         Comparator<CicloFormativo> comparadorCiclos = Comparator.comparing(CicloFormativo :: getNombre);
@@ -305,7 +305,7 @@ public class Vista {
         }
     }
 
-    private void insertarMatricula() throws OperationNotSupportedException {
+    public void insertarMatricula() throws OperationNotSupportedException {
         Alumno alumno = Consola.leerAlumno();
         List<Asignatura> asignaturas = controlador.getAsignaturas();
         List<Asignatura> asignaturasElegidas = Consola.elegirAsignaturasMatricula(asignaturas);
@@ -315,7 +315,7 @@ public class Vista {
 
     }
 
-    private void buscarMatricula() throws OperationNotSupportedException {
+    public void buscarMatricula() throws OperationNotSupportedException {
         Matricula matriculaABuscar = new Matricula(Consola.getMatriculaPorIdentificador());
         Matricula matriculaEncontrada = controlador.buscar(matriculaABuscar);
 
@@ -327,7 +327,7 @@ public class Vista {
         }
     }
 
-    private void anularMatricula() throws OperationNotSupportedException {
+    public void anularMatricula() throws OperationNotSupportedException {
         mostrarMatriculas();
 
         Matricula matriculaABuscar = Consola.getMatriculaPorIdentificador();
@@ -342,7 +342,7 @@ public class Vista {
 
     }
 
-    private void mostrarMatriculas() throws OperationNotSupportedException {
+    public void mostrarMatriculas() throws OperationNotSupportedException {
         List<Matricula> matriculas = controlador.getMatriculas();
 
         Comparator<Alumno> comparadorAlumnos = Comparator.comparing(Alumno :: getNombre);
@@ -357,7 +357,7 @@ public class Vista {
         }
     }
 
-    private void mostrarMatriculasPorAlumno() throws OperationNotSupportedException {
+    public void mostrarMatriculasPorAlumno() throws OperationNotSupportedException {
         mostrarAlumnos();
         Alumno alumnoABuscar = new Alumno(Consola.getAlumnoPorDni());
         Alumno alumnoEncontrado = controlador.buscar(alumnoABuscar);
@@ -375,7 +375,7 @@ public class Vista {
         }
     }
 
-    private void mostrarMatriculasPorCicloFormativo() throws OperationNotSupportedException {
+    public void mostrarMatriculasPorCicloFormativo() throws OperationNotSupportedException {
         mostrarCiclosFormativos();
         CicloFormativo cicloABuscar = new CicloFormativo(Consola.getCicloFormativoPorCodigo());
         CicloFormativo cicloEncontrado = controlador.buscar(cicloABuscar);
@@ -395,7 +395,7 @@ public class Vista {
         }
     }
 
-    private void mostrarMatriculasPorCursoAcademico() throws OperationNotSupportedException {
+    public void mostrarMatriculasPorCursoAcademico() throws OperationNotSupportedException {
         Curso curso = Consola.leerCurso();
         String cursoElegido = curso.toString();
 
