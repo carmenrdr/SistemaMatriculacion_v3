@@ -8,8 +8,8 @@ public abstract class Grado {
     protected String iniciales;
     protected int numAnios;
 
-    public Grado(String nombre) {
-
+    public Grado(String nombre) throws OperationNotSupportedException {
+        this.setNombre(nombre);
     }
 
     public String getNombre() {
@@ -44,7 +44,7 @@ public abstract class Grado {
 
     }
 
-    protected abstract void setNumAnios(int numAnios);
+    protected abstract void setNumAnios(int numAnios) throws OperationNotSupportedException;
 
     @Override
     public String toString() {
