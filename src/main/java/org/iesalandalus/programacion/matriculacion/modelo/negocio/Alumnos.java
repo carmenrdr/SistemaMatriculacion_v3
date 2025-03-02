@@ -15,11 +15,11 @@ public class Alumnos {
     }
 
     public List<Alumno> get() throws OperationNotSupportedException {
-        return copiaProfundaAlumnos(coleccionAlumnos);
+        return copiaProfundaAlumnos();
     }
 
-    private static List<Alumno> copiaProfundaAlumnos(List<Alumno> coleccionAlumnos) throws OperationNotSupportedException {
-        List<Alumno> coleccionAux = new ArrayList<>();
+    private List<Alumno> copiaProfundaAlumnos() throws OperationNotSupportedException {
+        List<Alumno> coleccionAux = new ArrayList<>(getTamano());
 
         for (Alumno alumno : coleccionAlumnos) {
             coleccionAux.add(new Alumno(alumno));
@@ -35,7 +35,7 @@ public class Alumnos {
     public void insertar(Alumno alumno) throws OperationNotSupportedException {
         if (alumno == null){
             throw new OperationNotSupportedException("ERROR: No se puede insertar un alumno nulo.");
-        } else if (buscar(alumno) != null) {
+        } else if (coleccionAlumnos.contains(alumno)) {
             throw new OperationNotSupportedException("ERROR: Ya existe un alumno con ese dni.");
         } else {
             coleccionAlumnos.add(alumno);
@@ -43,17 +43,9 @@ public class Alumnos {
     }
 
     public Alumno buscar(Alumno alumno) throws OperationNotSupportedException {
-        int indice = -1;
-        boolean encontrado = false;
+        int indice = coleccionAlumnos.indexOf(alumno);
 
-        for (int i=0; i < coleccionAlumnos.size() && !encontrado; i++) {
-            if (coleccionAlumnos.get(i) != null && coleccionAlumnos.get(i).equals(alumno)) {
-                indice = i;
-                encontrado = true;
-            }
-        }
-
-        if (!encontrado) {
+        if (indice == -1) {
             throw new OperationNotSupportedException("ERROR: El/la alumna no existe.");
         } else {
             return new Alumno(coleccionAlumnos.get(indice));
