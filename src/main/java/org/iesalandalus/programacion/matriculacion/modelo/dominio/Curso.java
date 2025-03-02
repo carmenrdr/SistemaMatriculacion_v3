@@ -11,14 +11,8 @@ public enum Curso {
         this.cadenaAMostrar = cadenaAMostrar;
     }
 
-    public String imprimir() throws OperationNotSupportedException {
-        if (this == PRIMERO) {
-            return "0.-"+this.cadenaAMostrar;
-        } else if (this == SEGUNDO) {
-            return "1.-"+this.cadenaAMostrar;
-        } else {
-            throw new OperationNotSupportedException("ERROR: El nombre del curso no es válido.");
-        }
+    public String imprimir() {
+        return ordinal() + ".- " + cadenaAMostrar;
     }
 
     @Override

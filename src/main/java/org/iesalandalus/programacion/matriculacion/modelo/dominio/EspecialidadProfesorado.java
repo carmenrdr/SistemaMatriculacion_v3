@@ -13,16 +13,8 @@ public enum EspecialidadProfesorado {
         this.cadenaAMostrar = cadenaAMostrar;
     }
 
-    public String imprimir() throws OperationNotSupportedException {
-        if (this == INFORMATICA) {
-            return "0.-"+this.cadenaAMostrar;
-        } else if (this == SISTEMAS) {
-            return "1.-"+this.cadenaAMostrar;
-        } else if (this == FOL) {
-            return "2.-"+this.cadenaAMostrar;
-        } else {
-            throw new OperationNotSupportedException("ERROR: La especialidad del profesorado no es válida.");
-        }
+    public String imprimir() {
+        return ordinal() + ".- " + cadenaAMostrar;
     }
 
     @Override
