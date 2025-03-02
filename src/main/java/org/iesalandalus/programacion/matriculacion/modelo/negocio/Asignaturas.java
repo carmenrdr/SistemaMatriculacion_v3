@@ -15,11 +15,11 @@ public class Asignaturas {
     }
 
     public List<Asignatura> get() throws OperationNotSupportedException {
-        return copiaProfundaAsignaturas(coleccionAsignaturas);
+        return copiaProfundaAsignaturas();
     }
 
-    private static List<Asignatura> copiaProfundaAsignaturas(List<Asignatura> coleccionAsignaturas) throws OperationNotSupportedException {
-        List<Asignatura> coleccionAux = new ArrayList<>();
+    private List<Asignatura> copiaProfundaAsignaturas() throws OperationNotSupportedException {
+        List<Asignatura> coleccionAux = new ArrayList<>(getTamano());
 
         for (Asignatura asignatura : coleccionAsignaturas) {
             coleccionAux.add(new Asignatura(asignatura));
@@ -35,7 +35,7 @@ public class Asignaturas {
     public void insertar(Asignatura asignatura) throws OperationNotSupportedException {
         if (asignatura==null){
             throw new OperationNotSupportedException("ERROR: No se puede insertar una asignatura nula.");
-        } else if (buscar(asignatura) != null){
+        } else if (coleccionAsignaturas.contains(asignatura)){
             throw new OperationNotSupportedException("ERROR: Ya existe una asignatura con ese código.");
         } else {
             coleccionAsignaturas.add(asignatura);
@@ -43,17 +43,9 @@ public class Asignaturas {
     }
 
     public Asignatura buscar(Asignatura asignatura) throws OperationNotSupportedException {
-        int indice = -1;
-        boolean encontrado = false;
+        int indice = coleccionAsignaturas.indexOf(asignatura);
 
-        for (int i=0; i < coleccionAsignaturas.size() && !encontrado; i++) {
-            if (coleccionAsignaturas.get(i) != null && coleccionAsignaturas.get(i).equals(asignatura)) {
-                indice = i;
-                encontrado = true;
-            }
-        }
-
-        if (!encontrado) {
+        if (indice == -1) {
             throw new OperationNotSupportedException("ERROR: No existe esta asignatura.");
         } else {
             return new Asignatura(coleccionAsignaturas.get(indice));
