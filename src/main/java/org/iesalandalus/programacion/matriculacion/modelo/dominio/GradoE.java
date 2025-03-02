@@ -26,8 +26,10 @@ public class GradoE extends Grado {
 
     @Override
     protected void setNumAnios(int numAnios) throws OperationNotSupportedException {
-        if (numAnios!=1) {
-            throw new OperationNotSupportedException("ERROR: El número de años para este grado no es válido.");
+        if (numEdiciones <= 0) {
+            throw new OperationNotSupportedException("ERROR: El número de ediciones no puede ser menor o igual a 0.");
+        } else if (numAnios!=1) {
+            throw new OperationNotSupportedException("ERROR: El número de años para este grado tiene que ser 1.");
         } else {
             this.numAnios = numAnios;
         }

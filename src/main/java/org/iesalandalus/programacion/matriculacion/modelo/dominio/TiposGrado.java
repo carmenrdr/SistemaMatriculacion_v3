@@ -11,14 +11,8 @@ public enum TiposGrado {
         this.cadenaAMostrar = cadenaAMostrar;
     }
 
-    public String imprimir() throws OperationNotSupportedException {
-        if (this == GRADOD) {
-            return "0.-"+this.cadenaAMostrar;
-        } else if (this == GRADOE) {
-            return "1.-"+this.cadenaAMostrar;
-        } else {
-            throw new OperationNotSupportedException("ERROR: El nombre del curso no es válido.");
-        }
+    public String imprimir() {
+        return ordinal() + ".- " + cadenaAMostrar;
     }
 
     @Override

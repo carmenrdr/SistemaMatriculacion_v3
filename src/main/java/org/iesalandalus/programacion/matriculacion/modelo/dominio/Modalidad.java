@@ -11,14 +11,8 @@ public enum Modalidad {
         this.cadenaAMostrar = cadenaAMostrar;
     }
 
-    public String imprimir() throws OperationNotSupportedException {
-        if (this == PRESENCIAL) {
-            return "0.-"+this.cadenaAMostrar;
-        } else if (this == SEMIPRESENCIAL) {
-            return "1.-"+this.cadenaAMostrar;
-        } else {
-            throw new OperationNotSupportedException("ERROR: El nombre del curso no es válido.");
-        }
+    public String imprimir() {
+        return ordinal() + ".- " + cadenaAMostrar;
     }
 
     @Override

@@ -32,7 +32,7 @@ public abstract class Grado {
 
         StringBuilder inicialesArray = new StringBuilder();
 
-        String[] palabras = this.nombre.split(" ");
+        String[] palabras = this.nombre.split("\\s+");
 
         for (String palabra : palabras) {
             if (!palabra.isEmpty()) {
