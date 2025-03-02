@@ -15,11 +15,11 @@ public class CiclosFormativos {
     }
 
     public List<CicloFormativo> get() {
-        return copiaProfundaCiclosFormativos(coleccionCiclosFormativos);
+        return copiaProfundaCiclosFormativos();
     }
 
-    private static List<CicloFormativo> copiaProfundaCiclosFormativos(List<CicloFormativo> coleccionCiclosFormativos) {
-        List<CicloFormativo> coleccionAux = new ArrayList<>();
+    private List<CicloFormativo> copiaProfundaCiclosFormativos() {
+        List<CicloFormativo> coleccionAux = new ArrayList<>(getTamano());
 
         for (CicloFormativo cicloFormativo : coleccionCiclosFormativos) {
             coleccionAux.add(new CicloFormativo(cicloFormativo));
@@ -35,24 +35,22 @@ public class CiclosFormativos {
     public void insertar(CicloFormativo cicloFormativo) throws OperationNotSupportedException {
         if (cicloFormativo == null) {
             throw new OperationNotSupportedException("ERROR: No se puede insertar un ciclo formativo nulo.");
-        } else if (buscar(cicloFormativo) != null) {
+        } else if (coleccionCiclosFormativos.contains(cicloFormativo)) {
             throw new OperationNotSupportedException("ERROR: Ya existe un ciclo formativo con ese código.");
         } else {
             coleccionCiclosFormativos.add(cicloFormativo);
         }
     }
 
-    public CicloFormativo buscar(CicloFormativo cicloFormativo) {
-        int indice = -1;
-        boolean encontrado = false;
+    public CicloFormativo buscar(CicloFormativo cicloFormativo) throws OperationNotSupportedException {
+        int indice = coleccionCiclosFormativos.indexOf(cicloFormativo);
 
-        for (int i=0; i < coleccionCiclosFormativos.size() && !encontrado; i++) {
-            if (coleccionCiclosFormativos.get(i) != null && coleccionCiclosFormativos.get(i).equals(cicloFormativo)) {
-                indice = i;
-                encontrado = true;
-            }
+        if (indice == -1) {
+            throw new OperationNotSupportedException("ERROR: No existe este Ciclo Formativo.");
+        } else {
+            return new CicloFormativo(coleccionCiclosFormativos.get(indice));
         }
-        return new CicloFormativo(coleccionCiclosFormativos.get(indice));
+
     }
 
     public void borrar(CicloFormativo cicloFormativo) throws OperationNotSupportedException {
