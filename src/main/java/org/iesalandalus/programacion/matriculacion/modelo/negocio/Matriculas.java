@@ -18,11 +18,11 @@ public class Matriculas {
     }
 
     public List<Matricula> get() throws OperationNotSupportedException{
-        return copiaProfundaMatricula(coleccionMatriculas);
+        return copiaProfundaMatricula();
     }
 
-    private static List<Matricula> copiaProfundaMatricula(List<Matricula> coleccionMatriculas) throws OperationNotSupportedException {
-        List<Matricula> coleccionAux = new ArrayList<>();
+    private List<Matricula> copiaProfundaMatricula() throws OperationNotSupportedException {
+        List<Matricula> coleccionAux = new ArrayList<>(getTamano());
 
         for (Matricula matricula : coleccionMatriculas) {
             coleccionAux.add(new Matricula(matricula));
@@ -38,7 +38,7 @@ public class Matriculas {
     public void insertar(Matricula matricula) throws OperationNotSupportedException {
         if (matricula == null){
             throw new OperationNotSupportedException("ERROR: No se puede insertar una matricula nula.");
-        } else if (buscar(matricula) != null) {
+        } else if (coleccionMatriculas.contains(matricula)) {
             throw new OperationNotSupportedException("ERROR: Ya existe una matrícula con ese identificador.");
         } else {
             coleccionMatriculas.add(matricula);
@@ -46,17 +46,9 @@ public class Matriculas {
     }
 
     public Matricula buscar(Matricula matricula) throws OperationNotSupportedException {
-        int indice = -1;
-        boolean encontrado = false;
+        int indice = coleccionMatriculas.indexOf(matricula);
 
-        for (int i=0; i < coleccionMatriculas.size() && !encontrado; i++) {
-            if (coleccionMatriculas.get(i) != null && coleccionMatriculas.get(i).equals(matricula)) {
-                indice = i;
-                encontrado = true;
-            }
-        }
-
-        if (!encontrado) {
+        if (indice == -1) {
             throw new OperationNotSupportedException("ERROR: No existe esta matrícula");
         } else {
             return new Matricula(coleccionMatriculas.get(indice));
