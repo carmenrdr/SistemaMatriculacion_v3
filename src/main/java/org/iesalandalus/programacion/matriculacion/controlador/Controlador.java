@@ -77,7 +77,7 @@ public class Controlador {
         modelo.insertar(cicloFormativo);
     }
 
-    public CicloFormativo buscar(CicloFormativo cicloFormativo) {
+    public CicloFormativo buscar(CicloFormativo cicloFormativo) throws OperationNotSupportedException {
         return modelo.buscar(cicloFormativo);
     }
 

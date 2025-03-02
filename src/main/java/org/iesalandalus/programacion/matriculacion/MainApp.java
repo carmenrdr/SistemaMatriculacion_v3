@@ -15,6 +15,7 @@ public class MainApp {
             Modelo modelo = new Modelo();
             Vista vista = new Vista();
             Controlador controlador = new Controlador(modelo, vista);
+            modelo.comenzar();
             controlador.comenzar();
 
         } catch (OperationNotSupportedException e) {

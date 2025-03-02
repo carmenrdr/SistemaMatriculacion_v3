@@ -54,7 +54,7 @@ public class Modelo {
         return asignaturas.buscar(asignatura);
     }
 
-    public CicloFormativo buscar(CicloFormativo cicloFormativo) {
+    public CicloFormativo buscar(CicloFormativo cicloFormativo) throws OperationNotSupportedException {
         return ciclosFormativos.buscar(cicloFormativo);
     }
 
