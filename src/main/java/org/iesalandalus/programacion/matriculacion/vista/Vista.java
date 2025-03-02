@@ -353,7 +353,10 @@ public class Vista {
         } else {
             System.out.println("Las matrículas registradas son:");
             matriculas.sort(comparadorMatriculas);
-            matriculas.forEach(System.out::println);
+
+            for (Matricula matricula : matriculas) {
+                System.out.println(matricula.imprimir());
+            }
         }
     }
 
@@ -371,7 +374,10 @@ public class Vista {
         } else {
             System.out.println("Las matrículas de este alumno son:");
             matriculasPorAlumno.sort(comparadorMatriculasAlumno);
-            matriculasPorAlumno.forEach(System.out::println);
+
+            for (Matricula matricula : matriculasPorAlumno) {
+                System.out.println(matricula.imprimir());
+            }
         }
     }
 
@@ -391,7 +397,10 @@ public class Vista {
         } else {
             System.out.println("Las matrículas de este Ciclo Formativo son:");
             matriculasPorCiclos.sort(comparadorMatriculasCiclo);
-            matriculasPorCiclos.forEach(System.out::println);
+
+            for (Matricula matricula : matriculasPorCiclos) {
+                System.out.println(matricula.imprimir());
+            }
         }
     }
 
@@ -410,7 +419,10 @@ public class Vista {
         } else {
             System.out.println("Las matrículas de este curso son:");
             matriculasPorCursos.sort(comparadorMatriculasCursos);
-            matriculasPorCursos.forEach(System.out::println);
+
+            for (Matricula matricula : matriculasPorCursos) {
+                System.out.println(matricula.imprimir());
+            }
         }
     }
 

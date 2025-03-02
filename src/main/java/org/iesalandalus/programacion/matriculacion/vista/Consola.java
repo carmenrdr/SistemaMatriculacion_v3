@@ -341,7 +341,7 @@ public class Consola {
         System.out.println("Introduce el ID de la mátricula: ");
         int id = Entrada.entero();
 
-        System.out.println("Introduzca el curso académico en (formato aa-aa)");
+        System.out.println("Introduzca el curso académico (en formato aa-aa)");
         String cursoAcademico = Entrada.cadena();
 
         System.out.println("Introduzca la fecha matriculación: ");
