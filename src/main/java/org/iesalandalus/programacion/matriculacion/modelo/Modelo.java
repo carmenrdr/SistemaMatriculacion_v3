@@ -86,7 +86,7 @@ public class Modelo {
         return asignaturas.get();
     }
 
-    public List<CicloFormativo> getCiclosFormativos() {
+    public List<CicloFormativo> getCiclosFormativos() throws OperationNotSupportedException {
         return ciclosFormativos.get();
     }
 

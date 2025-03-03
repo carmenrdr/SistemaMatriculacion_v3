@@ -73,7 +73,7 @@ public class Consola {
             String dniABuscar = Entrada.cadena();
 
             try {
-                Alumno alumnoInventado = new Alumno("Filemón", dniABuscar, "busca@busca.com", "000000000", LocalDate.of(1996, 1, 1));
+                Alumno alumnoInventado = new Alumno("Filemón", dniABuscar, "busca@busca.com", "666000000", LocalDate.of(1996, 1, 1));
                 return alumnoInventado;
             } catch (OperationNotSupportedException e) {
                 throw new OperationNotSupportedException("ERROR: "+ e.getMessage());
@@ -99,46 +99,40 @@ public class Consola {
 
     public static TiposGrado leerTipoGrado() throws OperationNotSupportedException {
         System.out.println("Los tipos de Grado que hay son los siguientes:");
-        for (int i = 0; i < TiposGrado.values().length; i++) {
-            System.out.println(TiposGrado.values()[i].imprimir());
+        for (TiposGrado gradosTipos : TiposGrado.values()) {
+            System.out.println(gradosTipos.imprimir());
         }
 
         int opcion = -1;
         do {
-            try {
-                System.out.println("Introduzca el Grado elegido (0 ó 1):");
-                opcion = Entrada.entero();
+            System.out.println("Introduzca el Grado elegido (0 ó 1):");
+            opcion = Entrada.entero();
 
-                if (!(opcion==0) || !(opcion==1)) {
-                    throw new OperationNotSupportedException("ERROR: La opción introducida no es válida.");
-                }
-            } catch (OperationNotSupportedException e) {
-                System.out.println(e.getMessage());
+            if (opcion != 0 && opcion != 1) {
+                throw new OperationNotSupportedException("ERROR: La opción introducida no es válida.");
             }
-        } while (!(opcion==0) || !(opcion==1));
+
+        } while (opcion!=0 && opcion!=1);
 
         return TiposGrado.values()[opcion];
     }
 
     public static Modalidad leerModalidad() throws OperationNotSupportedException {
         System.out.println("Las modalidades que hay son las siguientes:");
-        for (int i = 0; i < Modalidad.values().length; i++) {
-            System.out.println(Modalidad.values()[i].imprimir());
+        for (Modalidad modalidadTipos : Modalidad.values()) {
+            System.out.println(modalidadTipos.imprimir());
         }
 
         int opcion = -1;
         do {
-            try {
-                System.out.println("Introduzca la modalidad elegida (0 ó 1): ");
-                opcion = Entrada.entero();
+            System.out.println("Introduzca la modalidad elegida (0 ó 1): ");
+            opcion = Entrada.entero();
 
-                if (!(opcion==0) || !(opcion==1)) {
-                    throw new OperationNotSupportedException("ERROR: La opción introducida no es válida.");
-                }
-            } catch (OperationNotSupportedException e) {
-                System.out.println(e.getMessage());
+            if (opcion != 0 && opcion != 1) {
+                throw new OperationNotSupportedException("ERROR: La opción introducida no es válida.");
             }
-        } while (!(opcion==0) || !(opcion==1));
+
+        } while (opcion!=0 && opcion!=1);
 
         return Modalidad.values()[opcion];
     }
@@ -219,34 +213,31 @@ public class Consola {
             CicloFormativo cicloInventado = new CicloFormativo(codigoBuscar, "Programacion", gradoInventado, "DAM", 100);
             return cicloInventado;
         } catch (OperationNotSupportedException e) {
-            throw new OperationNotSupportedException("ERROR: " + e.getMessage());
+            throw new OperationNotSupportedException(e.getMessage());
         }
     }
 
     public static Curso leerCurso() throws OperationNotSupportedException {
         System.out.println("Los cursos existentes son los siguientes: ");
-        for (int i = 0; i < Curso.values().length; i++) {
-            System.out.println(Curso.values()[i].imprimir());
+        for (Curso cursosTipos : Curso.values()) {
+            System.out.println(cursosTipos.imprimir());
         }
 
         int opcion=-1;
         do {
-           try {
-               System.out.println("Introduzca el curso elegido (0 ó 1): ");
-               opcion = Entrada.entero();
+            System.out.println("Introduzca el curso elegido (0 ó 1): ");
+            opcion = Entrada.entero();
 
-               if (opcion < 0 || opcion > 1) {
-                   throw new OperationNotSupportedException("La opción introducida no es válida.");
-               }
-           } catch (OperationNotSupportedException e) {
-               System.out.println("ERROR: " + e.getMessage());
-           }
+            if (opcion < 0 || opcion > 1) {
+                throw new OperationNotSupportedException("La opción introducida no es válida.");
+            }
+
         } while (opcion < 0 || opcion > 1);
 
         return Curso.values()[opcion];
     }
 
-    public static EspecialidadProfesorado leerEspecialidadProfesorado() throws OperationNotSupportedException {
+    public static EspecialidadProfesorado leerEspecialidadProfesorado() {
         System.out.println("Las especialidades existentes son: ");
         for (int i = 0; i < EspecialidadProfesorado.values().length; i++) {
             System.out.println(EspecialidadProfesorado.values()[i].imprimir());
@@ -304,10 +295,10 @@ public class Consola {
         try {
             CicloFormativo cicloInventado = new CicloFormativo(3333, "Programacion", gradoInventado, "DAM", 100);
 
-            Asignatura asignaturaInventada = new Asignatura(codigoBuscar, "Programación", 10, Curso.PRIMERO, 10, EspecialidadProfesorado.FOL, cicloInventado);
+            Asignatura asignaturaInventada = new Asignatura(codigoBuscar, "Programación", 10, Curso.PRIMERO, 3, EspecialidadProfesorado.FOL, cicloInventado);
             return asignaturaInventada;
         } catch (OperationNotSupportedException e) {
-            throw new OperationNotSupportedException("ERROR: " + e.getMessage());
+            throw new OperationNotSupportedException(e.getMessage());
         }
     }
 

@@ -14,11 +14,11 @@ public class CiclosFormativos {
         this.coleccionCiclosFormativos = new ArrayList<>();
     }
 
-    public List<CicloFormativo> get() {
+    public List<CicloFormativo> get() throws OperationNotSupportedException {
         return copiaProfundaCiclosFormativos();
     }
 
-    private List<CicloFormativo> copiaProfundaCiclosFormativos() {
+    private List<CicloFormativo> copiaProfundaCiclosFormativos() throws OperationNotSupportedException {
         List<CicloFormativo> coleccionAux = new ArrayList<>(getTamano());
 
         for (CicloFormativo cicloFormativo : coleccionCiclosFormativos) {

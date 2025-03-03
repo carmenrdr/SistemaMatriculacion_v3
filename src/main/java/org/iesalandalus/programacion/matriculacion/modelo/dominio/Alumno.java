@@ -62,7 +62,7 @@ public class Alumno {
 
     public void setNia() {
         //creamos el nia con los cuatro primeros caracteres del nombre en minúscula y las 3 últimas cifras del DNI.
-        this.nia = nombre.substring(0, 3).toLowerCase() + dni.substring(5, 8);
+        this.nia = this.nombre.substring(0, 4).toLowerCase()+this.dni.substring(5, 8);
     }
 
     private void setNia(String nia) throws OperationNotSupportedException {

@@ -26,7 +26,7 @@ public class Controlador {
 
         this.modelo = modelo;
         this.vista = vista;
-        this.vista.setControlador(this);
+        vista.setControlador(this);
     }
 
     public void comenzar() throws OperationNotSupportedException {
@@ -85,7 +85,7 @@ public class Controlador {
         modelo.borrar(cicloFormativo);
     }
 
-    public List<CicloFormativo> getCiclosFormativos() {
+    public List<CicloFormativo> getCiclosFormativos() throws OperationNotSupportedException {
         return modelo.getCiclosFormativos();
     }
 

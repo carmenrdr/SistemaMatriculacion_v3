@@ -42,145 +42,6 @@ public class Vista {
         controlador.terminar();
     }
 
-    /*private void ejecutarOpcion(Opcion opcion) throws OperationNotSupportedException {
-
-        switch (opcion) {
-            case INSERTAR_ALUMNO:
-                try {
-                    insertarAlumno();
-                } catch (Exception e) {
-                    throw new OperationNotSupportedException("EEROR: " + e.getMessage());
-                }
-                break;
-            case BUSCAR_ALUMNO:
-                try {
-                    buscarAlumno();
-                } catch (Exception e) {
-                    throw new OperationNotSupportedException("ERROR: " + e.getMessage());
-                }
-                break;
-            case BORRAR_ALUMNO:
-                try {
-                    borrarAlumno();
-                } catch (Exception e) {
-                    throw new OperationNotSupportedException("ERROR: " + e.getMessage());
-                }
-                break;
-            case MOSTRAR_ALUMNOS:
-                try {
-                    mostrarAlumnos();
-                } catch (Exception e) {
-                    throw new OperationNotSupportedException("ERROR: " + e.getMessage());
-                }
-                break;
-            case INSERTAR_ASIGNATURA:
-                try {
-                    insertarAsignatura();
-                } catch (Exception e) {
-                    throw new OperationNotSupportedException("ERROR: " + e.getMessage());
-                }
-                break;
-            case BUSCAR_ASIGNATURA:
-                try {
-                    buscarAsignatura();
-                } catch (Exception e) {
-                    throw new OperationNotSupportedException("ERROR: " + e.getMessage());
-                }
-                break;
-            case BORRAR_ASIGNATURA:
-                try {
-                    borrarAsignatura();
-                } catch (Exception e) {
-                    throw new OperationNotSupportedException("ERROR: " + e.getMessage());
-                }
-                break;
-            case MOSTRAR_ASIGNATURAS:
-                try {
-                    mostrarAsignaturas();
-                } catch (Exception e) {
-                    throw new OperationNotSupportedException("ERROR: " + e.getMessage());
-                }
-                break;
-            case INSERTAR_CICLO_FORMATIVO:
-                try {
-                    insertarCicloFormativo();
-                } catch (Exception e) {
-                    throw new OperationNotSupportedException("ERROR: " + e.getMessage());
-                }
-                break;
-            case BUSCAR_CICLO_FORMATIVO:
-                try {
-                    buscarCicloFormativo();
-                } catch (Exception e) {
-                    throw new OperationNotSupportedException("ERROR: " + e.getMessage());
-                }
-                break;
-            case BORRAR_CICLO_FORMATIVO:
-                try {
-                    borrarCicloFormativo();
-                } catch (Exception e) {
-                    throw new OperationNotSupportedException("ERROR: " + e.getMessage());
-                }
-                break;
-            case MOSTRAR_CICLOS_FORMATIVOS:
-                try {
-                    mostrarCiclosFormativos();
-                } catch (Exception e) {
-                    throw new OperationNotSupportedException("ERROR: " + e.getMessage());
-                }
-                break;
-            case INSERTAR_MATRICULA:
-                try {
-                    insertarMatricula();
-                } catch (Exception e) {
-                    throw new OperationNotSupportedException("ERROR: " + e.getMessage());
-                }
-                break;
-            case BUSCAR_MATRICULA:
-                try {
-                    buscarMatricula();
-                } catch (Exception e) {
-                    throw new OperationNotSupportedException("ERROR: " + e.getMessage());
-                }
-                break;
-            case ANULAR_MATRICULA:
-                try {
-                    anularMatricula();
-                } catch (Exception e) {
-                    throw new OperationNotSupportedException("ERROR: " + e.getMessage());
-                }
-                break;
-            case MOSTRAR_MATRICULAS:
-                try {
-                    mostrarMatriculas();
-                } catch (Exception e) {
-                    throw new OperationNotSupportedException("ERROR: " + e.getMessage());
-                }
-                break;
-            case MOSTRAR_MATRICULAS_ALUMNO:
-                try {
-                    mostrarMatriculasPorAlumno();
-                } catch (Exception e) {
-                    throw new OperationNotSupportedException("ERROR: " + e.getMessage());
-                }
-                break;
-            case MOSTRAR_MATRICULAS_CICLO_FORMATIVO:
-                try {
-                    mostrarMatriculasPorCicloFormativo();
-                } catch (Exception e) {
-                    throw new OperationNotSupportedException("ERROR: " + e.getMessage());
-                }
-                break;
-            case MOSTRAR_MATRICULAS_CURSO_ACADEMICO:
-                try {
-                    mostrarMatriculasPorCursoAcademico();
-                } catch (Exception e) {
-                    throw new OperationNotSupportedException("ERROR: " + e.getMessage());
-                }
-                break;
-        }
-    } */
-
     public void insertarAlumno() throws OperationNotSupportedException {
         Alumno alumnoNuevo = new Alumno(Consola.leerAlumno());
         controlador.insertar(alumnoNuevo);
@@ -292,7 +153,7 @@ public class Vista {
 
     }
 
-    public void mostrarCiclosFormativos() {
+    public void mostrarCiclosFormativos() throws OperationNotSupportedException {
         List<CicloFormativo> ciclosFormativos = controlador.getCiclosFormativos();
 
         Comparator<CicloFormativo> comparadorCiclos = Comparator.comparing(CicloFormativo :: getNombre);
@@ -308,7 +169,13 @@ public class Vista {
     public void insertarMatricula() throws OperationNotSupportedException {
         Alumno alumno = Consola.leerAlumno();
         List<Asignatura> asignaturas = controlador.getAsignaturas();
-        List<Asignatura> asignaturasElegidas = Consola.elegirAsignaturasMatricula(asignaturas);
+        List<Asignatura> asignaturasElegidas;
+
+        if (asignaturas != null) {
+            asignaturasElegidas = Consola.elegirAsignaturasMatricula(asignaturas);
+        } else {
+            asignaturasElegidas = null;
+        }
 
         Matricula matriculaNueva = Consola.leerMatricula(alumno, asignaturasElegidas);
         controlador.insertar(matriculaNueva);
@@ -333,13 +200,16 @@ public class Vista {
         Matricula matriculaABuscar = Consola.getMatriculaPorIdentificador();
         Matricula matriculaEncontrada = controlador.buscar(matriculaABuscar);
 
-        System.out.println("Introduzca la fecha de anulación en formato dd/mm/yyyy:");
-        String fecha = Entrada.cadena();
+        if (matriculaEncontrada == null) {
+            System.out.println("No existe la matrícula que se quiere anular.");
+        } else {
+            System.out.println("Introduzca la fecha de anulación en formato dd/mm/yyyy:");
+            String fecha = Entrada.cadena();
 
-        LocalDate fechaAnulacion = Consola.leerFecha(fecha);
+            LocalDate fechaAnulacion = Consola.leerFecha(fecha);
 
-        matriculaEncontrada.setFechaAnulacion(fechaAnulacion);
-
+            matriculaEncontrada.setFechaAnulacion(fechaAnulacion);
+        }
     }
 
     public void mostrarMatriculas() throws OperationNotSupportedException {

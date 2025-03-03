@@ -20,9 +20,9 @@ public class CicloFormativo {
         setHoras(horas);
     }
 
-    public CicloFormativo(CicloFormativo cicloFormativo) {
+    public CicloFormativo(CicloFormativo cicloFormativo) throws OperationNotSupportedException {
         if (cicloFormativo == null) {
-            throw new IllegalArgumentException("ERROR: No es posible copiar un ciclo formativo nulo.");
+            throw new OperationNotSupportedException("ERROR: No es posible copiar un ciclo formativo nulo.");
         } else {
             this.codigo = cicloFormativo.getCodigo();
             this.familiaProfesional = cicloFormativo.getFamiliaProfesional();

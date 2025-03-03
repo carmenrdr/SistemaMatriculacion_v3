@@ -35,6 +35,6 @@ public class GradoD extends Grado {
 
     @Override
     public String toString() {
-        return super.toString() + ", " + this.numAnios + ", " + modalidad;
+        return super.toString() + ", " + this.numAnios + ", " + getModalidad();
     }
 }
