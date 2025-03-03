@@ -223,7 +223,7 @@ public class Alumno {
 
     @Override
     public String toString() {
-        return "Número de Identificación del Alumnado (NIA)= "+nia+ ", nombre= "+nombre+", DNI= "+dni+
-                ", correo= "+correo+", teléfono= "+telefono+", fecha nacimiento= "+fechaNacimiento+".";
+        return "Número de Identificación del Alumnado (NIA)= "+nia+ ", nombre= "+nombre+" (" +getIniciales()+
+                "), DNI= "+dni+ ", correo= "+correo+", teléfono= "+telefono+", fecha nacimiento= "+fechaNacimiento+".";
     }
 }
