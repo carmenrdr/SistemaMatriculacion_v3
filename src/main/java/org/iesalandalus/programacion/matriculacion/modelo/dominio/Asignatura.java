@@ -1,6 +1,5 @@
 package org.iesalandalus.programacion.matriculacion.modelo.dominio;
 
-import javax.naming.OperationNotSupportedException;
 import java.util.Objects;
 
 public class Asignatura {
@@ -16,7 +15,7 @@ public class Asignatura {
     private EspecialidadProfesorado especialidadProfesorado;
     private CicloFormativo cicloFormativo;
 
-    public Asignatura(String codigo, String nombre, int horasAnuales, Curso curso, int horasDesdoble, EspecialidadProfesorado especialidadProfesorado, CicloFormativo cicloFormativo) throws OperationNotSupportedException {
+    public Asignatura(String codigo, String nombre, int horasAnuales, Curso curso, int horasDesdoble, EspecialidadProfesorado especialidadProfesorado, CicloFormativo cicloFormativo) throws IllegalArgumentException {
         setCodigo(codigo);
         setNombre(nombre);
         setHorasAnuales(horasAnuales);
@@ -26,17 +25,17 @@ public class Asignatura {
         setCicloFormativo(cicloFormativo);
     }
 
-    public Asignatura(Asignatura asignatura) throws OperationNotSupportedException {
+    public Asignatura(Asignatura asignatura) throws IllegalArgumentException {
         if (asignatura == null){
-            throw new OperationNotSupportedException("ERROR: No es posible copiar una asignatura nula.");
+            throw new IllegalArgumentException("No es posible copiar una asignatura nula.");
         } else {
-            this.codigo = asignatura.getCodigo();
-            this.nombre = asignatura.getNombre();
-            this.horasAnuales = asignatura.getHorasAnuales();
-            this.curso = asignatura.getCurso();
-            this.horasDesdoble = asignatura.getHorasDesdoble();
-            this.especialidadProfesorado = asignatura.getEspecialidadProfesorado();
-            this.cicloFormativo = asignatura.getCicloFormativo();
+            setCodigo(asignatura.getCodigo());
+            setNombre(asignatura.getNombre());
+            setHorasAnuales(asignatura.getHorasAnuales());
+            setCurso(asignatura.getCurso());
+            setHorasDesdoble(asignatura.getHorasDesdoble());
+            setEspecialidadProfesorado(asignatura.getEspecialidadProfesorado());
+            setCicloFormativo(asignatura.getCicloFormativo());
         }
     }
 
@@ -44,9 +43,9 @@ public class Asignatura {
         return cicloFormativo;
     }
 
-    public void setCicloFormativo(CicloFormativo cicloFormativo) throws OperationNotSupportedException {
+    public void setCicloFormativo(CicloFormativo cicloFormativo) throws IllegalArgumentException {
         if (cicloFormativo == null){
-            throw new OperationNotSupportedException("ERROR: El ciclo formativo de una asignatura no puede ser nulo.");
+            throw new IllegalArgumentException("El ciclo formativo de una asignatura no puede ser nulo.");
         } else {
             this.cicloFormativo = cicloFormativo;
         }
@@ -56,11 +55,11 @@ public class Asignatura {
         return codigo;
     }
 
-    private void setCodigo(String codigo) throws OperationNotSupportedException {
+    private void setCodigo(String codigo) throws IllegalArgumentException {
         if (codigo == null) {
-            throw new OperationNotSupportedException("ERROR: El código de una asignatura no puede ser nulo.");
+            throw new IllegalArgumentException("El código de una asignatura no puede ser nulo.");
         } else if (!codigo.matches(ER_CODIGO)) {
-            throw new OperationNotSupportedException("ERROR: El código de la asignatura no tiene un formato válido.");
+            throw new IllegalArgumentException("El código de la asignatura no tiene un formato válido.");
         } else {
             this.codigo = codigo;
         }
@@ -70,9 +69,9 @@ public class Asignatura {
         return nombre;
     }
 
-    public void setNombre(String nombre) throws OperationNotSupportedException {
+    public void setNombre(String nombre) throws IllegalArgumentException {
         if (nombre == null){
-            throw new OperationNotSupportedException("ERROR: El nombre de una asignatura no puede ser nulo.");
+            throw new IllegalArgumentException("El nombre de una asignatura no puede ser nulo.");
         } else {
             this.nombre = nombre;
         }
@@ -82,9 +81,9 @@ public class Asignatura {
         return horasAnuales;
     }
 
-    public void setHorasAnuales(int horasAnuales) throws OperationNotSupportedException {
+    public void setHorasAnuales(int horasAnuales) throws IllegalArgumentException {
         if (horasAnuales < 0 || horasAnuales > MAX_NUM_HORAS_ANUALES){
-            throw new OperationNotSupportedException("ERROR: El número de horas de una asignatura no puede ser menor o igual a 0 ni mayor a" + Asignatura.MAX_NUM_HORAS_ANUALES +".");
+            throw new IllegalArgumentException("El número de horas de una asignatura no puede ser menor o igual a 0 ni mayor a" + Asignatura.MAX_NUM_HORAS_ANUALES +".");
         } else {
             this.horasAnuales = horasAnuales;
         }
@@ -94,9 +93,9 @@ public class Asignatura {
         return curso;
     }
 
-    public void setCurso(Curso curso) throws OperationNotSupportedException {
+    public void setCurso(Curso curso) throws IllegalArgumentException {
         if (curso == null){
-            throw new OperationNotSupportedException("ERROR: El curso de una asignatura no puede ser nulo");
+            throw new IllegalArgumentException("El curso de una asignatura no puede ser nulo");
         } else {
             this.curso = curso;
         }
@@ -106,9 +105,9 @@ public class Asignatura {
         return horasDesdoble;
     }
 
-    public void setHorasDesdoble(int horasDesdoble) throws OperationNotSupportedException {
+    public void setHorasDesdoble(int horasDesdoble) throws IllegalArgumentException {
         if (horasDesdoble < 0 || horasDesdoble > MAX_NUM_HORAS_DESDOBLES){
-            throw new OperationNotSupportedException("ERROR: El número de horas de desdoble de una asignatura no puede ser menor a 0 ni mayor a "+ Asignatura.MAX_NUM_HORAS_DESDOBLES+ ".");
+            throw new IllegalArgumentException("El número de horas de desdoble de una asignatura no puede ser menor a 0 ni mayor a "+ Asignatura.MAX_NUM_HORAS_DESDOBLES+ ".");
         } else {
             this.horasDesdoble = horasDesdoble;
         }
@@ -118,9 +117,9 @@ public class Asignatura {
         return especialidadProfesorado;
     }
 
-    public void setEspecialidadProfesorado(EspecialidadProfesorado especialidadProfesorado) throws OperationNotSupportedException {
+    public void setEspecialidadProfesorado(EspecialidadProfesorado especialidadProfesorado) throws IllegalArgumentException {
         if (especialidadProfesorado == null){
-            throw new OperationNotSupportedException("ERROR: La especialidad del profesorado de una asignatura no puede ser nula.");
+            throw new IllegalArgumentException("La especialidad del profesorado de una asignatura no puede ser nula.");
         } else {
             this.especialidadProfesorado = especialidadProfesorado;
         }

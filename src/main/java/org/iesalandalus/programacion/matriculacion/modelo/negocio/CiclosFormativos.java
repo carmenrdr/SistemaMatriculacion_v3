@@ -1,8 +1,6 @@
 package org.iesalandalus.programacion.matriculacion.modelo.negocio;
 
 import org.iesalandalus.programacion.matriculacion.modelo.dominio.CicloFormativo;
-
-import javax.naming.OperationNotSupportedException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,11 +12,11 @@ public class CiclosFormativos {
         this.coleccionCiclosFormativos = new ArrayList<>();
     }
 
-    public List<CicloFormativo> get() throws OperationNotSupportedException {
+    public List<CicloFormativo> get() throws IllegalArgumentException {
         return copiaProfundaCiclosFormativos();
     }
 
-    private List<CicloFormativo> copiaProfundaCiclosFormativos() throws OperationNotSupportedException {
+    private List<CicloFormativo> copiaProfundaCiclosFormativos() throws IllegalArgumentException {
         List<CicloFormativo> coleccionAux = new ArrayList<>(getTamano());
 
         for (CicloFormativo cicloFormativo : coleccionCiclosFormativos) {
@@ -32,34 +30,34 @@ public class CiclosFormativos {
         return coleccionCiclosFormativos.size();
     }
 
-    public void insertar(CicloFormativo cicloFormativo) throws OperationNotSupportedException {
+    public void insertar(CicloFormativo cicloFormativo) throws IllegalArgumentException {
         if (cicloFormativo == null) {
-            throw new OperationNotSupportedException("ERROR: No se puede insertar un ciclo formativo nulo.");
+            throw new IllegalArgumentException("No se puede insertar un ciclo formativo nulo.");
         } else if (coleccionCiclosFormativos.contains(cicloFormativo)) {
-            throw new OperationNotSupportedException("ERROR: Ya existe un ciclo formativo con ese código.");
+            throw new IllegalArgumentException("Ya existe un ciclo formativo con ese código.");
         } else {
             coleccionCiclosFormativos.add(cicloFormativo);
         }
     }
 
-    public CicloFormativo buscar(CicloFormativo cicloFormativo) throws OperationNotSupportedException {
+    public CicloFormativo buscar(CicloFormativo cicloFormativo) throws IllegalArgumentException {
         int indice = coleccionCiclosFormativos.indexOf(cicloFormativo);
 
         if (indice == -1) {
-            throw new OperationNotSupportedException("ERROR: No existe este Ciclo Formativo.");
+            throw new IllegalArgumentException("No existe este Ciclo Formativo.");
         } else {
             return new CicloFormativo(coleccionCiclosFormativos.get(indice));
         }
 
     }
 
-    public void borrar(CicloFormativo cicloFormativo) throws OperationNotSupportedException {
+    public void borrar(CicloFormativo cicloFormativo) throws IllegalArgumentException {
         if (cicloFormativo == null) {
-            throw new OperationNotSupportedException("ERROR: No se puede borrar un ciclo formativo nulo.");
+            throw new IllegalArgumentException("No se puede borrar un ciclo formativo nulo.");
         }
 
         if (!coleccionCiclosFormativos.remove(cicloFormativo)) {
-            throw new OperationNotSupportedException("ERROR: El Ciclo Formativo a borrar no existe.");
+            throw new IllegalArgumentException("El Ciclo Formativo a borrar no existe.");
         }
     }
 

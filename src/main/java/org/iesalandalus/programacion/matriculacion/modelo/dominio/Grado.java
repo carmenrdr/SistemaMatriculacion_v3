@@ -1,14 +1,12 @@
 package org.iesalandalus.programacion.matriculacion.modelo.dominio;
 
-import javax.naming.OperationNotSupportedException;
-
 public abstract class Grado {
 
     protected String nombre;
     protected String iniciales;
     protected int numAnios;
 
-    public Grado(String nombre) throws OperationNotSupportedException {
+    public Grado(String nombre) throws IllegalArgumentException {
         this.setNombre(nombre);
     }
 
@@ -16,10 +14,10 @@ public abstract class Grado {
         return nombre;
     }
 
-    protected void setNombre(String nombre) throws OperationNotSupportedException {
+    protected void setNombre(String nombre) throws IllegalArgumentException {
 
         if (nombre == null) {
-            throw new OperationNotSupportedException("ERROR: el nombre no puede ser nulo.");
+            throw new IllegalArgumentException("El nombre no puede ser nulo.");
         } else {
             this.nombre = nombre;
         }
@@ -44,7 +42,7 @@ public abstract class Grado {
 
     }
 
-    protected abstract void setNumAnios(int numAnios) throws OperationNotSupportedException;
+    protected abstract void setNumAnios(int numAnios) throws IllegalArgumentException;
 
     @Override
     public String toString() {

@@ -4,8 +4,6 @@ import org.iesalandalus.programacion.matriculacion.modelo.dominio.Alumno;
 import org.iesalandalus.programacion.matriculacion.modelo.dominio.Asignatura;
 import org.iesalandalus.programacion.matriculacion.modelo.dominio.CicloFormativo;
 import org.iesalandalus.programacion.matriculacion.modelo.dominio.Matricula;
-
-import javax.naming.OperationNotSupportedException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,11 +15,11 @@ public class Matriculas {
         this.coleccionMatriculas = new ArrayList<>();
     }
 
-    public List<Matricula> get() throws OperationNotSupportedException{
+    public List<Matricula> get() throws IllegalArgumentException{
         return copiaProfundaMatricula();
     }
 
-    private List<Matricula> copiaProfundaMatricula() throws OperationNotSupportedException {
+    private List<Matricula> copiaProfundaMatricula() throws IllegalArgumentException {
         List<Matricula> coleccionAux = new ArrayList<>(getTamano());
 
         for (Matricula matricula : coleccionMatriculas) {
@@ -35,39 +33,39 @@ public class Matriculas {
         return coleccionMatriculas.size();
     }
 
-    public void insertar(Matricula matricula) throws OperationNotSupportedException {
+    public void insertar(Matricula matricula) throws IllegalArgumentException {
         if (matricula == null){
-            throw new OperationNotSupportedException("ERROR: No se puede insertar una matricula nula.");
+            throw new IllegalArgumentException("No se puede insertar una matricula nula.");
         } else if (coleccionMatriculas.contains(matricula)) {
-            throw new OperationNotSupportedException("ERROR: Ya existe una matrícula con ese identificador.");
+            throw new IllegalArgumentException("Ya existe una matrícula con ese identificador.");
         } else {
             coleccionMatriculas.add(matricula);
         }
     }
 
-    public Matricula buscar(Matricula matricula) throws OperationNotSupportedException {
+    public Matricula buscar(Matricula matricula) throws IllegalArgumentException {
         int indice = coleccionMatriculas.indexOf(matricula);
 
         if (indice == -1) {
-            throw new OperationNotSupportedException("ERROR: No existe esta matrícula");
+            throw new IllegalArgumentException("No existe esta matrícula");
         } else {
             return new Matricula(coleccionMatriculas.get(indice));
         }
     }
 
-    public void borrar(Matricula matricula) throws OperationNotSupportedException {
+    public void borrar(Matricula matricula) throws IllegalArgumentException {
         if (matricula == null){
-            throw new OperationNotSupportedException("ERROR: No se puede borrar una matrícula nula.");
+            throw new IllegalArgumentException("No se puede borrar una matrícula nula.");
         }
 
         if(!coleccionMatriculas.remove(matricula)) {
-            throw new OperationNotSupportedException("ERROR: La matricula a borrar no existe.");
+            throw new IllegalArgumentException("La matricula a borrar no existe.");
         }
     }
 
-    public List<Matricula> get(Alumno alumno) throws OperationNotSupportedException {
+    public List<Matricula> get(Alumno alumno) throws IllegalArgumentException {
         if (alumno==null){
-            throw new OperationNotSupportedException("ERROR: El alumno no puede ser nulo.");
+            throw new IllegalArgumentException("El alumno no puede ser nulo.");
         }
 
         List<Matricula> resultado = new ArrayList<>();
@@ -81,9 +79,9 @@ public class Matriculas {
         return resultado;
     }
 
-    public List<Matricula> get(String cursoAcademico) throws OperationNotSupportedException {
+    public List<Matricula> get(String cursoAcademico) throws IllegalArgumentException {
         if (cursoAcademico==null){
-            throw new OperationNotSupportedException("ERROR: El curso académico no puede ser nulo.");
+            throw new IllegalArgumentException("El curso académico no puede ser nulo.");
         }
 
         List<Matricula> resultado = new ArrayList<>();
@@ -97,9 +95,9 @@ public class Matriculas {
         return resultado;
     }
 
-    public List<Matricula> get(CicloFormativo cicloFormativo) throws OperationNotSupportedException {
+    public List<Matricula> get(CicloFormativo cicloFormativo) throws IllegalArgumentException {
         if (cicloFormativo==null) {
-            throw new OperationNotSupportedException("ERROR: El ciclo formativo no puede ser nulo.");
+            throw new IllegalArgumentException("El ciclo formativo no puede ser nulo.");
         }
 
         List<Matricula> resultado = new ArrayList<>();

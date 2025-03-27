@@ -1,7 +1,5 @@
 package org.iesalandalus.programacion.matriculacion.modelo.dominio;
 
-import javax.naming.OperationNotSupportedException;
-
 public enum EspecialidadProfesorado {
 
     INFORMATICA("Informática"),

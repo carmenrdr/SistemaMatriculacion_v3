@@ -1,6 +1,5 @@
 package org.iesalandalus.programacion.matriculacion.modelo.dominio;
 
-import javax.naming.OperationNotSupportedException;
 import java.util.Objects;
 
 public class CicloFormativo {
@@ -12,7 +11,7 @@ public class CicloFormativo {
     private String nombre;
     private int horas;
 
-    public CicloFormativo(int codigo, String familiaProfesional, Grado grado, String nombre, int horas) throws OperationNotSupportedException {
+    public CicloFormativo(int codigo, String familiaProfesional, Grado grado, String nombre, int horas) throws IllegalArgumentException {
         setCodigo(codigo);
         setFamiliaProfesional(familiaProfesional);
         setGrado(grado);
@@ -20,15 +19,15 @@ public class CicloFormativo {
         setHoras(horas);
     }
 
-    public CicloFormativo(CicloFormativo cicloFormativo) throws OperationNotSupportedException {
+    public CicloFormativo(CicloFormativo cicloFormativo) throws IllegalArgumentException {
         if (cicloFormativo == null) {
-            throw new OperationNotSupportedException("ERROR: No es posible copiar un ciclo formativo nulo.");
+            throw new IllegalArgumentException("No es posible copiar un ciclo formativo nulo.");
         } else {
-            this.codigo = cicloFormativo.getCodigo();
-            this.familiaProfesional = cicloFormativo.getFamiliaProfesional();
-            this.grado = cicloFormativo.getGrado();
-            this.nombre = cicloFormativo.getNombre();
-            this.horas = cicloFormativo.getHoras();
+            setCodigo(cicloFormativo.getCodigo());
+            setFamiliaProfesional(cicloFormativo.getFamiliaProfesional());
+            setGrado(cicloFormativo.getGrado());
+            setNombre(cicloFormativo.getNombre());
+            setHoras(cicloFormativo.getHoras());
         }
     }
 
@@ -36,9 +35,9 @@ public class CicloFormativo {
         return codigo;
     }
 
-    private void setCodigo(int codigo) throws OperationNotSupportedException {
+    private void setCodigo(int codigo) throws IllegalArgumentException {
         if (codigo < 1000 || codigo > 9999) {
-            throw new OperationNotSupportedException("ERROR: El código es incorrecto");
+            throw new IllegalArgumentException("El código es incorrecto");
         } else {
             this.codigo = codigo;
         }
@@ -48,9 +47,9 @@ public class CicloFormativo {
         return familiaProfesional;
     }
 
-    public void setFamiliaProfesional(String familiaProfesional) throws OperationNotSupportedException {
+    public void setFamiliaProfesional(String familiaProfesional) throws IllegalArgumentException {
         if (familiaProfesional == null) {
-            throw new OperationNotSupportedException("ERROR: La familia profesional de un ciclo formativo no puede ser nula.");
+            throw new IllegalArgumentException("La familia profesional de un ciclo formativo no puede ser nula.");
         } else {
             this.familiaProfesional = familiaProfesional;
         }
@@ -60,9 +59,9 @@ public class CicloFormativo {
         return grado;
     }
 
-    public void setGrado(Grado grado) throws OperationNotSupportedException {
+    public void setGrado(Grado grado) throws IllegalArgumentException {
         if (grado == null) {
-            throw new OperationNotSupportedException("ERROR: El grado de un ciclo formativo no puede ser nulo.");
+            throw new IllegalArgumentException("El grado de un ciclo formativo no puede ser nulo.");
         } else {
             this.grado = grado;
         }
@@ -72,9 +71,9 @@ public class CicloFormativo {
         return nombre;
     }
 
-    public void setNombre(String nombre) throws OperationNotSupportedException {
+    public void setNombre(String nombre) throws IllegalArgumentException {
         if (nombre == null) {
-            throw new OperationNotSupportedException("ERROR: El nombre de un ciclo formativo no puede ser nulo.");
+            throw new IllegalArgumentException("El nombre de un ciclo formativo no puede ser nulo.");
         } else {
             this.nombre = nombre;
         }
@@ -84,9 +83,9 @@ public class CicloFormativo {
         return horas;
     }
 
-    public void setHoras(int horas) throws OperationNotSupportedException {
+    public void setHoras(int horas) throws IllegalArgumentException {
         if (horas <= 0 || horas > MAXIMO_NUMERO_HORAS) {
-            throw new OperationNotSupportedException("ERROR: El número de horas de un ciclo formativo no puede ser menor o igual a 0 ni mayor a " + CicloFormativo.MAXIMO_NUMERO_HORAS + ".");
+            throw new IllegalArgumentException("El número de horas de un ciclo formativo no puede ser menor o igual a 0 ni mayor a " + CicloFormativo.MAXIMO_NUMERO_HORAS + ".");
         } else {
             this.horas = horas;
         }

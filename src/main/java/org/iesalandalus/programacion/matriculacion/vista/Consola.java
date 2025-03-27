@@ -2,8 +2,6 @@ package org.iesalandalus.programacion.matriculacion.vista;
 
 import org.iesalandalus.programacion.matriculacion.modelo.dominio.*;
 import org.iesalandalus.programacion.utilidades.Entrada;
-
-import javax.naming.OperationNotSupportedException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -39,7 +37,7 @@ public class Consola {
         return Opcion.values()[opcion];
     }
 
-    public static Alumno leerAlumno() throws OperationNotSupportedException {
+    public static Alumno leerAlumno() throws IllegalArgumentException {
         System.out.println("Introduzca el nombre del nuevo alumno o alumna: ");
         String nombre = Entrada.cadena();
 
@@ -57,30 +55,19 @@ public class Consola {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDate fechaNacimiento = LocalDate.parse(fecha, formatter);
 
-        Alumno alumnoNuevo;
+        return new Alumno(nombre, dni, correo, telefono, fechaNacimiento);
 
-        try {
-            alumnoNuevo = new Alumno(nombre, dni, correo, telefono, fechaNacimiento);
-        } catch (OperationNotSupportedException e) {
-            throw new OperationNotSupportedException("El alumno introducido no es correcto.\n" + e.getMessage());
-        }
-
-        return alumnoNuevo;
     }
 
-    public static Alumno getAlumnoPorDni() throws OperationNotSupportedException {
+    public static Alumno getAlumnoPorDni() throws IllegalArgumentException {
             System.out.println("Introduzca el DNI del alumno/a: ");
             String dniABuscar = Entrada.cadena();
 
-            try {
-                Alumno alumnoInventado = new Alumno("Filemón", dniABuscar, "busca@busca.com", "666000000", LocalDate.of(1996, 1, 1));
-                return alumnoInventado;
-            } catch (OperationNotSupportedException e) {
-                throw new OperationNotSupportedException("ERROR: "+ e.getMessage());
-            }
+            return new Alumno("Filemón", dniABuscar, "busca@busca.com", "666000000", LocalDate.of(1996, 1, 1));
+
     }
 
-    public static LocalDate leerFecha(String mensaje) throws OperationNotSupportedException {
+    public static LocalDate leerFecha(String mensaje) throws IllegalArgumentException {
         String fechaIntroducida = mensaje;
 
         String FORMATO_FECHA = "(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[0-2])/(\\d{4})";
@@ -89,7 +76,7 @@ public class Consola {
 
         do {
             if (!matcher.matches()) {
-                throw new OperationNotSupportedException("ERROR: La fecha introducida no tiene el formato correcto.");
+                throw new IllegalArgumentException("ERROR: La fecha introducida no tiene el formato correcto.");
             }
         } while (!matcher.matches());
 
@@ -97,7 +84,7 @@ public class Consola {
         return LocalDate.parse(fechaIntroducida, formatter);
     }
 
-    public static TiposGrado leerTipoGrado() throws OperationNotSupportedException {
+    public static TiposGrado leerTipoGrado() {
         System.out.println("Los tipos de Grado que hay son los siguientes:");
         for (TiposGrado gradosTipos : TiposGrado.values()) {
             System.out.println(gradosTipos.imprimir());
@@ -109,7 +96,7 @@ public class Consola {
             opcion = Entrada.entero();
 
             if (opcion != 0 && opcion != 1) {
-                throw new OperationNotSupportedException("ERROR: La opción introducida no es válida.");
+               System.out.println("La opción introducida no es válida.");
             }
 
         } while (opcion!=0 && opcion!=1);
@@ -117,7 +104,7 @@ public class Consola {
         return TiposGrado.values()[opcion];
     }
 
-    public static Modalidad leerModalidad() throws OperationNotSupportedException {
+    public static Modalidad leerModalidad() {
         System.out.println("Las modalidades que hay son las siguientes:");
         for (Modalidad modalidadTipos : Modalidad.values()) {
             System.out.println(modalidadTipos.imprimir());
@@ -129,7 +116,7 @@ public class Consola {
             opcion = Entrada.entero();
 
             if (opcion != 0 && opcion != 1) {
-                throw new OperationNotSupportedException("ERROR: La opción introducida no es válida.");
+                System.out.println("La opción introducida no es válida.");
             }
 
         } while (opcion!=0 && opcion!=1);
@@ -137,7 +124,7 @@ public class Consola {
         return Modalidad.values()[opcion];
     }
 
-    public static CicloFormativo leerCicloFormativo() throws OperationNotSupportedException {
+    public static CicloFormativo leerCicloFormativo() throws IllegalArgumentException {
         System.out.println("Introduzca código del Ciclo Formativo: ");
         int codigo = Entrada.entero();
 
@@ -152,14 +139,11 @@ public class Consola {
         System.out.println("Introduzca las horas que tiene: ");
         int horas = Entrada.entero();
 
-        try {
-            return new CicloFormativo(codigo, familiaProfesional, grado, nombre, horas);
-        } catch (OperationNotSupportedException e) {
-            throw new OperationNotSupportedException("El Ciclo Formativo introducido no es correcto.\n" + e.getMessage());
-        }
+        return new CicloFormativo(codigo, familiaProfesional, grado, nombre, horas);
+
     }
 
-    public static Grado leerGrado() throws OperationNotSupportedException {
+    public static Grado leerGrado() throws IllegalArgumentException {
        TiposGrado gradoElegido = leerTipoGrado();
        Grado gradoNuevo = null;
 
@@ -203,21 +187,16 @@ public class Consola {
         }
     }
 
-    public static CicloFormativo getCicloFormativoPorCodigo() throws OperationNotSupportedException {
+    public static CicloFormativo getCicloFormativoPorCodigo() throws IllegalArgumentException {
         System.out.println("Introduzca el código del Ciclo Formativo: ");
         int codigoBuscar = Entrada.entero();
 
         Grado gradoInventado = new GradoE("Grado", 1, 1);
 
-        try {
-            CicloFormativo cicloInventado = new CicloFormativo(codigoBuscar, "Programacion", gradoInventado, "DAM", 100);
-            return cicloInventado;
-        } catch (OperationNotSupportedException e) {
-            throw new OperationNotSupportedException(e.getMessage());
-        }
+        return new CicloFormativo(codigoBuscar, "Programacion", gradoInventado, "DAM", 100);
     }
 
-    public static Curso leerCurso() throws OperationNotSupportedException {
+    public static Curso leerCurso() {
         System.out.println("Los cursos existentes son los siguientes: ");
         for (Curso cursosTipos : Curso.values()) {
             System.out.println(cursosTipos.imprimir());
@@ -229,7 +208,7 @@ public class Consola {
             opcion = Entrada.entero();
 
             if (opcion < 0 || opcion > 1) {
-                throw new OperationNotSupportedException("La opción introducida no es válida.");
+                System.out.println("La opción introducida no es válida.");
             }
 
         } while (opcion < 0 || opcion > 1);
@@ -244,23 +223,21 @@ public class Consola {
         }
 
         int opcion=-1;
-        do {
-            try {
-                System.out.println("Introduzca la especialidad elegida (0, 1 ó 2): ");
-                opcion = Entrada.entero();
 
-                if (opcion < 0 || opcion > 2) {
-                    throw new OperationNotSupportedException("La opción introducida no es válida.");
-                }
-            } catch (OperationNotSupportedException e) {
-                System.out.println("ERROR: " + e.getMessage());
+        do {
+            System.out.println("Introduzca la especialidad elegida (0, 1 ó 2): ");
+            opcion = Entrada.entero();
+
+            if (opcion < 0 || opcion > 2) {
+                System.out.println("La opción introducida no es válida.");
             }
+
         } while (opcion < 0 || opcion > 2);
 
         return EspecialidadProfesorado.values()[opcion];
     }
 
-    public static Asignatura leerAsignatura() throws OperationNotSupportedException {
+    public static Asignatura leerAsignatura() throws IllegalArgumentException {
         System.out.println("Introduzca el código de la asignatura: ");
         String codigo = Entrada.cadena();
 
@@ -279,27 +256,18 @@ public class Consola {
 
         EspecialidadProfesorado especialidadProfesorado = leerEspecialidadProfesorado();
 
-        try {
-            return new Asignatura(codigo, nombre, horasAnuales, curso, horasDesdoble, especialidadProfesorado, cicloFormativo);
-        } catch (OperationNotSupportedException e){
-            throw new OperationNotSupportedException("ERROR: La asignatura introducida no es correcta.\n"+e.getMessage());
-        }
+        return new Asignatura(codigo, nombre, horasAnuales, curso, horasDesdoble, especialidadProfesorado, cicloFormativo);
     }
 
-    public static Asignatura getAsignaturaPorCodigo() throws OperationNotSupportedException {
+    public static Asignatura getAsignaturaPorCodigo() throws IllegalArgumentException {
         System.out.println("Introduzca el código de la asignatura: ");
         String codigoBuscar = Entrada.cadena();
 
         Grado gradoInventado = new GradoE("Grado", 1, 1);
 
-        try {
-            CicloFormativo cicloInventado = new CicloFormativo(3333, "Programacion", gradoInventado, "DAM", 100);
+        CicloFormativo cicloInventado = new CicloFormativo(3333, "Programacion", gradoInventado, "DAM", 100);
 
-            Asignatura asignaturaInventada = new Asignatura(codigoBuscar, "Programación", 10, Curso.PRIMERO, 3, EspecialidadProfesorado.FOL, cicloInventado);
-            return asignaturaInventada;
-        } catch (OperationNotSupportedException e) {
-            throw new OperationNotSupportedException(e.getMessage());
-        }
+        return new Asignatura(codigoBuscar, "Programación", 10, Curso.PRIMERO, 3, EspecialidadProfesorado.FOL, cicloInventado);
     }
 
     public static void mostrarAsignaturas(List<Asignatura> asignaturas){
@@ -328,7 +296,7 @@ public class Consola {
         return false;
     }
 
-    public static Matricula leerMatricula(Alumno alumno, List<Asignatura> asignaturas) throws OperationNotSupportedException {
+    public static Matricula leerMatricula(Alumno alumno, List<Asignatura> asignaturas) throws IllegalArgumentException {
         System.out.println("Introduce el ID de la mátricula: ");
         int id = Entrada.entero();
 
@@ -350,13 +318,29 @@ public class Consola {
         int contadorAsignaturas = 0;
 
         while (contadorAsignaturas < Matricula.MAXIMO_NUMERO_ASIGNATURAS_POR_MATRICULA) {
-            System.out.println("Elija las asignaturas que quiere matricular (introduzca el número o -1 para terminar):");
+            System.out.println("Elija la asignatura que quiere añadir a la matrícula (introduzca el código de la asignatura o -1 para terminar):");
             int numeroAsignatura = Entrada.entero();
 
             if (numeroAsignatura == -1) {
                 break;
             }
 
+            /*for (Asignatura asignatura : asignaturas) {
+                String codigo = asignatura.getCodigo();
+
+                if (asignaturaYaMatriculada(asignaturasMatricula, asignatura)) {
+                    System.out.println("La asignatura elegida ya se encuentra en la matrícula.");
+
+                } else if (codigoAsignatura == codigo) {
+                    asignaturasMatricula.add(asignatura);
+                    contadorAsignaturas++;
+                }
+
+                if (contadorAsignaturas >= Matricula.MAXIMO_NUMERO_ASIGNATURAS_POR_MATRICULA) {
+                    System.out.println("No se pueden añadir más asignaturas a esta matrícula.");
+                }
+            }
+            */
             if (numeroAsignatura < 0 || numeroAsignatura >= asignaturas.size()) {
                 System.out.println("La opción elegida no es válida.");
             }
@@ -380,19 +364,17 @@ public class Consola {
 
     }
 
-    public static Matricula getMatriculaPorIdentificador() throws OperationNotSupportedException {
+
+    public static Matricula getMatriculaPorIdentificador () {
         System.out.println("Introduzca el ID de la Matrícula: ");
         int idABuscar = Entrada.entero();
 
-        try {
-            Alumno alumnoInventado = new Alumno("Filemón", "12345678A", "test@test.com", "000000000", LocalDate.of(1996, 1, 1));
-            List<Asignatura> coleccionInventada = new ArrayList<>();
+        Alumno alumnoInventado = new Alumno("Filemón", "12345678A", "test@test.com", "000000000", LocalDate.of(1996, 1, 1));
+        List<Asignatura> coleccionInventada = new ArrayList<>();
 
-            Matricula matriculaInventada = new Matricula(idABuscar, Curso.PRIMERO.toString(), LocalDate.now(), alumnoInventado, coleccionInventada);
-            return matriculaInventada;
-        } catch (OperationNotSupportedException e) {
-            throw new OperationNotSupportedException("ERROR: " + e.getMessage());
-        }
+        return new Matricula(idABuscar, Curso.PRIMERO.toString(), LocalDate.now(), alumnoInventado, coleccionInventada);
+
     }
+
 
 }

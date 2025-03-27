@@ -21,7 +21,7 @@ public class Alumno {
     private LocalDate fechaNacimiento;
     private String nia;
 
-    public Alumno(String nombre, String dni, String correo, String telefono, LocalDate fechaNacimiento) throws OperationNotSupportedException {
+    public Alumno(String nombre, String dni, String correo, String telefono, LocalDate fechaNacimiento) throws IllegalArgumentException {
         setNombre(nombre);
         setDni(dni);
         setCorreo(correo);
@@ -30,15 +30,15 @@ public class Alumno {
         setNia();
     }
 
-    public Alumno(Alumno alumno) throws OperationNotSupportedException {
+    public Alumno(Alumno alumno) {
         if (alumno == null){
-            throw new OperationNotSupportedException("ERROR: No es posible copiar un alumno nulo.");
+            throw new IllegalArgumentException("No es posible copiar un alumno nulo.");
         } else {
-            this.nombre = alumno.getNombre();
-            this.dni = alumno.getDni();
-            this.correo = alumno.getCorreo();
-            this.telefono = alumno.getTelefono();
-            this.fechaNacimiento = alumno.getFechaNacimiento();
+            setNombre(alumno.getNombre());
+            setDni(alumno.getDni());
+            setCorreo(alumno.getCorreo());
+            setTelefono(alumno.getTelefono());
+            setFechaNacimiento(alumno.getFechaNacimiento());
             setNia(alumno.getNia());
         }
     }
@@ -47,10 +47,10 @@ public class Alumno {
         return nombre;
     }
 
-    public void setNombre(String nombre) throws OperationNotSupportedException {
+    public void setNombre(String nombre) throws IllegalArgumentException {
         String nombreFormateado = formateaNombre(nombre);
         if (nombreFormateado.isEmpty()) {
-            throw new OperationNotSupportedException("ERROR: El nombre de un alumno no puede ser nulo.");
+            throw new IllegalArgumentException("El nombre de un alumno no puede ser nulo.");
         } else {
             this.nombre = nombreFormateado;
         }
@@ -61,13 +61,12 @@ public class Alumno {
     }
 
     public void setNia() {
-        //creamos el nia con los cuatro primeros caracteres del nombre en minúscula y las 3 últimas cifras del DNI.
         this.nia = this.nombre.substring(0, 4).toLowerCase()+this.dni.substring(5, 8);
     }
 
-    private void setNia(String nia) throws OperationNotSupportedException {
+    private void setNia(String nia) throws IllegalArgumentException {
         if (!nia.matches(ER_NIA)) {
-            throw new OperationNotSupportedException("ERROR: el Nia introducido no es válido.");
+            throw new IllegalArgumentException("El Nia introducido no es válido.");
         } else {
             this.nia = nia;
         }
@@ -79,18 +78,15 @@ public class Alumno {
 
         StringBuilder nombreFormateado = new StringBuilder();
 
-        //Ir recorriendo para poner la primera letra en mayúscula y las demás en minúsculas.
         for (int i = 0; i < palabras.length; i++) {
             String palabraFormateada = palabras[i].substring(0, 1).toUpperCase() + palabras[i].substring(1).toLowerCase();
             nombreFormateado.append(palabraFormateada);
 
-            //Añadir los espacios de nuevo tras cada palabra.
             if (i < palabras.length-1) {
                 nombreFormateado.append(" ");
             }
         }
 
-        //Devolver el nombre formateado y quitándole el espacio final.
         return nombreFormateado.toString().trim();
     }
 
@@ -98,9 +94,9 @@ public class Alumno {
         return telefono;
     }
 
-    public void setTelefono(String telefono) throws OperationNotSupportedException {
+    public void setTelefono(String telefono) throws IllegalArgumentException {
         if (!telefono.matches(ER_TELEFONO)) {
-            throw new OperationNotSupportedException("ERROR: El teléfono del alumno no tiene un formato válido.");
+            throw new IllegalArgumentException("El teléfono del alumno no tiene un formato válido.");
         } else {
             this.telefono = telefono;
         }
@@ -110,9 +106,9 @@ public class Alumno {
         return correo;
     }
 
-    public void setCorreo(String correo) throws OperationNotSupportedException {
+    public void setCorreo(String correo) throws IllegalArgumentException {
         if (!correo.matches(ER_CORREO)) {
-            throw new OperationNotSupportedException("ERROR: El correo del alumno no tiene un formato válido.");
+            throw new IllegalArgumentException("El correo del alumno no tiene un formato válido.");
         } else {
             this.correo = correo;
         }
@@ -122,38 +118,32 @@ public class Alumno {
         return dni;
     }
 
-    private void setDni(String dni) throws OperationNotSupportedException {
+    private void setDni(String dni) throws IllegalArgumentException {
         if (!dni.matches(ER_DNI)) {
-            throw new OperationNotSupportedException("ERROR: El dni del alumno no tiene un formato válido.");
+            throw new IllegalArgumentException("El dni del alumno no tiene un formato válido.");
         }
         if (!comprobarLetraDni(dni)) {
-            throw new OperationNotSupportedException("ERROR: La letra del dni del alumno no es correcta.");
+            throw new IllegalArgumentException("La letra del dni del alumno no es correcta.");
         }
+
         this.dni = dni;
-        //Si se cambia el Dni hay que actualizar el Nia.
         setNia();
     }
 
     private boolean comprobarLetraDni(String dni) {
-        //Primero comprobamos si cumple el patrón establecido, sino directamente es incorrecto.
         if (!dni.matches(ER_DNI)) {
             return false;
         }
 
-        //Separamos las subcadenas.
         String numeroDni = dni.substring(0,8);
-        char letraDni = Character.toUpperCase(dni.charAt(8)); //lo ponemos en mayúscula ya que se puede introducir por teclado en minúscula.
+        char letraDni = Character.toUpperCase(dni.charAt(8));
 
-        //Convertimos los números en un entero para comprobar si la letra es correcta.
         int dniNumeroEntero = Integer.parseInt(numeroDni);
 
-        //Creamos array de letras. El índice corresponde al resto de la división para poder comprobarlo según la tabla explicada en la web.
-        //Asociamos la letra correspondiente según el resto que nos ha dado.
         char[] letrasDni = {'T','R','W','A','G','M','Y','F','P','D','X','B','N','J','Z','S','Q','V','H','L','C','K','E'};
         int resto = dniNumeroEntero % 23;
         char letraCalculada = letrasDni[resto];
 
-        //Si son la misma letra dará true, sino false.
         return letraDni == letraCalculada;
 
     }
@@ -162,22 +152,22 @@ public class Alumno {
         return fechaNacimiento;
     }
 
-    private void setFechaNacimiento(LocalDate fechaNacimiento) throws OperationNotSupportedException {
+    private void setFechaNacimiento(LocalDate fechaNacimiento) throws IllegalArgumentException {
         if (fechaNacimiento == null){
-            throw new OperationNotSupportedException("ERROR: La fecha de nacimiento de un alumno no puede ser nula.");
+            throw new IllegalArgumentException("La fecha de nacimiento de un alumno no puede ser nula.");
         }
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         String fechaEnString = fechaNacimiento.format(formatter);
 
         if (!fechaEnString.matches(FORMATO_FECHA)){
-            throw new OperationNotSupportedException("ERROR: El formato de la fecha introducida no es correcto.");
+            throw new IllegalArgumentException("El formato de la fecha introducida no es correcto.");
         }
 
         LocalDate fechaAhora = LocalDate.now();
 
         if (fechaAhora.minusYears(MIN_EDAD_ALUMNADO).isBefore(fechaNacimiento)) {
-            throw new OperationNotSupportedException("ERROR: La edad del alumno debe ser mayor o igual a 16 años.");
+            throw new IllegalArgumentException("La edad del alumno debe ser mayor o igual a 16 años.");
         }
 
         this.fechaNacimiento = fechaNacimiento;

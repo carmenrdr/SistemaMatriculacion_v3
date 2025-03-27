@@ -18,8 +18,8 @@ public class MainApp {
             modelo.comenzar();
             controlador.comenzar();
 
-        } catch (OperationNotSupportedException e) {
-            System.out.println(e.getMessage());
+        } catch (IllegalArgumentException e) {
+            System.out.println("ERROR: "+e.getMessage());
         }
 
     }

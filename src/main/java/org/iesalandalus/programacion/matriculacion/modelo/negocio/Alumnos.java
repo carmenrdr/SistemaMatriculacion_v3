@@ -1,8 +1,6 @@
 package org.iesalandalus.programacion.matriculacion.modelo.negocio;
 
 import org.iesalandalus.programacion.matriculacion.modelo.dominio.Alumno;
-
-import javax.naming.OperationNotSupportedException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,11 +12,11 @@ public class Alumnos {
         this.coleccionAlumnos = new ArrayList<>();
     }
 
-    public List<Alumno> get() throws OperationNotSupportedException {
+    public List<Alumno> get() throws IllegalArgumentException {
         return copiaProfundaAlumnos();
     }
 
-    private List<Alumno> copiaProfundaAlumnos() throws OperationNotSupportedException {
+    private List<Alumno> copiaProfundaAlumnos() throws IllegalArgumentException {
         List<Alumno> coleccionAux = new ArrayList<>(getTamano());
 
         for (Alumno alumno : coleccionAlumnos) {
@@ -32,33 +30,33 @@ public class Alumnos {
         return coleccionAlumnos.size();
     }
 
-    public void insertar(Alumno alumno) throws OperationNotSupportedException {
+    public void insertar(Alumno alumno) throws IllegalArgumentException {
         if (alumno == null){
-            throw new OperationNotSupportedException("ERROR: No se puede insertar un alumno nulo.");
+            throw new IllegalArgumentException("No se puede insertar un alumno nulo.");
         } else if (coleccionAlumnos.contains(alumno)) {
-            throw new OperationNotSupportedException("ERROR: Ya existe un alumno con ese dni.");
+            throw new IllegalArgumentException("Ya existe un alumno con ese dni.");
         } else {
             coleccionAlumnos.add(alumno);
         }
     }
 
-    public Alumno buscar(Alumno alumno) throws OperationNotSupportedException {
+    public Alumno buscar(Alumno alumno) throws IllegalArgumentException {
         int indice = coleccionAlumnos.indexOf(alumno);
 
         if (indice == -1) {
-            throw new OperationNotSupportedException("ERROR: El/la alumna no existe.");
+            throw new IllegalArgumentException("El/la alumna no existe.");
         } else {
             return new Alumno(coleccionAlumnos.get(indice));
         }
     }
 
-    public void borrar(Alumno alumno) throws OperationNotSupportedException {
+    public void borrar(Alumno alumno) throws IllegalArgumentException {
         if (alumno == null){
-            throw new OperationNotSupportedException("ERROR: No se puede borrar un alumno nulo.");
+            throw new IllegalArgumentException("No se puede borrar un alumno nulo.");
         }
 
         if (!coleccionAlumnos.remove(alumno)) {
-            throw new OperationNotSupportedException("ERROR: El alumno a borrar no existe.");
+            throw new IllegalArgumentException("El alumno a borrar no existe.");
         }
     }
 

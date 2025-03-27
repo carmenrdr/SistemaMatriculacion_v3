@@ -18,14 +18,14 @@ public class Vista {
         Opcion.setVista(this);
     }
 
-    public void setControlador(Controlador controlador) throws OperationNotSupportedException {
+    public void setControlador(Controlador controlador) throws IllegalArgumentException {
         if (controlador == null) {
-            throw new OperationNotSupportedException("ERROR: El controlador no puede ser nulo.");
+            throw new IllegalArgumentException("ERROR: El controlador no puede ser nulo.");
         }
         this.controlador = controlador;
     }
 
-    public void comenzar() throws OperationNotSupportedException {
+    public void comenzar() throws IllegalArgumentException {
 
         Opcion opcionElegida;
 
@@ -42,12 +42,12 @@ public class Vista {
         controlador.terminar();
     }
 
-    public void insertarAlumno() throws OperationNotSupportedException {
+    public void insertarAlumno() throws IllegalArgumentException {
         Alumno alumnoNuevo = new Alumno(Consola.leerAlumno());
         controlador.insertar(alumnoNuevo);
     }
 
-    public void buscarAlumno() throws OperationNotSupportedException {
+    public void buscarAlumno() throws IllegalArgumentException {
         Alumno alumnoABuscar = new Alumno(Consola.getAlumnoPorDni());
         Alumno alumnoEncontrado = controlador.buscar(alumnoABuscar);
 
@@ -59,7 +59,7 @@ public class Vista {
 
     }
 
-    public void borrarAlumno() throws OperationNotSupportedException {
+    public void borrarAlumno() throws IllegalArgumentException {
         Alumno alumnoABuscar = new Alumno(Consola.getAlumnoPorDni());
         Alumno alumnoEncontrado = controlador.buscar(alumnoABuscar);
 
@@ -71,7 +71,7 @@ public class Vista {
 
     }
 
-    public void mostrarAlumnos() throws OperationNotSupportedException {
+    public void mostrarAlumnos() throws IllegalArgumentException {
         List<Alumno> alumnos = controlador.getAlumnos();
 
         Comparator<Alumno> comparadorAlumnos = Comparator.comparing(Alumno :: getNombre);
@@ -85,12 +85,12 @@ public class Vista {
         }
     }
 
-    public void insertarAsignatura() throws OperationNotSupportedException {
+    public void insertarAsignatura() throws IllegalArgumentException {
         Asignatura asignaturaNueva = new Asignatura(Consola.leerAsignatura());
         controlador.insertar(asignaturaNueva);
     }
 
-    public void buscarAsignatura() throws OperationNotSupportedException {
+    public void buscarAsignatura() throws IllegalArgumentException {
         Asignatura asignaturaABuscar = new Asignatura(Consola.getAsignaturaPorCodigo());
         Asignatura asignaturaEncontrada = controlador.buscar(asignaturaABuscar);
 
@@ -101,7 +101,7 @@ public class Vista {
         }
     }
 
-    public void borrarAsignatura() throws OperationNotSupportedException {
+    public void borrarAsignatura() throws IllegalArgumentException {
         Asignatura asignaturaABuscar = new Asignatura(Consola.getAsignaturaPorCodigo());
         Asignatura asignaturaEncontrada = controlador.buscar(asignaturaABuscar);
 
@@ -112,7 +112,7 @@ public class Vista {
         }
     }
 
-    public void mostrarAsignaturas() throws OperationNotSupportedException {
+    public void mostrarAsignaturas() throws IllegalArgumentException {
         List<Asignatura> asignaturas = controlador.getAsignaturas();
 
         Comparator<Asignatura> comparadorAsignaturas = Comparator.comparing(Asignatura :: getNombre);
@@ -125,12 +125,12 @@ public class Vista {
         }
     }
 
-    public void insertarCicloFormativo() throws OperationNotSupportedException {
+    public void insertarCicloFormativo() throws IllegalArgumentException {
         CicloFormativo cicloFormativoNuevo = new CicloFormativo(Consola.leerCicloFormativo());
         controlador.insertar(cicloFormativoNuevo);
     }
 
-    public void buscarCicloFormativo() throws OperationNotSupportedException {
+    public void buscarCicloFormativo() throws IllegalArgumentException {
         CicloFormativo cicloFormativoABuscar = new CicloFormativo(Consola.getCicloFormativoPorCodigo());
         CicloFormativo cicloFormativoEncontrado = controlador.buscar(cicloFormativoABuscar);
 
@@ -141,7 +141,7 @@ public class Vista {
         }
     }
 
-    public void borrarCicloFormativo() throws OperationNotSupportedException {
+    public void borrarCicloFormativo() throws IllegalArgumentException {
         CicloFormativo cicloFormativoABuscar = new CicloFormativo(Consola.getCicloFormativoPorCodigo());
         CicloFormativo cicloFormativoEncontrado = controlador.buscar(cicloFormativoABuscar);
 
@@ -153,7 +153,7 @@ public class Vista {
 
     }
 
-    public void mostrarCiclosFormativos() throws OperationNotSupportedException {
+    public void mostrarCiclosFormativos() throws IllegalArgumentException {
         List<CicloFormativo> ciclosFormativos = controlador.getCiclosFormativos();
 
         Comparator<CicloFormativo> comparadorCiclos = Comparator.comparing(CicloFormativo :: getNombre);
@@ -166,7 +166,7 @@ public class Vista {
         }
     }
 
-    public void insertarMatricula() throws OperationNotSupportedException {
+    public void insertarMatricula() throws IllegalArgumentException {
         Alumno alumno = Consola.leerAlumno();
         List<Asignatura> asignaturas = controlador.getAsignaturas();
         List<Asignatura> asignaturasElegidas;
@@ -182,7 +182,7 @@ public class Vista {
 
     }
 
-    public void buscarMatricula() throws OperationNotSupportedException {
+    public void buscarMatricula() throws IllegalArgumentException {
         Matricula matriculaABuscar = new Matricula(Consola.getMatriculaPorIdentificador());
         Matricula matriculaEncontrada = controlador.buscar(matriculaABuscar);
 
@@ -194,7 +194,7 @@ public class Vista {
         }
     }
 
-    public void anularMatricula() throws OperationNotSupportedException {
+    public void anularMatricula() throws IllegalArgumentException {
         mostrarMatriculas();
 
         Matricula matriculaABuscar = Consola.getMatriculaPorIdentificador();
@@ -212,7 +212,7 @@ public class Vista {
         }
     }
 
-    public void mostrarMatriculas() throws OperationNotSupportedException {
+    public void mostrarMatriculas() throws IllegalArgumentException {
         List<Matricula> matriculas = controlador.getMatriculas();
 
         Comparator<Alumno> comparadorAlumnos = Comparator.comparing(Alumno :: getNombre);
@@ -230,7 +230,7 @@ public class Vista {
         }
     }
 
-    public void mostrarMatriculasPorAlumno() throws OperationNotSupportedException {
+    public void mostrarMatriculasPorAlumno() throws IllegalArgumentException {
         mostrarAlumnos();
         Alumno alumnoABuscar = new Alumno(Consola.getAlumnoPorDni());
         Alumno alumnoEncontrado = controlador.buscar(alumnoABuscar);
@@ -251,7 +251,7 @@ public class Vista {
         }
     }
 
-    public void mostrarMatriculasPorCicloFormativo() throws OperationNotSupportedException {
+    public void mostrarMatriculasPorCicloFormativo() throws IllegalArgumentException {
         mostrarCiclosFormativos();
         CicloFormativo cicloABuscar = new CicloFormativo(Consola.getCicloFormativoPorCodigo());
         CicloFormativo cicloEncontrado = controlador.buscar(cicloABuscar);
@@ -274,7 +274,7 @@ public class Vista {
         }
     }
 
-    public void mostrarMatriculasPorCursoAcademico() throws OperationNotSupportedException {
+    public void mostrarMatriculasPorCursoAcademico() throws IllegalArgumentException {
         Curso curso = Consola.leerCurso();
         String cursoElegido = curso.toString();
 

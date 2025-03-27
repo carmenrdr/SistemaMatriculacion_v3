@@ -1,12 +1,10 @@
 package org.iesalandalus.programacion.matriculacion.modelo.dominio;
 
-import javax.naming.OperationNotSupportedException;
-
 public class GradoD extends Grado {
 
     private Modalidad modalidad;
 
-    public GradoD(String nombre, int numAnios, Modalidad modalidad) throws OperationNotSupportedException {
+    public GradoD(String nombre, int numAnios, Modalidad modalidad) throws IllegalArgumentException {
         super(nombre);
         this.setNumAnios(numAnios);
         setModalidad(modalidad);
@@ -16,18 +14,18 @@ public class GradoD extends Grado {
         return modalidad;
     }
 
-    public void setModalidad(Modalidad modalidad) throws OperationNotSupportedException {
+    public void setModalidad(Modalidad modalidad) throws IllegalArgumentException {
         if (modalidad == null) {
-            throw new OperationNotSupportedException("ERROR: La modalidad no puede ser nula.");
+            throw new IllegalArgumentException("La modalidad no puede ser nula.");
         } else {
             this.modalidad = modalidad;
         }
     }
 
     @Override
-    protected void setNumAnios(int numAnios) throws OperationNotSupportedException {
+    protected void setNumAnios(int numAnios) throws IllegalArgumentException {
         if (numAnios != 2 && numAnios != 3) {
-            throw new OperationNotSupportedException("ERROR: El número de años para este grado solo puede ser 2 ó 3.");
+            throw new IllegalArgumentException("El número de años para este grado solo puede ser 2 ó 3.");
         } else {
             this.numAnios = numAnios;
         }
